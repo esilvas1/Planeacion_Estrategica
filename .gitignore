@@ -1,0 +1,70 @@
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+.eggs/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.ipynb_checkpoints/
+
+# Entornos virtuales
+.venv/
+venv/
+env/
+ENV/
+
+# Variables de entorno y credenciales
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+
+# ===== Editores / IDE =====
+.vscode/
+.idea/
+.cursor/
+*.swp
+*.swo
+
+# ===== Windows / OneDrive =====
+Thumbs.db
+ehthumbs.db
+desktop.ini
+$RECYCLE.BIN/
+*.lnk
+*.tmp
+.~lock.*
+
+# ===== macOS =====
+.DS_Store
+
+# ===== Microsoft Office (archivos temporales de bloqueo) =====
+~$*.docx
+~$*.xlsx
+~$*.pptx
+~$*.doc
+~$*.xls
+~$*.ppt
+
+# ===== LaTeX / Pandoc (archivos auxiliares al generar PDF) =====
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+tex2pdf.*/
+
+# ===== Temporales del proyecto =====
+_prueba*.md
+tmp/
+temp/
