@@ -71,7 +71,7 @@ Se diligenció el *Readiness Assessment Questionnaire* para Centrales Eléctrica
 | Implementación | 14 | 15 |
 | **Total** | **98** | **125** |
 
-El detalle del cálculo (respuesta a cada una de las 25 preguntas, su justificación y fuente, y la inversión de puntajes) puede consultarse en el cuestionario diligenciado: [Questionnaire.html en GitHub](https://github.com/esilvas1/Planeacion_Estrategica/blob/main/Questionnaire.html).
+El detalle del cálculo (respuesta a cada una de las 25 preguntas, su justificación y fuente, y la inversión de puntajes) puede consultarse en el cuestionario diligenciado: [esilvas1.github.io/Planeacion_Estrategica/Questionnaire.html](https://esilvas1.github.io/Planeacion_Estrategica/Questionnaire.html).
 
 #### Comentario de los resultados
 
