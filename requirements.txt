@@ -1,0 +1,9 @@
+# Python 3.13.5
+#
+# El proyecto no tiene dependencias de Python: no contiene scripts (.py) ni notebooks.
+# Agregue aquí las librerías cuando se incorpore código Python.
+#
+# Herramientas externas (no se instalan con pip):
+#   - Pandoc 3.8.3                  -> conversión .docx/.md a .md/.html/.pdf
+#   - MiKTeX 26.2 (XeTeX/pdfLaTeX)  -> motor PDF para "pandoc ... -o archivo.pdf"
+#   - Microsoft Edge (headless)     -> impresión de .html a .pdf conservando el logo y la portada
