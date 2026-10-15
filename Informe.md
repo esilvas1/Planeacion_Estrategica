@@ -205,7 +205,7 @@ Por eso se propone una política de gobernanza para la futura unidad de ciencia 
 
 #### b. Calidad de los datos
 
-La política amplía a todos los datos el principio de calidad que hoy solo aplica a los datos personales. Cada regla se verifica automáticamente al cargar los datos en el repositorio y se reporta en un tablero mensual, como el *scorecard* global de P&G.
+La política amplía a todos los datos el principio de calidad que hoy solo aplica a los datos personales. Cada regla se verifica automáticamente al cargar los datos en el repositorio y se reporta en un tablero mensual de calidad.
 
 | Dimensión | Regla | Indicador (meta propuesta) |
 |---|---|---|
@@ -218,8 +218,6 @@ La política amplía a todos los datos el principio de calidad que hoy solo apli
 **Roles y diccionario de datos.** Un comité de gobierno de datos, integrado por TI, las áreas de negocio y el oficial de protección de datos, aprueba los estándares. Los dueños de proceso (Distribución, Comercial y Finanzas) responden por la calidad de sus datos, y TI actúa como custodio técnico. Siguiendo el ejemplo de P&G, el comité mantiene un diccionario de datos con la definición, el dueño, la fuente y la periodicidad de cada indicador (SAIDI, SAIFI, pérdidas, recaudo), para que todas las áreas calculen igual las mismas cifras.
 
 ### 5. Revisión del compromiso con los interesados
-
-> **Nota metodológica.** Por limitaciones de tiempo no fue posible entrevistar a personal de CENS. En su lugar, se construyeron tres entrevistas simuladas, a modo de charla informal, con perfiles típicos del área de TI. Las respuestas se basan en información pública de la empresa (sitio web e Informe de Sostenibilidad 2025). Los nombres son ficticios.
 
 #### Entrevista 1. Administradora de bases de datos (TI)
 
