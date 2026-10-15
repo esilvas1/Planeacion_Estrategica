@@ -128,6 +128,5 @@ Como CENS no cuenta con un área oficial de ciencia de datos (D4), el mapeo se h
 | Analítica | IA y automatización | 2 | Media | Agentes en Copilot Studio y automatización de procesos internos. |
 | Entrega de valor | Innovación y desarrollo de soluciones | 4 | Media | CENSNNOVA; primer lugar en los Premios CIER 2026 (SafeGRID). |
 | Entrega de valor | Canales digitales para clientes | 3 | Media | Crecimiento de la autogestión digital de los usuarios. |
-| Entrega de valor | Formación y cultura de datos | 2 | Alta | Sin programa visible de alfabetización en datos. |
 
 **Brechas prioritarias.** Las capacidades con importancia alta y madurez de 1 a 2 son el gobierno y la calidad de datos, la integración de sistemas centrales, los modelos predictivos, la detección de pérdidas y la formación en datos. Estas brechas confirman la estrategia DO de la matriz DOFA: formalizar una unidad de ciencia de datos con una política de gobierno de datos, y la FO: aprovechar la plataforma en la nube y la fortaleza en reportes para avanzar hacia modelos predictivos de pérdidas.
