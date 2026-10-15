@@ -566,5 +566,322 @@ la estrategia DO de la matriz DOFA: formalizar una unidad de ciencia de
 datos con una política de gobierno de datos, y la FO: aprovechar la
 plataforma en la nube y la fortaleza en reportes para avanzar hacia
 modelos predictivos de pérdidas.</p>
+<h3 id="revisión-de-la-pila-tecnológica">3. Revisión de la pila
+tecnológica</h3>
+<p>Como CENS todavía no tiene una unidad de ciencia de datos (D4), se
+revisó la pila del área de TI, que es la que esa unidad heredaría el día
+que se cree. Casi toda la información sale del Informe de Sostenibilidad
+2025 y del sitio web de la empresa.</p>
+<h4 id="a.-cuál-es">a. ¿Cuál es?</h4>
+<p>La pila se organizó por capas, con la misma lógica del artículo de
+referencia:</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Capa</th>
+<th>Tecnología</th>
+<th>Para qué se usa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Infraestructura y nube</td>
+<td>Azure Cloud, Azure DevOps, red corporativa del Grupo EPM, 133,7 km
+de fibra óptica entre subestaciones, Wi-Fi 7</td>
+<td>Alojar los desarrollos propios y conectar a CENS con los sistemas
+que comparten las filiales de energía.</td>
+</tr>
+<tr>
+<td>Sistemas centrales</td>
+<td>ERP actual, en transición a SAP S/4HANA (proyecto Saphiro); SAP
+Ariba; Mercurio; Sinergia</td>
+<td>Finanzas, compras, mantenimiento de activos, correspondencia y
+riesgos.</td>
+</tr>
+<tr>
+<td>Tecnología de operación</td>
+<td>SCADA Siemens SP7 con aplicaciones DMS/OMS, reconectadores,
+telemedida</td>
+<td>Operar la red en tiempo real desde el Centro de Control.</td>
+</tr>
+<tr>
+<td>Ingeniería y red</td>
+<td>Hexagon NetWorks, AutoCAD, PLS-CADD, PLS-POLE/TOWER, PVsyst</td>
+<td>Diseñar redes, llevar el inventario de infraestructura y hacer
+estudios solares.</td>
+</tr>
+<tr>
+<td>Datos y analítica</td>
+<td>No hay una plataforma de datos declarada. Hay esfuerzos puntuales:
+SafeGRID (pérdidas), una plataforma de pronóstico de demanda con
+<em>machine learning</em> y el visualizador DESS sobre el Modelo Común
+de Información (CIM).</td>
+<td>Análisis por proyecto, no como un servicio corporativo.</td>
+</tr>
+<tr>
+<td>IA y automatización</td>
+<td>Microsoft 365 Copilot, Copilot Studio (25 agentes), RPA (19
+automatizaciones), fábrica digital interna (9 aplicaciones, como
+PRESUPUC, PRIORIX y SIGELEC)</td>
+<td>Automatizar tareas y construir soluciones a la medida.</td>
+</tr>
+<tr>
+<td>Canales al cliente</td>
+<td>Sede electrónica, pagos con Placetopay, Chatbot Lucía, bot de
+WhatsApp, facturación electrónica</td>
+<td>Atención, trámites y pagos.</td>
+</tr>
+<tr>
+<td>Seguridad</td>
+<td>SGSI bajo ISO 27001, firewall para subestaciones críticas, 95,95 %
+de madurez en ciberseguridad en el nivel MIL2</td>
+<td>Proteger la información y los ciberactivos.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="b.-se-está-utilizando">b. ¿Se está utilizando?</h4>
+<p>Depende de la capa. Lo operativo y lo comercial se usa todos los
+días; lo relacionado con datos y analítica apenas empieza.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Tecnología</th>
+<th>Estado</th>
+<th>Qué muestra el uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SCADA SP7, DMS/OMS</td>
+<td>En uso</td>
+<td>Es la base del Centro de Control. EPM contrata el soporte con
+Siemens a nombre de CENS.</td>
+</tr>
+<tr>
+<td>ERP actual</td>
+<td>En uso, con riesgo</td>
+<td>Sigue funcionando mientras llega SAP S/4HANA, previsto para
+2027.</td>
+</tr>
+<tr>
+<td>SAP Ariba</td>
+<td>En uso</td>
+<td>Los proveedores se inscriben y actualizan sus datos allí. En 2025 se
+acompañó a 32 empresas.</td>
+</tr>
+<tr>
+<td>Microsoft 365 y Copilot</td>
+<td>En adopción</td>
+<td>419 personas asistieron al taller de Copilot Chat y 40 construyeron
+agentes.</td>
+</tr>
+<tr>
+<td>Azure Cloud y DevOps</td>
+<td>Uso inicial</td>
+<td>Se habilitaron con el nuevo contrato de licencias de 2025.</td>
+</tr>
+<tr>
+<td>Fábrica digital interna</td>
+<td>En uso</td>
+<td>6 de los 9 desarrollos ya están en producción, con un ahorro de COP$
+690 millones.</td>
+</tr>
+<tr>
+<td>RPA</td>
+<td>Subutilizado</td>
+<td>El ahorro real fue de COP$ 203 millones, frente a COP$ 447 millones
+proyectados: menos de la mitad.</td>
+</tr>
+<tr>
+<td>SafeGRID</td>
+<td>Piloto</td>
+<td>Prototipo en campo (TRL 7) que recupera en promedio más de 1.000
+kWh/mes por usuario.</td>
+</tr>
+<tr>
+<td>Medición avanzada (AMI)</td>
+<td>No implementada</td>
+<td>El propio informe reconoce atrasos en los pilotos.</td>
+</tr>
+</tbody>
+</table>
+<p>El caso más llamativo es AMI. Sin medidores inteligentes, buena parte
+de la analítica de pérdidas y de demanda propuesta en la DOFA no tiene
+con qué alimentarse.</p>
+<h4 id="c.-hay-superposición">c. ¿Hay superposición?</h4>
+<p>Sí, en varios frentes. Hoy no es grave, pero lo será si nadie lo
+ordena antes de 2027.</p>
+<ul>
+<li><strong>Desarrollos propios frente a SAP S/4HANA.</strong>
+Aplicaciones como PRESUPUC (presupuesto) o el control de activos fijos
+automatizado con RPA cubren funciones que SAP va a asumir. Cuando SAP
+entre en operación habrá que decidir qué se apaga y qué se integra.</li>
+<li><strong>Tres caminos para automatizar.</strong> RPA, agentes en
+Copilot Studio y desarrollos en Azure resuelven el mismo tipo de
+necesidad. Cada área puede escoger el suyo y terminar con soluciones
+parecidas que nadie mantiene en conjunto.</li>
+<li><strong>Varios bots para el cliente.</strong> Conviven el Chatbot
+Lucía, el bot de WhatsApp, el chat en línea y un nuevo desarrollo
+interno llamado CHATBOT.</li>
+<li><strong>Gestión del trabajo de campo.</strong> El Grupo EPM está
+comprando una solución FSM, SAP traerá su propio módulo de mantenimiento
+y CENS ya automatizó con RPA el cierre de órdenes de trabajo.</li>
+</ul>
+<h4
+id="d.-la-pila-es-interoperable-con-el-resto-de-la-organización">d. ¿La
+pila es interoperable con el resto de la organización?</h4>
+<p>A medias. En infraestructura y herramientas de oficina, sí. En datos,
+todavía no.</p>
+<p>Hay puntos a favor. CENS actualizó sus enrutadores para conectarse
+con la red del Grupo EPM y usar las soluciones que comparten las
+filiales. Microsoft 365, Azure y Copilot pertenecen al mismo ecosistema,
+así que comparten usuarios, permisos y almacenamiento. Y la fábrica
+digital dice construir sus desarrollos pensando en que se integren con
+las demás aplicaciones.</p>
+<p>El problema está en los datos. No se encontró evidencia de una bodega
+ni de un lago de datos que reúna la información del SCADA, del sistema
+comercial y del ERP. SafeGRID, el pronóstico de demanda y DESS funcionan
+como islas. Además, piezas clave como el SCADA y el ERP se administran
+desde EPM, lo que le resta a CENS control sobre cómo y cuándo accede a
+esos datos.</p>
+<p>En pocas palabras, una futura unidad de ciencia de datos encontraría
+buenas herramientas, pero tendría que empezar por tender puentes entre
+ellas. Esto coincide con la brecha de integración de sistemas centrales
+(madurez 2) del mapa de capacidades y con la estrategia DO de la matriz
+DOFA.</p>
+<h3 id="política-de-gobernanza-de-los-datos">4. Política de gobernanza
+de los datos</h3>
+<p>Hoy CENS solo tiene una política formal sobre datos: el <a
+href="https://www.cens.com.co/institucional/proteccion-de-datos-personales">Lineamiento
+de Protección de Datos Personales</a> (Decisión Empresarial
+1100-032-2013), que cumple la Ley 1581 de 2012. Este lineamiento ya
+incluye un principio de calidad del dato: debe ser veraz, completo,
+exacto, comprobable y actualizado. También incluye un principio de
+seguridad, apoyado en el SGSI bajo ISO 27001. Sin embargo, solo cubre
+datos personales y no orienta el uso analítico de la información
+operativa, comercial y financiera (D4).</p>
+<p>Por eso se propone una política de gobernanza para la futura unidad
+de ciencia de datos. Toma como referencia el <a
+href="https://www.hci.org/video/data-governance-and-standardization-pg">caso
+de P&amp;G</a>: un equipo central que controla el acceso a los datos y
+un diccionario de datos con métricas, jerarquías, definiciones, dueños y
+periodicidad.</p>
+<h4 id="a.-arquitectura-de-los-datos">a. Arquitectura de los datos</h4>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Componente</th>
+<th>Situación actual</th>
+<th>Lineamiento de la política</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fuentes</td>
+<td>SCADA SP7 y DMS/OMS, sistema comercial, ERP (hacia SAP S/4HANA),
+Hexagon NetWorks y canales digitales, sin un inventario común.</td>
+<td>Inventariar cada fuente con su dueño, periodicidad y nivel de
+sensibilidad.</td>
+</tr>
+<tr>
+<td>Integración (ETL)</td>
+<td>Integraciones puntuales por proyecto (SafeGRID, DESS, pronóstico de
+demanda).</td>
+<td>Centralizar la extracción, transformación y carga en Azure,
+aprovechando las licencias contratadas en 2025.</td>
+</tr>
+<tr>
+<td>Almacenamiento</td>
+<td>Datos en silos; el SCADA y el ERP se administran desde EPM.</td>
+<td>Crear un repositorio analítico único (lago de datos) como fuente
+única de verdad, con acuerdos de acceso con EPM.</td>
+</tr>
+<tr>
+<td>Estándares</td>
+<td>El Modelo Común de Información (CIM) solo se usa en DESS.</td>
+<td>Adoptar CIM como estándar para los datos de la red y SAP como
+maestro de activos, proveedores y finanzas.</td>
+</tr>
+<tr>
+<td>Disposición</td>
+<td>Supresión de datos personales según la Ley 1581.</td>
+<td>Definir tiempos de retención y borrado para cada tipo de dato.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="b.-calidad-de-los-datos">b. Calidad de los datos</h4>
+<p>La política amplía a todos los datos el principio de calidad que hoy
+solo aplica a los datos personales. Cada regla se verifica
+automáticamente al cargar los datos en el repositorio y se reporta en un
+tablero mensual, como el <em>scorecard</em> global de P&amp;G.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Dimensión</th>
+<th>Regla</th>
+<th>Indicador (meta propuesta)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Exactitud</td>
+<td>Las lecturas de consumo deben cuadrar con el balance de energía de
+cada circuito.</td>
+<td>Lecturas sin anomalías (≥ 97 %).</td>
+</tr>
+<tr>
+<td>Completitud</td>
+<td>Los registros de clientes y activos deben tener todos sus campos
+obligatorios.</td>
+<td>Registros completos (≥ 98 %).</td>
+</tr>
+<tr>
+<td>Consistencia</td>
+<td>Un mismo cliente o activo debe tener el mismo código en todos los
+sistemas.</td>
+<td>Códigos que coinciden entre sistemas (≥ 99 %).</td>
+</tr>
+<tr>
+<td>Unicidad</td>
+<td>No debe haber clientes ni activos duplicados.</td>
+<td>Duplicados detectados (≤ 0,5 %).</td>
+</tr>
+<tr>
+<td>Oportunidad</td>
+<td>Los datos operativos y comerciales deben estar disponibles para
+análisis a tiempo.</td>
+<td>Carga en el repositorio en menos de 24 horas.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Roles y diccionario de datos.</strong> Un comité de gobierno
+de datos, integrado por TI, las áreas de negocio y el oficial de
+protección de datos, aprueba los estándares. Los dueños de proceso
+(Distribución, Comercial y Finanzas) responden por la calidad de sus
+datos, y TI actúa como custodio técnico. Siguiendo el ejemplo de
+P&amp;G, el comité mantiene un diccionario de datos con la definición,
+el dueño, la fuente y la periodicidad de cada indicador (SAIDI, SAIFI,
+pérdidas, recaudo), para que todas las áreas calculen igual las mismas
+cifras.</p>
 </body>
 </html>

@@ -187,3 +187,33 @@ El problema está en los datos. No se encontró evidencia de una bodega ni de un
 
 En pocas palabras, una futura unidad de ciencia de datos encontraría buenas herramientas, pero tendría que empezar por tender puentes entre ellas. Esto coincide con la brecha de integración de sistemas centrales (madurez 2) del mapa de capacidades y con la estrategia DO de la matriz DOFA.
 
+### 4. Política de gobernanza de los datos
+
+Hoy CENS solo tiene una política formal sobre datos: el [Lineamiento de Protección de Datos Personales](https://www.cens.com.co/institucional/proteccion-de-datos-personales) (Decisión Empresarial 1100-032-2013), que cumple la Ley 1581 de 2012. Este lineamiento ya incluye un principio de calidad del dato: debe ser veraz, completo, exacto, comprobable y actualizado. También incluye un principio de seguridad, apoyado en el SGSI bajo ISO 27001. Sin embargo, solo cubre datos personales y no orienta el uso analítico de la información operativa, comercial y financiera (D4).
+
+Por eso se propone una política de gobernanza para la futura unidad de ciencia de datos. Toma como referencia el [caso de P&G](https://www.hci.org/video/data-governance-and-standardization-pg): un equipo central que controla el acceso a los datos y un diccionario de datos con métricas, jerarquías, definiciones, dueños y periodicidad.
+
+#### a. Arquitectura de los datos
+
+| Componente | Situación actual | Lineamiento de la política |
+|---|---|---|
+| Fuentes | SCADA SP7 y DMS/OMS, sistema comercial, ERP (hacia SAP S/4HANA), Hexagon NetWorks y canales digitales, sin un inventario común. | Inventariar cada fuente con su dueño, periodicidad y nivel de sensibilidad. |
+| Integración (ETL) | Integraciones puntuales por proyecto (SafeGRID, DESS, pronóstico de demanda). | Centralizar la extracción, transformación y carga en Azure, aprovechando las licencias contratadas en 2025. |
+| Almacenamiento | Datos en silos; el SCADA y el ERP se administran desde EPM. | Crear un repositorio analítico único (lago de datos) como fuente única de verdad, con acuerdos de acceso con EPM. |
+| Estándares | El Modelo Común de Información (CIM) solo se usa en DESS. | Adoptar CIM como estándar para los datos de la red y SAP como maestro de activos, proveedores y finanzas. |
+| Disposición | Supresión de datos personales según la Ley 1581. | Definir tiempos de retención y borrado para cada tipo de dato. |
+
+#### b. Calidad de los datos
+
+La política amplía a todos los datos el principio de calidad que hoy solo aplica a los datos personales. Cada regla se verifica automáticamente al cargar los datos en el repositorio y se reporta en un tablero mensual, como el *scorecard* global de P&G.
+
+| Dimensión | Regla | Indicador (meta propuesta) |
+|---|---|---|
+| Exactitud | Las lecturas de consumo deben cuadrar con el balance de energía de cada circuito. | Lecturas sin anomalías (≥ 97 %). |
+| Completitud | Los registros de clientes y activos deben tener todos sus campos obligatorios. | Registros completos (≥ 98 %). |
+| Consistencia | Un mismo cliente o activo debe tener el mismo código en todos los sistemas. | Códigos que coinciden entre sistemas (≥ 99 %). |
+| Unicidad | No debe haber clientes ni activos duplicados. | Duplicados detectados (≤ 0,5 %). |
+| Oportunidad | Los datos operativos y comerciales deben estar disponibles para análisis a tiempo. | Carga en el repositorio en menos de 24 horas. |
+
+**Roles y diccionario de datos.** Un comité de gobierno de datos, integrado por TI, las áreas de negocio y el oficial de protección de datos, aprueba los estándares. Los dueños de proceso (Distribución, Comercial y Finanzas) responden por la calidad de sus datos, y TI actúa como custodio técnico. Siguiendo el ejemplo de P&G, el comité mantiene un diccionario de datos con la definición, el dueño, la fuente y la periodicidad de cada indicador (SAIDI, SAIFI, pérdidas, recaudo), para que todas las áreas calculen igual las mismas cifras.
+
