@@ -130,3 +130,60 @@ Como CENS no cuenta con un área oficial de ciencia de datos (D4), el mapeo se h
 | Entrega de valor | Canales digitales para clientes | 3 | Media | Crecimiento de la autogestión digital de los usuarios. |
 
 **Brechas prioritarias.** Las capacidades con importancia alta y madurez de 1 a 2 son el gobierno y la calidad de datos, la integración de sistemas centrales, los modelos predictivos, la detección de pérdidas y la formación en datos. Estas brechas confirman la estrategia DO de la matriz DOFA: formalizar una unidad de ciencia de datos con una política de gobierno de datos, y la FO: aprovechar la plataforma en la nube y la fortaleza en reportes para avanzar hacia modelos predictivos de pérdidas.
+
+### 3. Revisión de la pila tecnológica
+
+Como CENS todavía no tiene una unidad de ciencia de datos (D4), se revisó la pila del área de TI, que es la que esa unidad heredaría el día que se cree. Casi toda la información sale del Informe de Sostenibilidad 2025 y del sitio web de la empresa.
+
+#### a. ¿Cuál es?
+
+La pila se organizó por capas, con la misma lógica del artículo de referencia:
+
+| Capa | Tecnología | Para qué se usa |
+|---|---|---|
+| Infraestructura y nube | Azure Cloud, Azure DevOps, red corporativa del Grupo EPM, 133,7 km de fibra óptica entre subestaciones, Wi-Fi 7 | Alojar los desarrollos propios y conectar a CENS con los sistemas que comparten las filiales de energía. |
+| Sistemas centrales | ERP actual, en transición a SAP S/4HANA (proyecto Saphiro); SAP Ariba; Mercurio; Sinergia | Finanzas, compras, mantenimiento de activos, correspondencia y riesgos. |
+| Tecnología de operación | SCADA Siemens SP7 con aplicaciones DMS/OMS, reconectadores, telemedida | Operar la red en tiempo real desde el Centro de Control. |
+| Ingeniería y red | Hexagon NetWorks, AutoCAD, PLS-CADD, PLS-POLE/TOWER, PVsyst | Diseñar redes, llevar el inventario de infraestructura y hacer estudios solares. |
+| Datos y analítica | No hay una plataforma de datos declarada. Hay esfuerzos puntuales: SafeGRID (pérdidas), una plataforma de pronóstico de demanda con *machine learning* y el visualizador DESS sobre el Modelo Común de Información (CIM). | Análisis por proyecto, no como un servicio corporativo. |
+| IA y automatización | Microsoft 365 Copilot, Copilot Studio (25 agentes), RPA (19 automatizaciones), fábrica digital interna (9 aplicaciones, como PRESUPUC, PRIORIX y SIGELEC) | Automatizar tareas y construir soluciones a la medida. |
+| Canales al cliente | Sede electrónica, pagos con Placetopay, Chatbot Lucía, bot de WhatsApp, facturación electrónica | Atención, trámites y pagos. |
+| Seguridad | SGSI bajo ISO 27001, firewall para subestaciones críticas, 95,95 % de madurez en ciberseguridad en el nivel MIL2 | Proteger la información y los ciberactivos. |
+
+#### b. ¿Se está utilizando?
+
+Depende de la capa. Lo operativo y lo comercial se usa todos los días; lo relacionado con datos y analítica apenas empieza.
+
+| Tecnología | Estado | Qué muestra el uso |
+|---|---|---|
+| SCADA SP7, DMS/OMS | En uso | Es la base del Centro de Control. EPM contrata el soporte con Siemens a nombre de CENS. |
+| ERP actual | En uso, con riesgo | Sigue funcionando mientras llega SAP S/4HANA, previsto para 2027. |
+| SAP Ariba | En uso | Los proveedores se inscriben y actualizan sus datos allí. En 2025 se acompañó a 32 empresas. |
+| Microsoft 365 y Copilot | En adopción | 419 personas asistieron al taller de Copilot Chat y 40 construyeron agentes. |
+| Azure Cloud y DevOps | Uso inicial | Se habilitaron con el nuevo contrato de licencias de 2025. |
+| Fábrica digital interna | En uso | 6 de los 9 desarrollos ya están en producción, con un ahorro de COP$ 690 millones. |
+| RPA | Subutilizado | El ahorro real fue de COP$ 203 millones, frente a COP$ 447 millones proyectados: menos de la mitad. |
+| SafeGRID | Piloto | Prototipo en campo (TRL 7) que recupera en promedio más de 1.000 kWh/mes por usuario. |
+| Medición avanzada (AMI) | No implementada | El propio informe reconoce atrasos en los pilotos. |
+
+El caso más llamativo es AMI. Sin medidores inteligentes, buena parte de la analítica de pérdidas y de demanda propuesta en la DOFA no tiene con qué alimentarse.
+
+#### c. ¿Hay superposición?
+
+Sí, en varios frentes. Hoy no es grave, pero lo será si nadie lo ordena antes de 2027.
+
+- **Desarrollos propios frente a SAP S/4HANA.** Aplicaciones como PRESUPUC (presupuesto) o el control de activos fijos automatizado con RPA cubren funciones que SAP va a asumir. Cuando SAP entre en operación habrá que decidir qué se apaga y qué se integra.
+- **Tres caminos para automatizar.** RPA, agentes en Copilot Studio y desarrollos en Azure resuelven el mismo tipo de necesidad. Cada área puede escoger el suyo y terminar con soluciones parecidas que nadie mantiene en conjunto.
+- **Varios bots para el cliente.** Conviven el Chatbot Lucía, el bot de WhatsApp, el chat en línea y un nuevo desarrollo interno llamado CHATBOT.
+- **Gestión del trabajo de campo.** El Grupo EPM está comprando una solución FSM, SAP traerá su propio módulo de mantenimiento y CENS ya automatizó con RPA el cierre de órdenes de trabajo.
+
+#### d. ¿La pila es interoperable con el resto de la organización?
+
+A medias. En infraestructura y herramientas de oficina, sí. En datos, todavía no.
+
+Hay puntos a favor. CENS actualizó sus enrutadores para conectarse con la red del Grupo EPM y usar las soluciones que comparten las filiales. Microsoft 365, Azure y Copilot pertenecen al mismo ecosistema, así que comparten usuarios, permisos y almacenamiento. Y la fábrica digital dice construir sus desarrollos pensando en que se integren con las demás aplicaciones.
+
+El problema está en los datos. No se encontró evidencia de una bodega ni de un lago de datos que reúna la información del SCADA, del sistema comercial y del ERP. SafeGRID, el pronóstico de demanda y DESS funcionan como islas. Además, piezas clave como el SCADA y el ERP se administran desde EPM, lo que le resta a CENS control sobre cómo y cuándo accede a esos datos.
+
+En pocas palabras, una futura unidad de ciencia de datos encontraría buenas herramientas, pero tendría que empezar por tender puentes entre ellas. Esto coincide con la brecha de integración de sistemas centrales (madurez 2) del mapa de capacidades y con la estrategia DO de la matriz DOFA.
+
