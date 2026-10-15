@@ -110,3 +110,24 @@ La matriz se construyó para la capacidad de analítica y TI de CENS, que sería
 | **DO** (D4 + O3) | Formalizar una unidad de ciencia de datos y una política de gobierno de datos apoyadas en los lineamientos del Grupo EPM. |
 | **FA** (F2 + A1) | Usar analítica remota (medición inteligente, telemetría) para gestionar zonas con acceso restringido. |
 | **DA** (D2 + A2) | Priorizar proyectos analíticos de retorno rápido y medible para justificar su financiación. |
+
+### 2. Modelización y mapeo de capacidades del equipo de TI
+
+Como CENS no cuenta con un área oficial de ciencia de datos (D4), el mapeo se hizo sobre el equipo de TI. Siguiendo el enfoque de [mapa de capacidades de negocio](https://capstera.com/knowledge-hub/articles/business-capability-map-example), las capacidades se agrupan en dominios y describen *qué* hace el equipo, independientemente de quién o con qué herramienta lo haga. La madurez se estimó a partir de la información pública de la empresa y de la DOFA, con una escala de 1 (inicial) a 5 (optimizada).
+
+| Dominio | Capacidad | Madurez (1–5) | Importancia | Evidencia |
+|---|---|:---:|:---:|---|
+| Estrategia y gobierno | Gobierno y calidad de datos | 1 | Alta | Sin política de gobierno de datos propia visible (D4). |
+| Estrategia y gobierno | Gestión de la demanda analítica | 1 | Media | No existe un área que reciba y priorice necesidades de analítica. |
+| Datos e infraestructura | Plataforma de datos en la nube | 3 | Alta | Desarrollos internos en Azure y Azure DevOps. |
+| Datos e infraestructura | Integración de sistemas centrales | 2 | Alta | ERP en transición hacia Saphiro (2027). |
+| Datos e infraestructura | Seguridad y protección de datos | 3 | Alta | Política de protección de datos personales publicada; infraestructura crítica. |
+| Analítica | Reportes e indicadores de gestión | 4 | Alta | Seguimiento de SAIDI, SAIFI, pérdidas y metas financieras. |
+| Analítica | Modelos predictivos y de riesgo | 2 | Alta | Gestión de activos basada en riesgos (ISO 55001) y escenarios de flujo de caja. |
+| Analítica | Detección de pérdidas y fraude | 2 | Alta | 29,85 GWh recuperados en 2025, sin evidencia de modelos analíticos. |
+| Analítica | IA y automatización | 2 | Media | Agentes en Copilot Studio y automatización de procesos internos. |
+| Entrega de valor | Innovación y desarrollo de soluciones | 4 | Media | CENSNNOVA; primer lugar en los Premios CIER 2026 (SafeGRID). |
+| Entrega de valor | Canales digitales para clientes | 3 | Media | Crecimiento de la autogestión digital de los usuarios. |
+| Entrega de valor | Formación y cultura de datos | 2 | Alta | Sin programa visible de alfabetización en datos. |
+
+**Brechas prioritarias.** Las capacidades con importancia alta y madurez de 1 a 2 son el gobierno y la calidad de datos, la integración de sistemas centrales, los modelos predictivos, la detección de pérdidas y la formación en datos. Estas brechas confirman la estrategia DO de la matriz DOFA: formalizar una unidad de ciencia de datos con una política de gobierno de datos, y la FO: aprovechar la plataforma en la nube y la fortaleza en reportes para avanzar hacia modelos predictivos de pérdidas.
