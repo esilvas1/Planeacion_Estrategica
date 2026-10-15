@@ -217,3 +217,71 @@ La política amplía a todos los datos el principio de calidad que hoy solo apli
 
 **Roles y diccionario de datos.** Un comité de gobierno de datos, integrado por TI, las áreas de negocio y el oficial de protección de datos, aprueba los estándares. Los dueños de proceso (Distribución, Comercial y Finanzas) responden por la calidad de sus datos, y TI actúa como custodio técnico. Siguiendo el ejemplo de P&G, el comité mantiene un diccionario de datos con la definición, el dueño, la fuente y la periodicidad de cada indicador (SAIDI, SAIFI, pérdidas, recaudo), para que todas las áreas calculen igual las mismas cifras.
 
+### 5. Revisión del compromiso con los interesados
+
+> **Nota metodológica.** Por limitaciones de tiempo no fue posible entrevistar a personal de CENS. En su lugar, se construyeron tres entrevistas simuladas, a modo de charla informal, con perfiles típicos del área de TI. Las respuestas se basan en información pública de la empresa (sitio web e Informe de Sostenibilidad 2025). Los nombres son ficticios.
+
+#### Entrevista 1. Administradora de bases de datos (TI)
+
+**¿Ha trabajado antes con un equipo de analítica?**
+"Equipo de analítica como tal no hay. Lo que sí me llega todo el tiempo son solicitudes: que una consulta de pérdidas por circuito, que un cruce de clientes con consumos para Comercial. Yo las saco, las mando en Excel y ahí se acaba mi parte. No es mala experiencia, pero es muy de apagar incendios. Diría que neutra."
+
+**¿Qué tanto se conoce lo que puede hacer la analítica?**
+"Yo sé lo que hay en las bases y sé que ahí hay oro, pero también sé lo sucios que están algunos datos. Mucha gente cree que es pedir el dato y ya. No ven que hay códigos repetidos, direcciones mal escritas, medidores que cambiaron y nadie actualizó."
+
+**¿Cuáles son los desafíos de su área?**
+"El más grande es la migración a SAP S/4HANA. Eso sale en 2027 y hay que limpiar datos maestros antes de pasarlos; si migramos basura, SAP va a tener basura. Lo otro es que la información está regada: el SCADA lo administra EPM con Siemens, lo comercial está por un lado, la correspondencia en Mercurio... No hay un sitio donde todo se cruce."
+
+**¿Qué la motiva a nivel personal?**
+"Me gustaría que existiera un rol formal de gobierno de datos, alguien dueño de la calidad. Hoy eso lo hago a ratos y sin que esté en mis funciones. También quiero meterme más con Azure, ahora que tenemos la licencia."
+
+**¿Quién apoyaría o frenaría una unidad de analítica?**
+"Apoyo seguro de la gente de innovación, de CENSNNOVA. Lo que me preocupa es que si se abre acceso a todos para hacer consultas, alguien tumbe una base en producción. Yo apoyaría, pero con reglas claras."
+
+#### Entrevista 2. Arquitecto de software (fábrica digital)
+
+**¿Ha trabajado antes con un equipo de analítica?**
+"Sí, y bien. Acompañamos a los de innovación en SafeGRID, el piloto de pérdidas, y vimos cómo un prototipo recupera más de 1.000 kWh al mes por usuario. Eso convence a cualquiera. El problema es que cuando el piloto termina, nadie se queda con él. Positiva, pero con ese sinsabor."
+
+**¿Qué tanto se conoce lo que puede hacer la analítica?**
+"En TI entendemos bastante: sabemos que se puede pronosticar demanda, detectar fraude, priorizar mantenimiento. De hecho, en un hackathon un equipo armó un pronóstico de demanda con *machine learning*. La brecha está en pasar del prototipo a algo que funcione todos los días. Eso no es solo ciencia de datos, es arquitectura, y ahí todavía estamos verdes."
+
+**¿Cuáles son los desafíos de su área?**
+"Tenemos nueve desarrollos propios, seis ya en producción, y nos ahorramos unos 690 millones frente a contratar afuera. Pero cuando llegue SAP, algunos se van a pisar, como el de presupuesto. También tenemos RPA, agentes en Copilot Studio y desarrollos en Azure, cada uno por su lado. Y hasta cuatro bots para el cliente. Necesitamos ordenar eso y tener una capa de datos común, porque hoy cada solución trae su propia base."
+
+**¿Qué lo motiva a nivel personal?**
+"Me encantaría diseñar la plataforma de datos de la empresa en Azure, algo que perdure. Lo de los premios CIER fue bonito, pero quiero que lo que construimos no se quede en un piloto."
+
+**¿Quién apoyaría o frenaría una unidad de analítica?**
+"Yo soy de los que empujan. Las dudas van a venir de quienes ven la analítica como gasto y no como inversión, sobre todo ahora que la plata está apretada por los subsidios que no ha girado la Nación."
+
+#### Entrevista 3. Analista de datos (gestión de pérdidas)
+
+**¿Ha trabajado antes con un equipo de analítica?**
+"No como tal. Yo pido los datos a TI, me llegan en unos días y los trabajo en Excel. A veces cuando llegan ya la reunión pasó. No es culpa de ellos, son poquitos y les llega de todo, pero la experiencia es más bien negativa por los tiempos."
+
+**¿Qué tanto se conoce lo que puede hacer la analítica?**
+"Hago informes de pérdidas y de indicadores, eso lo domino. Fui al taller de Copilot con otras 400 personas y quedé con ganas de más. Pero en mi área hay gente que piensa que un modelo predictivo es una bola de cristal, y otros que piensan que es algo imposible. Falta explicar qué se puede y qué no."
+
+**¿Cuáles son los desafíos de su área?**
+"Las pérdidas están en 14,3 % y en el Catatumbo pasan del 47 %. Allá muchas veces no podemos ni entrar por orden público. El año pasado se recuperaron casi 30 GWh, pero todo a punta de revisiones en campo. Si los pilotos de medición inteligente no estuvieran atrasados, podríamos vigilar consumos a distancia sin arriesgar a nadie."
+
+**¿Qué la motiva a nivel personal?**
+"Quiero dejar de ser 'la de los informes' y trabajar en modelos de verdad. Estoy pensando en estudiar ciencia de datos. Si se crea la unidad, me encantaría estar ahí."
+
+**¿Quién apoyaría o frenaría una unidad de analítica?**
+"Los ingenieros jóvenes y la gente de innovación se le miden. Algunos jefes con muchos años confían más en la experiencia de campo que en un modelo, y les preocupa que les cambien la forma de trabajar. Hay que llegarles con resultados, no con promesas."
+
+#### Resumen de resultados
+
+| Tema | Administradora de bases de datos | Arquitecto de software | Analista de datos |
+|---|---|---|---|
+| Interacciones anteriores | Neutra: atiende solicitudes puntuales de datos. | Positiva: acompañó SafeGRID, pero los pilotos no tienen continuidad. | Negativa: los datos llegan tarde para la toma de decisiones. |
+| Madurez analítica | Alta en datos, conoce sus problemas de calidad. | Alta: entiende el potencial, pero ve la brecha entre prototipo y producción. | Media: domina reportes; percibe expectativas poco realistas en su área. |
+| Desafíos actuales | Migración a SAP S/4HANA (2027), datos dispersos sin integrar. | Superposición de soluciones; falta una capa de datos común. | Pérdidas del 14,3 % (47 % en el Catatumbo) y atraso en AMI. |
+| Ambiciones personales | Formalizar un rol de gobierno de datos; formarse en Azure. | Diseñar la plataforma de datos corporativa. | Pasar de los reportes a los modelos; estudiar ciencia de datos. |
+| Campeón potencial | Sí, con condiciones (reglas de acceso). | Sí, fuerte. | Sí, entusiasta. |
+| Detractores identificados | Usuarios sin control que pongan en riesgo la producción. | Quienes ven la analítica como un gasto en época de liquidez ajustada. | Jefes con larga experiencia que confían más en el campo que en los modelos. |
+
+**Lectura general.** Las tres personas coinciden en que el problema no es la falta de interés, sino la falta de estructura: no hay una unidad que reciba las solicitudes, los datos están dispersos y los pilotos exitosos no pasan a producción. Los campeones están en TI e innovación. La resistencia viene de la presión financiera y de la cultura de campo, y se atiende mostrando resultados rápidos, como sugiere la estrategia DA de la matriz DOFA.
+
