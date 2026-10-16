@@ -283,3 +283,20 @@ La política amplía a todos los datos el principio de calidad que hoy solo apli
 
 **Lectura general.** Las tres personas coinciden en que el problema no es la falta de interés, sino la falta de estructura: no hay una unidad que reciba las solicitudes, los datos están dispersos y los pilotos exitosos no pasan a producción. Los campeones están en TI e innovación. La resistencia viene de la presión financiera y de la cultura de campo, y se atiende mostrando resultados rápidos, como sugiere la estrategia DA de la matriz DOFA.
 
+## Estado futuro
+
+El estado futuro describe la unidad de ciencia de datos y analítica que CENS aún no tiene (D4). Su primer proyecto de alto impacto sería **detectar y priorizar pérdidas de energía no técnicas** con modelos predictivos sobre datos de medición, clientes y red. Ese proyecto materializa la estrategia FO de la matriz DOFA y responde al desafío más urgente que planteó la analista de pérdidas: el índice del 14,3 % (47,8 % en el Catatumbo).
+
+### 1. Roles y responsabilidades del equipo
+
+Según la proyección orientada por el equipo organizador y el gerente del centro de datos que se desea implementar en la compañía, estos roles son del equipo como un todo, no de sus integrantes. Definen el papel que jugará la analítica en la organización y el valor que se espera que aporte.
+
+| Rol del equipo | Responsabilidad | Valor esperado en CENS |
+|---|---|---|
+| **Gestor de productos analíticos** | Dirigir el ciclo de vida del producto "detección de pérdidas": backlog, priorización con Comercial y Distribución, puesta en producción y mantenimiento. | Que SafeGRID y modelos similares dejen de ser pilotos y se conviertan en un servicio continuo, con dueño claro. |
+| **Propietario de la plataforma** | Administrar la plataforma de datos en Azure, el control de versiones, los tableros y el acceso a los datos. | Una sola fuente de verdad para SAIDI, SAIFI, pérdidas y recaudo, con reglas de acceso que eviten riesgos en producción. |
+| **Habilitador de autoservicio** | Ingestar, transformar y dejar listos los datos de medición, clientes y red para que las áreas de negocio consulten con apoyo ligero. | Reducir las solicitudes ad hoc a TI y los tiempos de espera que hoy frustran a los analistas de negocio. |
+| **Formador** | Capacitar a Comercial, Distribución y TI en el uso de los productos, en analítica básica y en la lectura correcta de los indicadores. | Alinear expectativas (qué puede y qué no puede un modelo) y ganar a los detractores con resultados, no con promesas. |
+
+El equipo desempeña los cuatro roles a la vez. El gestor de productos y el formador son los más visibles hacia el negocio; el propietario de la plataforma y el habilitador de autoservicio cierran las brechas de gobierno de datos e integración que hoy tienen madurez 1 y 2 en el mapa de capacidades.
+
