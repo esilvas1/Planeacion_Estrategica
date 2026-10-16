@@ -52,8 +52,6 @@ Santiago de Cali, octubre de 2026
 
 Se diligenció el *Readiness Assessment Questionnaire* para Centrales Eléctricas del Norte de Santander S.A. E.S.P. (CENS – Grupo EPM), con base en información pública de la empresa (informes de sostenibilidad 2024–2025, plan de inversiones 2025 e informes de control interno).
 
-*"Questionnaire adapted from proprietary materials developed by Farnum Alston and The Crescent Company, Bozeman, Montana."*
-
 #### Valor obtenido
 
 **Puntaje total: 98 / 125 (rango 75–100).**
