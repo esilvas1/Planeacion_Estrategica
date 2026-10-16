@@ -300,3 +300,42 @@ Según la proyección orientada por el equipo organizador y el gerente del centr
 
 El equipo desempeña los cuatro roles a la vez. El gestor de productos y el formador son los más visibles hacia el negocio; el propietario de la plataforma y el habilitador de autoservicio cierran las brechas de gobierno de datos e integración que hoy tienen madurez 1 y 2 en el mapa de capacidades.
 
+### 2. Funciones y servicios
+
+Las funciones y servicios son las tareas del trabajo diario del equipo. Para cumplirlas se definen los siguientes puestos ideales (personajes), orientados al proyecto de detección de pérdidas y a la operación continua de la unidad.
+
+#### Puestos ideales (personajes)
+
+| Personaje | Función principal en CENS |
+|---|---|
+| **Científico de datos** | Desarrolla, entrena y despliega modelos de detección de pérdidas, fraude y pronóstico de demanda. |
+| **Modelador de datos** | Diseña el modelo conceptual y físico del repositorio analítico, alineado con CIM y con los maestros de SAP. |
+| **Arquitecto de datos** | Diseña los canales ETL, la integración con SCADA, el sistema comercial y Azure, y el rendimiento de la plataforma. |
+| **Analista de negocio** | Recoge las necesidades de Comercial, Distribución y Pérdidas; traduce el problema de negocio en requisitos analíticos. |
+| **Gestor de productos** | Planifica el backlog, el mantenimiento y la gobernanza del producto "detección de pérdidas" y de los tableros asociados. |
+| **Asesor analítico** | Orienta a la dirección sobre el valor estratégico de la analítica, la priorización de casos de uso y el retorno de la inversión. |
+
+#### Servicios del trabajo diario
+
+| Servicio | Qué entrega | Quién lo lidera |
+|---|---|---|
+| Generación de indicadores y tableros | SAIDI, SAIFI, pérdidas y recaudo actualizados desde una sola fuente. | Analista de negocio / Gestor de productos |
+| Modelado predictivo | Listas priorizadas de clientes y circuitos con alto riesgo de pérdida no técnica. | Científico de datos |
+| Ingesta e integración de datos | Datos de medición, clientes y red listos en Azure para consulta y modelado. | Arquitecto / Modelador de datos |
+| Atención de solicitudes de negocio | Casos priorizados (no solo Excel ad hoc), con tiempos de respuesta definidos. | Analista de negocio |
+| Capacitación y acompañamiento | Talleres de uso de tableros, lectura de modelos y buenas prácticas de datos. | Asesor / Gestor de productos |
+| Gestión del producto analítico | Roadmap, métricas de adopción y continuidad de pilotos hacia producción. | Gestor de productos |
+
+#### Asociación entre personajes y roles del equipo
+
+| Personaje | Gestor de productos | Propietario de plataforma | Habilitador de autoservicio | Formador |
+|---|:---:|:---:|:---:|:---:|
+| Científico de datos | | | ● | ● |
+| Modelador de datos | | ● | ● | |
+| Arquitecto de datos | | ● | ● | |
+| Analista de negocio | ● | | | ● |
+| Gestor de productos | ● | | | ● |
+| Asesor analítico | ● | | | ● |
+
+Con este diseño, el día a día del equipo deja de ser una secuencia de solicitudes sueltas a TI y pasa a ser un portafolio de servicios medibles, con dueños claros y orientado al proyecto de pérdidas como caso de uso inicial.
+
