@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="img/Logo_Pontificia_Javeriana.png" alt="Pontificia Universidad Javeriana Cali" width="350">
+![](img/Logo_Pontificia_Javeriana.png){width=55%}
 
 <br><br>
 
@@ -209,10 +209,10 @@ La política amplía a todos los datos el principio de calidad que hoy solo apli
 
 | Dimensión | Regla | Indicador (meta propuesta) |
 |---|---|---|
-| Exactitud | Las lecturas de consumo deben cuadrar con el balance de energía de cada circuito. | Lecturas sin anomalías (≥ 97 %). |
-| Completitud | Los registros de clientes y activos deben tener todos sus campos obligatorios. | Registros completos (≥ 98 %). |
-| Consistencia | Un mismo cliente o activo debe tener el mismo código en todos los sistemas. | Códigos que coinciden entre sistemas (≥ 99 %). |
-| Unicidad | No debe haber clientes ni activos duplicados. | Duplicados detectados (≤ 0,5 %). |
+| Exactitud | Las lecturas de consumo deben cuadrar con el balance de energía de cada circuito. | Lecturas sin anomalías (>= 97 %). |
+| Completitud | Los registros de clientes y activos deben tener todos sus campos obligatorios. | Registros completos (>= 98 %). |
+| Consistencia | Un mismo cliente o activo debe tener el mismo código en todos los sistemas. | Códigos que coinciden entre sistemas (>= 99 %). |
+| Unicidad | No debe haber clientes ni activos duplicados. | Duplicados detectados (<= 0,5 %). |
 | Oportunidad | Los datos operativos y comerciales deben estar disponibles para análisis a tiempo. | Carga en el repositorio en menos de 24 horas. |
 
 **Roles y diccionario de datos.** Un comité de gobierno de datos, integrado por TI, las áreas de negocio y el oficial de protección de datos, aprueba los estándares. Los dueños de proceso (Distribución, Comercial y Finanzas) responden por la calidad de sus datos, y TI actúa como custodio técnico. Siguiendo el ejemplo de P&G, el comité mantiene un diccionario de datos con la definición, el dueño, la fuente y la periodicidad de cada indicador (SAIDI, SAIFI, pérdidas, recaudo), para que todas las áreas calculen igual las mismas cifras.
@@ -330,12 +330,12 @@ Las funciones y servicios son las tareas del trabajo diario del equipo. Para cum
 
 | Personaje | Gestor de productos | Propietario de plataforma | Habilitador de autoservicio | Formador |
 |---|:---:|:---:|:---:|:---:|
-| Científico de datos | | | ● | ● |
-| Modelador de datos | | ● | ● | |
-| Arquitecto de datos | | ● | ● | |
-| Analista de negocio | ● | | | ● |
-| Gestor de productos | ● | | | ● |
-| Asesor analítico | ● | | | ● |
+| Científico de datos | | | X | X |
+| Modelador de datos | | X | X | |
+| Arquitecto de datos | | X | X | |
+| Analista de negocio | X | | | X |
+| Gestor de productos | X | | | X |
+| Asesor analítico | X | | | X |
 
 Con este diseño, el día a día del equipo deja de ser una secuencia de solicitudes sueltas a TI y pasa a ser un portafolio de servicios medibles, con dueños claros y orientado al proyecto de pérdidas como caso de uso inicial.
 
