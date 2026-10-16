@@ -365,3 +365,11 @@ El horizonte es **noviembre 2026 – diciembre 2027**, de modo que la plataforma
 
 **Lectura del cronograma.** Gobernanza, talento y comunicación arrancan primero para dar mandato al equipo. El MVP de pérdidas inicia en febrero de 2027, sin esperar a que toda la plataforma esté lista, para mostrar retorno rápido. La integración profunda con SCADA y SAP corre en la segunda mitad de 2027, en paralelo a la puesta en producción del producto y a la adopción por Comercial y Distribución.
 
+## Reflexiones y conclusiones
+
+Lo más valioso del taller fue ver cómo una metodología ordenada —alistamiento, estado actual, estado futuro y hoja de ruta— ayuda a entender un proceso completo de planeación, no solo a listar hallazgos sueltos. Cada herramienta obliga a mirar la organización desde un ángulo distinto y, al cruzarlas, aparecen prioridades claras.
+
+Nos sorprendió del taller la utilidad práctica de modelos y marcos que al inicio parecen abstractos: el cuestionario de Bryson, la DOFA, el mapa de capacidades y el Gantt dejan de ser “teoría” cuando se aplican a un caso real y exigen decisiones concretas (roles del equipo, servicios diarios, fechas).
+
+Como grupo, aprendimos a pasar del diagnóstico a un diseño accionable. La metodología no sustituye el conocimiento de la empresa, pero estructura la conversación y evita saltar directo a soluciones sin haber definido el estado deseado ni el camino para llegar.
+
