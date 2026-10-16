@@ -1,0 +1,32 @@
+gantt
+    title Hoja de ruta - Unidad de ciencia de datos CENS
+    dateFormat  YYYY-MM-DD
+    axisFormat  %b %Y
+    tickInterval 3month
+
+    section Gobernanza de datos
+    Politica y comite de gobierno           :g1, 2026-11-01, 90d
+    Diccionario e indicadores               :g2, after g1, 60d
+    Roles dueños y custodios                :milestone, m1, 2027-03-01, 0d
+
+    section Talento humano
+    Conformación del equipo núcleo          :t1, 2026-11-15, 75d
+    Capacitación Azure y analítica          :t2, 2027-01-15, 150d
+    Ampliación de perfiles                  :t3, 2027-06-01, 120d
+
+    section Pila tecnológica
+    Lago de datos en Azure                  :p1, 2027-01-01, 120d
+    Integración SCADA comercial             :p2, after p1, 90d
+    Alineación con SAP Saphiro              :p3, 2027-07-01, 150d
+    Plataforma lista                        :milestone, m2, 2027-12-01, 0d
+
+    section Producto pérdidas
+    MVP detección de pérdidas               :a1, 2027-02-01, 90d
+    Piloto en circuitos prioritarios        :a2, after a1, 60d
+    Puesta en producción continua           :a3, after a2, 90d
+    Producto en operación                   :milestone, m3, 2027-09-30, 0d
+
+    section Gestión del cambio
+    Comunicación y sponsors                 :c1, 2026-11-01, 60d
+    Talleres con Comercial y Distribución   :c2, 2027-03-01, 180d
+    Adopción y autoservicio                 :c3, 2027-07-01, 150d

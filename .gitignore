@@ -68,3 +68,7 @@ tex2pdf.*/
 _prueba*.md
 tmp/
 temp/
+
+# Informe: solo se entrega PDF (no regenerar HTML)
+Informe.html
+informe.html

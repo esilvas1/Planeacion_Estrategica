@@ -339,3 +339,29 @@ Las funciones y servicios son las tareas del trabajo diario del equipo. Para cum
 
 Con este diseño, el día a día del equipo deja de ser una secuencia de solicitudes sueltas a TI y pasa a ser un portafolio de servicios medibles, con dueños claros y orientado al proyecto de pérdidas como caso de uso inicial.
 
+## Hoja de ruta
+
+A diferencia de un plan de proyecto (actividades concretas para un entregable), la hoja de ruta estratégica define el calendario para implantar el modelo operativo deseado: gobernanza de datos, talento, pila tecnológica, el producto de detección de pérdidas y la gestión del cambio. Estas iniciativas corren en paralelo al trabajo diario y cierran las brechas del estado actual.
+
+### 1. Cronograma para lograr el estado deseado
+
+El horizonte es **noviembre 2026 – diciembre 2027**, de modo que la plataforma quede alineada con la salida en vivo de SAP Saphiro (2027) y el producto de pérdidas entregue resultados tempranos (estrategia DA).
+
+| Iniciativa | Qué cierra del estado actual | Resultado esperado |
+|---|---|---|
+| Gobernanza de datos | D4; madurez 1 en gobierno y calidad | Política, comité, diccionario e indicadores unificados. |
+| Talento humano | Sin unidad formal; brecha de formación | Equipo núcleo (6 personajes del estado futuro) y capacitación continua. |
+| Pila tecnológica | Silos de datos; integración madurez 2; ERP en transición | Lago en Azure, integración SCADA/comercial y alineación con Saphiro. |
+| Producto pérdidas | FO/DA; SafeGRID sin continuidad | MVP, piloto y operación continua del producto analítico. |
+| Gestión del cambio | Detractores por liquidez y cultura de campo | Sponsors, talleres y adopción de autoservicio. |
+
+#### Diagrama de Gantt
+
+\begin{flushright}
+\includegraphics[width=0.9\textwidth]{img/gantt_hoja_ruta.png}
+\end{flushright}
+
+**Hitos clave.** Marzo 2027: roles de dueños y custodios definidos. Septiembre 2027: producto de pérdidas en operación. Diciembre 2027: plataforma de datos lista y alineada con Saphiro.
+
+**Lectura del cronograma.** Gobernanza, talento y comunicación arrancan primero para dar mandato al equipo. El MVP de pérdidas inicia en febrero de 2027, sin esperar a que toda la plataforma esté lista, para mostrar retorno rápido. La integración profunda con SCADA y SAP corre en la segunda mitad de 2027, en paralelo a la puesta en producción del producto y a la adopción por Comercial y Distribución.
+
