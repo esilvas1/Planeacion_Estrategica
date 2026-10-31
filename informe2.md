@@ -64,14 +64,11 @@ Opera en un entorno regulado (CREG), con presión por calidad del servicio (SAID
 
 ### 1.3 Descripción del problema
 
-| Aspecto | Descripción |
-|---|---|
-| **Problema** | Pérdidas de energía no técnicas (hurto, fraude, anomalías de medición o consumo) que elevan el índice de pérdidas y reducen ingresos. |
-| **Afectados** | La empresa (ingresos, liquidez y cumplimiento regulatorio), los usuarios que asumen el costo en tarifa y las zonas de mayor incidencia, en particular el Catatumbo. |
-| **Magnitud** | Índice de pérdidas 14,30 % (2025); 47,84 % en el Catatumbo. Recuperación de 29,85 GWh, apoyada en gran medida en revisiones en campo. |
-| **Prioridad actual** | El indicador mejora con lentitud, el acceso a zonas críticas es limitado y la liquidez está tensionada; a la vez hay capacidad tecnológica (Azure, datos comerciales y de red) para priorizar intervenciones. |
-| **Esfuerzos previos** | Revisiones en campo, esquemas de control de pérdidas y el piloto SafeGRID (TRL 7; más de 1.000 kWh/mes recuperados por usuario en prueba), todavía sin un servicio operativo permanente. |
-| **Actores involucrados** | Distribución y gestión de pérdidas, Comercial, TI, innovación (CENSNNOVA), equipos de campo y, cuando corresponda, EPM por la administración de SCADA y del ERP. |
+CENS enfrenta pérdidas de energía no técnicas asociadas a hurto, fraude y anomalías de medición o de consumo. Ese fenómeno eleva el índice de pérdidas, reduce ingresos y complica el cumplimiento de las metas regulatorias de control de pérdidas. El impacto recae sobre la empresa —en su liquidez y desempeño—, sobre los usuarios que asumen parte del costo en la tarifa y, de manera más aguda, sobre las zonas de mayor incidencia, en particular el Catatumbo.
+
+En 2025 el índice de pérdidas cerró en 14,30 % y en el Catatumbo alcanzó 47,84 %. Ese mismo año se recuperaron 29,85 GWh, en gran medida mediante revisiones en campo. El indicador mejora con lentitud, el acceso a zonas críticas está restringido por el orden público y la liquidez de la compañía está tensionada; al mismo tiempo, CENS dispone de capacidad tecnológica (Azure, datos comerciales y de red) para priorizar mejor las intervenciones.
+
+Hasta ahora el problema se ha abordado con revisiones y esquemas de control en campo, con gestión comercial en zonas críticas y con el piloto SafeGRID (TRL 7; más de 1.000 kWh recuperados por usuario al mes en prueba), aún sin un servicio operativo permanente. En la solución intervienen Distribución y gestión de pérdidas, Comercial, TI, innovación (CENSNNOVA), los equipos de campo y, cuando corresponda, EPM por la administración de SCADA y del ERP.
 
 ### 1.4 Objetivo de negocio del proyecto
 
