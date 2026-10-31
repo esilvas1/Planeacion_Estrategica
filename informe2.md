@@ -70,6 +70,38 @@ En 2025 el índice de pérdidas cerró en 14,30 % y en el Catatumbo alcanzó 47,
 
 Hasta ahora el problema se ha abordado con revisiones y esquemas de control en campo, con gestión comercial en zonas críticas y con el piloto SafeGRID (TRL 7; más de 1.000 kWh recuperados por usuario al mes en prueba), aún sin un servicio operativo permanente. En la solución intervienen Distribución y gestión de pérdidas, Comercial, TI, innovación (CENSNNOVA), los equipos de campo y, cuando corresponda, EPM por la administración de SCADA y del ERP.
 
+#### 1.3.1 ¿Cuál es el problema de negocio o de política que enfrentan?
+
+Pérdidas de energía no técnicas asociadas a hurto, fraude y anomalías de medición o de consumo. El fenómeno eleva el índice de pérdidas, reduce ingresos y complica el cumplimiento de las metas regulatorias de control de pérdidas.
+
+#### 1.3.2 ¿A quién o a qué afecta este problema?
+
+Afecta a CENS (ingresos, liquidez y desempeño regulatorio), a los clientes y usuarios que asumen parte del costo en la tarifa, a las zonas geográficas de mayor incidencia —en especial el Catatumbo— y a los equipos de Distribución, Comercial y de campo, que concentran revisiones con poca priorización analítica.
+
+#### 1.3.3 ¿Cuántos se ven afectados y en qué medida?
+
+CENS atiende más de 640.000 clientes. El índice de pérdidas cerró en 14,30 % en 2025 y en el Catatumbo alcanzó 47,84 %. Ese mismo año se recuperaron 29,85 GWh, en gran medida mediante revisiones en campo. El impacto es de gran magnitud sobre el balance energético del área de influencia y, de forma crítica, sobre un subconjunto de circuitos y usuarios en zonas de difícil acceso.
+
+#### 1.3.4 ¿Por qué resolver este problema es una prioridad para la organización en este momento?
+
+El indicador mejora con lentitud (0,08 puntos porcentuales frente a 2024), el acceso a zonas críticas está restringido por el orden público y la liquidez está tensionada por factores externos (subsidios y opción tarifaria). Al mismo tiempo, CENS dispone de capacidad tecnológica (Azure, datos comerciales y de red, piloto SafeGRID) para priorizar intervenciones antes de la migración a SAP Saphiro en 2027.
+
+#### 1.3.5 ¿Cómo han intentado enfrentar este problema y cuál ha sido el resultado?
+
+| Esfuerzo | Resultado |
+|---|---|
+| Revisiones y control en campo | Recuperación de 29,85 GWh en 2025; alto costo operativo y dependencia del acceso físico. |
+| Gestión comercial en zonas críticas | Limitada por orden público y por la capacidad de pago de algunos segmentos. |
+| Piloto SafeGRID | TRL 7; más de 1.000 kWh recuperados por usuario al mes en prueba; aún sin servicio operativo permanente. |
+
+#### 1.3.6 ¿Qué otros grupos o interesados deben participar en el alcance y la implementación?
+
+| Ámbito | Interesados |
+|---|---|
+| Internos | Gestión de pérdidas / Distribución; Comercial; TI (datos e infraestructura); innovación (CENSNNOVA); cuadrillas y supervisores de campo; áreas de riesgo y cumplimiento. |
+| Grupo empresarial | EPM (SCADA, ERP/Saphiro y lineamientos de grupo). |
+| Externos | CREG (metas de pérdidas); usuarios priorizados para intervención; contratistas de inspección cuando aplique; autoridades locales en zonas de acceso restringido. |
+
 ### 1.4 Objetivo de negocio del proyecto
 
 Priorizar intervenciones de campo y de control sobre clientes y circuitos con mayor riesgo de pérdida no técnica, para recuperar más energía con la misma o menor capacidad de inspección. El resultado esperado es mayor energía recuperada y mejor uso de cuadrillas, dentro de las restricciones de liquidez, acceso territorial y protección de datos personales (Ley 1581).
