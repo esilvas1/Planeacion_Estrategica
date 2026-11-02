@@ -1,0 +1,36 @@
+gantt
+    title Cronograma del proyecto - Deteccion y priorizacion de perdidas no tecnicas CENS
+    dateFormat  YYYY-MM-DD
+    axisFormat  %b %Y
+    tickInterval 1month
+
+    section 1. Inicio y planeacion
+    Acta y alcance del proyecto             :i1, 2027-01-01, 30d
+    Acuerdos de acceso a datos con EPM      :i2, after i1, 45d
+
+    section 2. Datos
+    Integracion SAC GIS SCADA               :d1, 2027-01-15, 90d
+    Calidad y construccion de variables     :d2, after d1, 60d
+    Datos listos                            :milestone, m1, 2027-06-15, 0d
+
+    section 3. Analisis descriptivo y deteccion
+    EDA y balances de energia               :a1, 2027-03-01, 60d
+    Deteccion de anomalias                  :a2, after a1, 75d
+
+    section 4. Prediccion y optimizacion
+    Modelos de riesgo y scoring             :p1, 2027-05-15, 90d
+    Optimizacion de agenda de visitas       :p2, after p1, 45d
+    Modelo validado                         :milestone, m2, 2027-09-30, 0d
+
+    section 5. Piloto de campo
+    Diseno del ensayo                       :f1, 2027-08-01, 30d
+    Ejecucion del piloto                    :f2, after f1, 90d
+    Evaluacion de resultados                :f3, after f2, 30d
+
+    section 6. Produccion y transferencia
+    Tableros y despliegue en Azure          :t1, 2027-10-01, 60d
+    Capacitacion y gestion del cambio       :t2, 2027-10-15, 60d
+    Producto en operacion                   :milestone, m3, 2027-12-01, 0d
+
+    section 7. Cierre
+    Documentacion y cierre                  :c1, 2027-12-01, 30d

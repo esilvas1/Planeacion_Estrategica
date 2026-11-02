@@ -196,3 +196,198 @@ Además de las fuentes internas y externas ya descritas, el proyecto incorpora o
 - **Polígonos de asentamientos rurales**, para ubicar geografías donde la red y el patrón de consumo difieren del área urbana.
 - **Polígonos de problemas de orden público**, para marcar zonas de difícil ingreso, mantenerlas en el ranking de priorización y programar visitas solo cuando haya condiciones de acceso.
 - Información del **DANE** (demografía, vivienda, pobreza u otras variables territoriales), para enriquecer el contexto socioeconómico de las zonas y reducir sesgos al interpretar anomalías de consumo.
+
+### 7. Análisis
+
+Este análisis es el medio para priorizar inspecciones, actualizar el ranking geográfico y orientar la normalización comercial.
+
+#### 7.1 ¿Qué análisis se realizarán para informar las acciones?
+
+| | Análisis 1 | Análisis 2 | Análisis 3 |
+|---|---|---|---|
+| **Tipo de análisis** | Descripción | Detección | Predicción (con apoyo de optimización de visitas) |
+| **Propósito** | Caracterizar el comportamiento histórico de pérdidas y consumo por circuito, transformador y zona, y calcular desbalances entre energía de red (SCADA/GIS) y energía facturada (SAC). | Identificar en el periodo actual cuentas, medidores o tramos con comportamiento anómalo respecto a su historia y a vecinos de la misma zona o transformador. | Estimar el riesgo de pérdida no técnica o fraude en cada punto geográfico y producir un ranking priorizado para asignar la capacidad limitada de cuadrillas. |
+| **Acción que informa** | Acción 2 (ranking geográfico) y planeación de Distribución y Comercial. | Acción 1 (inspección en campo) y Acción 3 (gestión comercial / normalización). | Acción 1, Acción 2 y Acción 3: define el orden de visitas y mantiene en lista las zonas de alta incidencia aunque no haya ingreso inmediato. |
+| **Cómo se analiza (método y herramientas)** | Análisis exploratorio de datos (EDA), balances de energía por circuito o transformador, series temporales de consumo, mapas de calor sobre GTECH y tableros en Azure. Herramientas: Python (pandas, geopandas), SQL sobre SAC/GIS y Power BI o equivalentes. | Detección de anomalías: reglas de negocio (caídas abruptas de consumo, consumo nulo con vecinos activos), métodos no supervisados (Isolation Forest, LOF o autoencoders) y, cuando haya etiquetas de inspecciones previas, modelos supervisados. Herramientas: scikit-learn, PyTorch o equivalentes sobre features de SAC, SCADA y GIS. | Modelos de riesgo / clasificación o scoring (regresión logística, random forest, gradient boosting / XGBoost o LightGBM) con variables de consumo, red, clima, DANE y orden público. Optimización de la agenda de visitas sujeto a cupo de cuadrillas y polígonos de acceso. Herramientas: scikit-learn, XGBoost/LightGBM, OR-Tools o reglas de asignación en Azure. |
+| **Validación y métricas** | Contraste del balance histórico con reportes de pérdidas ya conocidos y con zonas de alta incidencia (p. ej. Catatumbo). Métricas: error de balance por circuito, estabilidad de series y cobertura geográfica del inventario GIS. | Validación retrospectiva con resultados de inspecciones y del piloto SafeGRID. Métricas: precisión, recall, F1 y precisión en el top 10 % de alertas, comparadas contra una línea base aleatoria y contra el criterio actual de programación de visitas. | Validación temporal (train/test por periodos, walk-forward). Métricas: AUC, precisión y valor predictivo positivo en el top 5 % o 10 %, lift frente a selección aleatoria y frente al sistema actual, y kWh recuperados por visita en un piloto de campo. |
+| **Línea base de comparación** | Reportes históricos de pérdidas y mapas operativos actuales sin cruce sistemático SAC–SCADA–GIS. | Selección aleatoria de cuentas y listados actuales sin modelo de anomalías. | Programación actual de cuadrillas y resultado del piloto SafeGRID como referencia de mejora. |
+| **Temas éticos del análisis** | Evitar estigmatizar zonas enteras solo por el nivel agregado de pérdidas. | Falsos positivos que generen visitas injustificadas, y falsos negativos que dejen fuera fraudes reales. Cumplimiento de la Ley 1581 al usar datos de SAC. | Sesgo geográfico o socioeconómico (DANE, asentamientos rurales). No excluir del ranking las zonas de difícil acceso, aunque la visita se posponga por orden público. |
+
+En conjunto, el flujo de análisis es: primero se describe y balancea la red (Análisis 1), luego se detectan anomalías vigentes (Análisis 2) y finalmente se predice el riesgo y se ordenan las visitas (Análisis 3). La validación inicial se hace con datos históricos e inspecciones pasadas, y la validación definitiva con un ensayo de campo sobre las listas priorizadas.
+
+### 8. Consideraciones éticas
+
+Las consideraciones éticas acompañan el alcance, el diseño y la ejecución del proyecto. Se revisan de forma continua, no solo al cierre del scoping.
+
+#### 8.1 Privacidad, confidencialidad y seguridad
+
+El proyecto trabaja con datos personales e individualmente identificables del SAC (NIU, cuenta, medidor, dirección, consumo, novedades comerciales) y con datos sensibles de operación (GIS/GTECH y SCADA) que describen infraestructura crítica. El marco legal aplicable es la Ley 1581 de 2012 y las políticas de tratamiento de datos de CENS y del Grupo EPM. Éticamente, el uso se limita a lo necesario para priorizar intervenciones de control de pérdidas, sin reutilizar los datos para fines ajenos al caso de uso.
+
+Protecciones previstas: acceso por roles (TI, Distribución, Comercial y analítica), minimización de campos en los listados operativos, seudonimización o agregación cuando el análisis no requiera identificar al cliente, cifrado y controles de ciberseguridad sobre Azure y sobre SCADA en coordinación con EPM, y custodia reforzada de la ubicación de activos de red. La auditoría de estas protecciones se alinea con los controles internos de TI y cumplimiento: revisión periódica de permisos, registro de accesos a bases comerciales y de red, y seguimiento a incidentes. Los permisos y accesos se revisan al menos cada trimestre, y de inmediato ante cualquier incidente o cambio mayor de infraestructura (por ejemplo, migración a SAP Saphiro).
+
+#### 8.2 Transparencia
+
+| Interesado | Qué debe conocer sobre el proyecto |
+|---|---|
+| Dirección y áreas de política / regulación interna | Metas (energía recuperada, índice de pérdidas, equidad territorial), restricciones de liquidez y orden público, y límites del modelo (no sustituye la decisión humana de visitar). |
+| Trabajadores de primera línea (cuadrillas, supervisores, Comercial) | Cómo se construye el ranking, qué señales alimentan la alerta, tasa esperada de falsos positivos y el protocolo cuando la visita no confirma irregularidad. |
+| Personas priorizadas para intervención | Que la visita o gestión comercial responde a indicios de anomalía de consumo o medición en el marco del control de pérdidas, no a un juicio definitivo de fraude, y cuáles son sus canales de reclamación. |
+| Dueños de los datos (Comercial, Distribución, Centro de Control / EPM) | Finalidad del cruce SAC–GIS–SCADA, campos usados, retención y quiénes tienen acceso a los productos analíticos. |
+| Público general / usuarios del servicio | Que CENS usa analítica para reducir pérdidas no técnicas que afectan la tarifa y la sostenibilidad del servicio, con protección de datos personales. |
+
+Los dueños de los datos deben autorizar y documentar el uso analítico. Las personas priorizadas deben poder entender, en lenguaje claro, por qué aparecen en la lista y qué ocurre si la inspección no encuentra irregularidad.
+
+#### 8.3 Discriminación / equidad
+
+Los grupos para los que se busca equidad de resultados son: usuarios de zonas de alta incidencia y difícil acceso (en particular el Catatumbo), segmentos rurales frente a urbanos, usuarios de menor capacidad de pago o en condición de vulnerabilidad socioeconómica, y, cuando los datos lo permitan, desagregaciones por tipo de usuario y localidad. Para estos grupos, equidad significa no quedar excluidos del análisis ni del seguimiento solo por el costo operativo o por la imposibilidad temporal de ingresar, y no recibir un trato más agresivo de normalización sin considerar su contexto.
+
+Sesgos a vigilar: sobreponderar zonas urbanas de fácil acceso (eficiencia a costa de equidad), estigmatizar circuitos enteros por el índice agregado de pérdidas, y confundir patrones de pobreza o informalidad (variables DANE, asentamientos rurales) con fraude. Mitigación: mantener en el ranking las zonas de difícil acceso aunque la visita se posponga, medir la distribución geográfica y por segmento de las intervenciones y de los falsos positivos, revisar el modelo cuando un grupo quede sistemáticamente sobre o sub representado, y separar la señal de riesgo técnico de la decisión comercial de cobro o normalización. También se reconocen inequidades más amplias (orden público, capacidad de pago, calidad histórica del servicio) que el modelo no elimina, pero que no deben amplificarse al priorizar.
+
+#### 8.4 Licencia social
+
+Si la población del área de influencia o del país conoce el proyecto, es razonable esperarlo como aceptable en la medida en que reduce pérdidas que terminan en la tarifa, mejora el uso de recursos públicos y privados del prestador, y opera bajo reglas de protección de datos. El titular del servicio espera que el control de fraude sea legítimo, pero también que no se le trate como sospechoso sin causa revisable.
+
+Grupos que podrían objetar: usuarios falsamente priorizados (visitas injustificadas y desgaste), comunidades del Catatumbo u otras zonas estigmatizadas por el discurso de “alto hurto”, y organizaciones de usuarios o veedurías si perciben opacidad del algoritmo o uso excesivo de datos personales. Un titular de prensa positivo enfatizaría recuperación de energía y menor carga en la tarifa. Uno negativo enfatizaría “CENS espía consumos” o “persigue a los más pobres”. Por eso la comunicación pública debe centrarse en el beneficio colectivo del control de pérdidas, en la protección de datos y en el derecho a reclamar cuando la inspección no confirma irregularidad.
+
+#### 8.5 Rendición de cuentas (accountability)
+
+| Rol | Responsabilidad ética |
+|---|---|
+| Quienes construyen el sistema (analítica / TI / CENSNNOVA) | Calidad de datos y del modelo, documentación de supuestos, monitoreo de sesgos y falsos positivos, y cumplimiento de controles de acceso y minimización. |
+| Quienes actúan sobre las salidas (cuadrillas, supervisores, Comercial) | Usar el ranking como apoyo, no como veredicto, registrar el resultado de cada visita y abstenerse de prácticas abusivas en la normalización. |
+| Quienes definen metas y prioridades (dirección de Distribución / pérdidas, y lineamientos de grupo cuando aplique) | Equilibrio entre eficiencia, efectividad y equidad territorial, y recursos para atender reclamaciones y zonas de difícil acceso cuando haya condiciones de ingreso. |
+| Cumplimiento, riesgo y protección de datos | Vigilancia de Ley 1581, incidentes de seguridad y uso indebido de listados. |
+
+Ante fugas de datos, uso indebido del sistema, consecuencias no deseadas (por ejemplo, hostigamiento a un segmento) u otros daños, la rendición de cuentas es compartida: TI y analítica por el diseño y la custodia técnica, las áreas operativas por la forma de intervenir, y la dirección del caso de uso por haber definido metas y autorizar el despliegue. Los incidentes se escalan por los canales internos de CENS / EPM de seguridad de la información y de servicio al cliente.
+
+#### 8.6 Otras consideraciones éticas
+
+Además de lo anterior, antes y durante el proyecto se tienen en cuenta:
+
+- **Marco legal y regulatorio:** Ley 1581 de 2012, normas del servicio público domiciliario y lineamientos CREG/SSPD aplicables al control de pérdidas, sin presentar el score del modelo como prueba jurídica de fraude por sí solo.
+- **Consentimiento e información:** el tratamiento se enmarca en las finalidades autorizadas del prestador y en el aviso de privacidad, con información clara al usuario cuando la gestión comercial o la visita lo requieran.
+- **Seguridad de cuadrillas y comunidades:** en zonas de orden público crítico, la priorización analítica no obliga a ingresar. La integridad de las personas prima sobre la ejecución de la lista.
+- **Infraestructura crítica y ciberseguridad:** el abuso o la filtración de GIS/SCADA puede exponer la red. El acceso analítico no debilita los controles del Centro de Control.
+- **No automatización total de sanciones:** toda consecuencia material sobre el usuario (normalización, recuperación, reporte) pasa por criterio humano y registro verificable.
+- **Revisión periódica:** al cerrar cada ciclo de piloto o de producción, se revisan reclamaciones, falsos positivos por segmento y la licencia social del caso de uso, antes de ampliar cobertura.
+
+### 9. Plan de presupuesto y recursos del proyecto
+
+El proyecto se concibe como un caso de uso analítico de doce meses, con un equipo núcleo alineado a los seis puestos ideales definidos en el estado futuro del taller de planeación estratégica (científico de datos, modelador de datos, arquitecto de datos, analista de negocio, gestor de productos y asesor analítico). Se apoya en la infraestructura y los datos que CENS ya tiene (Azure, GIS/GTECH, SAC y SCADA) y en la línea del piloto SafeGRID. El presupuesto se expresa en pesos colombianos (COP) y corresponde a una estimación de planeación, sujeta a ajuste una vez se concreten las contrataciones y los acuerdos internos con EPM.
+
+#### 9.1 Recursos humanos
+
+El costo incremental corresponde al equipo núcleo de analítica. Como apoyo al ranking geográfico se incluye un especialista GIS con dedicación parcial. Las cuadrillas, Comercial y los dueños de datos participan con dedicación parcial dentro de su operación normal, sin costo adicional atribuible al proyecto.
+
+| Personaje / rol | Función en el proyecto | Dedicación | Meses | Costo mensual (COP) | Costo total (COP) |
+|---|---|---|---|---|---|
+| Científico de datos | Desarrolla, entrena y despliega modelos de detección y priorización de pérdidas no técnicas. | 100 % | 12 | 12.000.000 | 144.000.000 |
+| Modelador de datos | Diseña el modelo conceptual y físico del repositorio analítico (SAC, GIS, SCADA), alineado con maestros futuros de SAP. | 50 % | 12 | 9.000.000 | 54.000.000 |
+| Arquitecto de datos | Diseña los canales ETL, la integración con SCADA, el sistema comercial y Azure, y el rendimiento de la plataforma. | 50 % | 12 | 11.000.000 | 66.000.000 |
+| Analista de negocio | Recoge necesidades de Comercial, Distribución y Pérdidas, y traduce el problema en requisitos analíticos. | 50 % | 12 | 7.000.000 | 42.000.000 |
+| Gestor de productos | Planifica el backlog, el mantenimiento y la gobernanza del producto de detección de pérdidas y de los tableros. | 50 % | 12 | 8.000.000 | 48.000.000 |
+| Asesor analítico | Orienta a la dirección sobre el valor estratégico, la priorización de casos de uso y el retorno de la inversión. | 20 % | 12 | 10.000.000 | 24.000.000 |
+| Especialista geoespacial (GIS) — apoyo | Apoya el cruce con GTECH, mapas de calor y polígonos de acceso / asentamientos. | 30 % | 10 | 9.000.000 | 27.000.000 |
+| Enlace de Distribución / gestión de pérdidas | Valida listas, programa cuadrillas y registra resultados de inspección. | 20 % | 12 | 0 | 0 |
+| Enlace Comercial | Ejecuta normalización y gestión sobre usuarios priorizados. | 20 % | 12 | 0 | 0 |
+| **Subtotal recursos humanos** | | | | | **405.000.000** |
+
+#### 9.2 Recursos tecnológicos e infraestructura
+
+El proyecto usa la nube Azure corporativa y las herramientas analíticas de código abierto (Python, scikit-learn, XGBoost/LightGBM, OR-Tools, geopandas). El costo incremental se concentra en cómputo, almacenamiento y visualización, no en nuevas plataformas.
+
+| Concepto | Detalle | Costo anual (COP) |
+|---|---|---|
+| Cómputo y almacenamiento en Azure | Entornos de desarrollo y entrenamiento, almacenamiento de datos cruzados | 48.000.000 |
+| Licencias de visualización (Power BI o equivalente) | Tableros operativos para Distribución y Comercial | 12.000.000 |
+| Herramientas de analítica | Mayoritariamente código abierto, soporte y librerías especializadas | 6.000.000 |
+| Equipos de cómputo | Estaciones de trabajo para el equipo analítico | 10.000.000 |
+| **Subtotal tecnología** | | **76.000.000** |
+
+#### 9.3 Datos, validación en campo y otros recursos
+
+| Concepto | Detalle | Costo (COP) |
+|---|---|---|
+| Integración y calidad de datos | Conectores y limpieza de SAC, GIS/GTECH y SCADA, acuerdos de acceso con EPM | 20.000.000 |
+| Datos externos complementarios | Variables meteorológicas, polígonos y contexto territorial (mayoría de fuentes públicas) | 5.000.000 |
+| Ensayo de campo (validación) | Apoyo logístico a cuadrillas para el piloto de listas priorizadas | 25.000.000 |
+| Capacitación y gestión del cambio | Transferencia a Distribución, Comercial y TI (rol de formador del equipo) | 8.000.000 |
+| **Subtotal datos y validación** | | **58.000.000** |
+
+#### 9.4 Resumen del presupuesto
+
+| Componente | Costo estimado (COP) |
+|---|---|
+| Recursos humanos | 405.000.000 |
+| Tecnología e infraestructura | 76.000.000 |
+| Datos, validación y gestión del cambio | 58.000.000 |
+| Subtotal | 539.000.000 |
+| Contingencia (10 %) | 53.900.000 |
+| **Total estimado** | **592.900.000** |
+
+#### 9.5 Supuestos y consideraciones del presupuesto
+
+- El equipo núcleo de seis personajes coincide con el estado futuro del taller de planeación estratégica. El especialista GIS y los enlaces de Distribución y Comercial son apoyo operativo del caso de uso, no un reemplazo de esos puestos.
+- El proyecto se apoya en infraestructura, datos y licencias corporativas ya disponibles, por lo que el costo incremental se concentra en el equipo analítico y en la integración de datos.
+- Las cuadrillas, Comercial y los dueños de datos participan con dedicación parcial dentro de su operación normal, sin costo adicional atribuible al proyecto.
+- Los valores son estimaciones de planeación en pesos colombianos y se ajustan al concretar contrataciones y acuerdos con EPM.
+- La contingencia del 10 % cubre variaciones en integración de datos, demoras por acceso a zonas de orden público y ajustes del ensayo de campo.
+- El retorno esperado se sustenta en la energía adicional recuperada por intervención. Dado que en 2025 las revisiones recuperaron 29,85 GWh, una mejora moderada en la eficiencia de priorización justifica la inversión frente al costo de visitas no efectivas.
+
+### 10. Desglose de actividades y cronograma
+
+El proyecto se organiza en un desglose de actividades (EDT) de siete fases, desde el inicio hasta el cierre, durante un horizonte de doce meses. Las fases siguen el orden del scoping: primero se aseguran los datos, luego se construyen los análisis descriptivo, de detección y de predicción, y finalmente se valida en campo y se pone en operación.
+
+#### 10.1 Desglose de actividades (EDT)
+
+| Fase | Actividad | Entregable | Responsable principal |
+|---|---|---|---|
+| 1. Inicio y planeación | Acta y alcance del proyecto | Acta firmada con alcance, metas y restricciones | Gestor de productos |
+| 1. Inicio y planeación | Acuerdos de acceso a datos con EPM | Permisos de SAC, GIS y SCADA formalizados | Arquitecto de datos |
+| 2. Datos | Integración SAC, GIS y SCADA | Repositorio analítico con fuentes cruzadas en Azure | Arquitecto / Modelador de datos |
+| 2. Datos | Calidad y construcción de variables | Conjunto de variables depurado y documentado | Modelador de datos |
+| 3. Análisis descriptivo y detección | EDA y balances de energía | Caracterización histórica y balances por circuito | Científico de datos |
+| 3. Análisis descriptivo y detección | Detección de anomalías | Alertas de cuentas y tramos con comportamiento anómalo | Científico de datos |
+| 4. Predicción y optimización | Modelos de riesgo y scoring | Ranking geográfico de riesgo de pérdida no técnica | Científico de datos |
+| 4. Predicción y optimización | Optimización de la agenda de visitas | Asignación de cuadrillas sujeta a cupo y acceso | Científico de datos |
+| 5. Piloto de campo | Diseño del ensayo | Protocolo del piloto y métricas de éxito | Analista de negocio |
+| 5. Piloto de campo | Ejecución del piloto | Inspecciones sobre listas priorizadas | Enlace de Distribución |
+| 5. Piloto de campo | Evaluación de resultados | kWh recuperados por visita y lift frente a línea base | Científico de datos / Analista de negocio |
+| 6. Producción y transferencia | Tableros y despliegue en Azure | Producto operable y tableros para negocio | Arquitecto de datos |
+| 6. Producción y transferencia | Capacitación y gestión del cambio | Equipos de Comercial y Distribución capacitados | Gestor de productos |
+| 7. Cierre | Documentación y cierre | Informe final, lecciones aprendidas y plan de continuidad | Gestor de productos / Asesor analítico |
+
+#### 10.2 Cronograma (diagrama de Gantt)
+
+El horizonte es enero a diciembre de 2027. Las fases de datos y de análisis se traslapan de forma controlada, el piloto de campo comienza cuando hay un modelo validado, y la puesta en operación se cierra con la transferencia a las áreas de negocio.
+
+\begin{flushright}
+\includegraphics[width=\textwidth]{img/gantt_proyecto_perdidas.png}
+\end{flushright}
+
+**Hitos clave.** Junio 2027: datos listos (integración y variables). Septiembre 2027: modelo validado (riesgo y optimización). Diciembre 2027: producto en operación y proyecto cerrado.
+
+**Lectura del cronograma.** La integración de datos arranca primero porque condiciona todos los análisis. El análisis descriptivo y la detección avanzan en paralelo a la depuración final de datos para ganar tiempo. Los modelos de predicción y la optimización de visitas se construyen a mitad de año y habilitan el piloto de campo, que es la validación definitiva sobre listas priorizadas. La producción y la transferencia cierran el año, de modo que el producto quede operando y adoptado por Comercial y Distribución antes del cierre formal del proyecto.
+
+### 11. Conclusiones del taller
+
+Este taller de *Project Scoping* convirtió el diagnóstico del módulo anterior en un plan de proyecto concreto para CENS. Donde el primer taller definió el problema, las capacidades y el estado futuro, aquí se fijaron el alcance, las metas con sus tensiones, las acciones, los datos, los análisis, la ética, el presupuesto, el desglose de actividades y el cronograma. El resultado es un caso de uso listo para discutirse con la organización, no solo una idea de analítica.
+
+#### 11.1 Aplicación al caso CENS
+
+Aplicar el *DS Project Scoping Worksheet* obligó a conectar cada pieza con la siguiente. Las metas de eficiencia, efectividad y equidad dejaron de ser enunciados generales y pasaron a condicionar las acciones de inspección, ranking y normalización. Los datos de SAC, GIS y SCADA se justificaron por la acción que informan, y los tres análisis (descripción, detección y predicción con optimización) se diseñaron para priorizar visitas, no para “hacer modelos” por sí mismos. Las consideraciones éticas (Ley 1581, equidad territorial en el Catatumbo, falsos positivos) y el presupuesto alineado a los seis personajes del estado futuro cerraron el puente entre la estrategia y la ejecución.
+
+En la práctica, el ejercicio muestra que un proyecto de ciencia de datos en un prestador regulado gana valor cuando el alcance es estrecho, medible y anclado a una decisión operativa: a quién visitar y en qué orden, con la misma o menor capacidad de cuadrillas.
+
+#### 11.2 Aprendizaje como profesionales estudiantes de la materia
+
+Como estudiantes de Gerencia en proyectos de ciencia de datos, el aprendizaje central fue disciplinar el salto del problema al algoritmo. El worksheet exige primero aclarar a quién afecta el problema, qué meta se persigue, qué acción cambia el resultado y qué datos existen, y solo después definir el análisis y su validación. Eso cambia el rol del profesional: deja de ser solo quien construye el modelo y pasa a ser quien traduce una necesidad de negocio en un proyecto gobernable, con restricciones, ética, recursos y fechas.
+
+También aprendimos a manejar tensiones reales. En CENS, la eficiencia de las visitas choca con la equidad en zonas de difícil acceso, y la liquidez limita lo que se puede contratar. Nombrar esas tensiones en el scoping evita promesas irreales y fortalece el juicio gerencial que la materia busca formar.
+
+#### 11.3 Hacia una dirección estratégica que agrega valor
+
+Esta actividad abre una dirección estratégica porque sitúa la analítica dentro del portafolio de la empresa, no al margen de TI ni como piloto aislado. Al definir metas, acciones, presupuesto y cronograma, el caso de pérdidas no técnicas se vuelve un vehículo para recuperar energía, mejorar el uso de cuadrillas y aportar a indicadores que importan a la dirección y al regulador. Al mismo tiempo, materializa el primer producto de la unidad de ciencia de datos imaginada en el taller previo, con roles claros y un retorno argumentable frente a la inversión.
+
+El valor para la compañía no está solo en el score del modelo. Está en decidir mejor con evidencia, en reducir visitas improductivas, en no abandonar zonas críticas en el seguimiento y en construir capacidad interna que luego se pueda transferir a otros casos de uso. El scoping es, en ese sentido, el instrumento que convierte la ciencia de datos en dirección estratégica: alinea problema, decisión, recurso y resultado, y deja a la organización con un camino ejecutable para agregar valor medible.
+
