@@ -163,16 +163,16 @@ El proyecto combina fuentes administrativas internas de CENS con información p�
 
 | | Fuente 1 | Fuente 2 | Fuente 3 |
 |---|---|---|---|
-| **Nombre** | Sistema GIS (GTECH) | Sistema de información comercial (SAC) | SCADA |
+| **Nombre** | Sistema GIS (GTECH / Intergraph G/Technology, hoy en la línea HxGN NetWorks) [1] | Sistema de Administración Comercial (SAC) [2][3] | SCADA Siemens Spectrum Power 7 (SP7), con aplicaciones DMS/OMS [4][5] |
 | **¿Qué contiene?** | Inventario y ubicación de la red: circuitos, transformadores, postes, tramos, coordenadas y topología de distribución. | Datos de clientes y cuentas: identificación, dirección, consumo facturado, tipo de usuario, estado de la cuenta, novedades comerciales y de medición. | Medidas operativas de la red en tiempo real o casi real: cargas, alarmas, estados de equipos y eventos de operación. |
 | **Granularidad** | Activo de red / transformador / circuito, con georreferenciación. | Cliente / cuenta / medidor. | Punto de medida o equipo de red, por instante o intervalo de operación. |
 | **Historia disponible** | Histórico de red suficiente para ubicar activos y cambios de topología en los últimos años de operación. | Series de consumo y novedades de varios años de facturación, útiles para detectar anomalías. | Registros operativos recientes y archivos de eventos, según retención definida con EPM / Centro de Control. |
 | **Frecuencia de actualización** | Según mantenimientos y actualizaciones de inventario de red. | Diaria o por ciclo de facturación, con novedades comerciales frecuentes. | Continua (tiempo real o casi real). |
 | **Identificadores para cruce** | Código de transformador, circuito o activo, enlazable con SAC y con medidas de red. | NIU / cuenta / medidor, enlazable con ubicación GIS y con resultados de inspección. | Código de equipo o punto de medida, enlazable con GIS (GTECH). |
 | **Dueño interno** | Distribución / área de red e inventario GIS. | Comercial / sistemas de información comercial. | Centro de Control / operación, con administración de SCADA en coordinación con EPM. |
-| **Almacenamiento** | Base geoespacial GTECH / repositorio GIS corporativo. | Base de datos del SAC. | Históricos y servidor SCADA, con acceso controlado. |
+| **Almacenamiento** | Base geoespacial GTECH / repositorio GIS corporativo. | Base de datos del SAC (en CENS, documentada sobre Oracle) [3]. | Históricos y servidor SCADA, con acceso controlado. |
 | **Temas éticos** | Ubicación de infraestructura crítica: acceso restringido y custodia de la información. | Datos personales de clientes: Ley 1581 de 2012, minimización de uso y control de acceso. | Seguridad de la operación y ciberseguridad de ciberactivos. |
-| **Otra información útil** | Base para la identificación geográfica de puntos de riesgo. | Base para el perfil de consumo y la priorización de usuarios. | Base para contrastar energía de red frente a energía facturada y detectar desbalances. |
+| **Otra información útil** | Plataforma GIS de redes de Hexagon (Intergraph G/Technology / HxGN NetWorks), usada para modelar y documentar la red de distribución [1]. Base para la identificación geográfica de puntos de riesgo. | Suite comercial de administración de servicios públicos (clientes, facturación, cartera y medición), en uso en CENS y otras filiales del sector [2][3]. Base para el perfil de consumo y la priorización de usuarios. | Plataforma de supervisión y control Spectrum Power 7 de Siemens, con DMS/OMS, operada desde el Centro de Control y con soporte contratado por EPM a nombre de CENS [4][5]. Base para contrastar energía de red frente a energía facturada y detectar desbalances. |
 
 #### 6.2 ¿Qué datos se obtienen de fuentes externas públicas o privadas?
 
@@ -390,4 +390,16 @@ También aprendimos a manejar tensiones reales. En CENS, la eficiencia de las vi
 Esta actividad abre una dirección estratégica porque sitúa la analítica dentro del portafolio de la empresa, no al margen de TI ni como piloto aislado. Al definir metas, acciones, presupuesto y cronograma, el caso de pérdidas no técnicas se vuelve un vehículo para recuperar energía, mejorar el uso de cuadrillas y aportar a indicadores que importan a la dirección y al regulador. Al mismo tiempo, materializa el primer producto de la unidad de ciencia de datos imaginada en el taller previo, con roles claros y un retorno argumentable frente a la inversión.
 
 El valor para la compañía no está solo en el score del modelo. Está en decidir mejor con evidencia, en reducir visitas improductivas, en no abandonar zonas críticas en el seguimiento y en construir capacidad interna que luego se pueda transferir a otros casos de uso. El scoping es, en ese sentido, el instrumento que convierte la ciencia de datos en dirección estratégica: alinea problema, decisión, recurso y resultado, y deja a la organización con un camino ejecutable para agregar valor medible.
+
+### Referencias
+
+[1] Hexagon. (2022). *Hexagon announces HxGN NetWorks, rebrands utilities and communications offerings* (incluye el renombrado de Intergraph G/Technology, conocido en operación como GTECH). Disponible en: [https://hexagon.com/company/newsroom/press-releases/2022/hexagon-announces-hxgn-networks-rebrands-utilities-and-communications-offerings](https://hexagon.com/company/newsroom/press-releases/2022/hexagon-announces-hxgn-networks-rebrands-utilities-and-communications-offerings)
+
+[2] ACTSIS / Universidad Industrial de Santander. *Sistema de Administración Comercial (SAC)*: sistema de administración y gestión de procesos de comercialización de servicios públicos (energía y afines). Descripción del producto en trabajo de grado UIS. Disponible en: [https://noesis.uis.edu.co/handle/20.500.14071/27087](https://noesis.uis.edu.co/handle/20.500.14071/27087)
+
+[3] Centrales Eléctricas del Norte de Santander S.A. E.S.P. (CENS). (2021). *Informe del revisor fiscal*: identifica el aplicativo SAC sobre base de datos Oracle como sistema de información comercial. Disponible en: [https://www.cens.com.co/Portals/cens/menu-transparencia/mecanismos-de-control/revisoria-fiscal/RF2021.pdf](https://www.cens.com.co/Portals/cens/menu-transparencia/mecanismos-de-control/revisoria-fiscal/RF2021.pdf)
+
+[4] Siemens. *Spectrum Power Advanced Distribution Management (ADMS)*: plataforma que integra funcionalidad SCADA para monitoreo, alarma, medición y control de redes de distribución. Disponible en: [https://www.siemens.com/global/en/products/energy/grid-software/operation/grid-control/advanced-distribution-management.html](https://www.siemens.com/global/en/products/energy/grid-software/operation/grid-control/advanced-distribution-management.html)
+
+[5] Siemens. *Spectrum Power ADMS – módulos* (documento técnico): describe el módulo SCADA y su integración con GIS, CIS y aplicaciones de operación (DMS/OMS). Disponible en: [https://assets.new.siemens.com/siemens/assets/api/uuid:6be45822-9bad-4f93-ac98-d4fbee5d622f/interactive-pdf-for-ADMS-modules.pdf](https://assets.new.siemens.com/siemens/assets/api/uuid:6be45822-9bad-4f93-ac98-d4fbee5d622f/interactive-pdf-for-ADMS-modules.pdf)
 
