@@ -119,15 +119,15 @@ El indicador mejora con lentitud (0,08 puntos porcentuales frente a 2024), el ac
 
 ### 4. Objetivo del proyecto (Meta)
 
-Priorizar intervenciones de campo y de control sobre clientes y circuitos con mayor riesgo de pérdida no técnica, para recuperar más energía con la misma o menor capacidad de inspección. El resultado esperado es mayor energía recuperada y mejor uso de cuadrillas, dentro de las restricciones de liquidez, acceso territorial y protección de datos personales (Ley 1581).
+**Objetivo general.** Priorizar intervenciones de campo y de control sobre clientes y circuitos con mayor riesgo de pérdida no técnica, para recuperar más energía con la misma o menor capacidad de inspección. El resultado esperado es mayor energía recuperada y mejor uso de cuadrillas, dentro de las restricciones de liquidez, acceso territorial y protección de datos personales (Ley 1581).
 
 #### 4.1 ¿Cuáles son las metas de negocio o de política, y qué restricciones tienen?
 
-| Prioridad | Meta | Tipo de meta | Restricciones |
-|---|---|---|---|
-| 1 | Aumentar la energía recuperada por intervención de campo, asignando las visitas a clientes y circuitos de mayor riesgo de pérdida no técnica. | Eficiencia | Capacidad limitada de cuadrillas, liquidez tensionada, ausencia de tableros y predicciones de fraude en tiempo casi real, y condiciones de orden público que impiden ingresar a ciertas zonas. |
-| 2 | Reducir el índice de pérdidas no técnicas en el área de influencia de CENS, con seguimiento en zonas de alta incidencia. | Efectividad | Calidad e integración de datos comerciales, de medición y de red, operación continua del producto derivado de SafeGRID, y condiciones de orden público que limitan la intervención en zonas de alta incidencia. |
-| 3 | Mantener en las listas de priorización zonas y segmentos de alta incidencia, aun cuando en ocasiones sea imposible ingresar a las zonas de difícil acceso. | Equidad | Condiciones de orden público que en ocasiones hacen imposible el ingreso a zonas de difícil acceso, tratamiento de datos personales bajo la Ley 1581 de 2012 y registro de la distribución geográfica de las intervenciones. |
+| Prioridad | Meta específica (medible) | Indicador y meta numérica | Tipo de meta | Restricciones |
+|---|---|---|---|---|
+| 1 | Aumentar la energía recuperada por intervención de campo, asignando las visitas a clientes y circuitos de mayor riesgo de pérdida no técnica. | kWh recuperados por visita (o por inspección efectiva). Meta: >= 20 % de mejora frente a la línea base operativa actual al cierre del piloto (mes 9–12), midiendo el mismo cupo de cuadrillas. | Eficiencia | Capacidad limitada de cuadrillas, liquidez tensionada, ausencia de tableros y predicciones de fraude en tiempo casi real, y condiciones de orden público que impiden ingresar a ciertas zonas. |
+| 2 | Reducir el índice de pérdidas no técnicas en el área de influencia de CENS, con seguimiento en zonas de alta incidencia. | Índice de pérdidas (%). Meta de proyecto: contribuir a una reducción de al menos 0,30 puntos porcentuales respecto al cierre 2025 (14,30 %), con tablero mensual por circuito / zona, incluido Catatumbo. | Efectividad | Calidad e integración de datos comerciales, de medición y de red, operación continua del producto derivado de SafeGRID, y condiciones de orden público que limitan la intervención en zonas de alta incidencia. |
+| 3 | Mantener en las listas de priorización zonas y segmentos de alta incidencia, aun cuando en ocasiones sea imposible ingresar a las zonas de difícil acceso. | Cobertura equitativa del ranking. Meta: >= 95 % de los circuitos / zonas de alta incidencia permanecen en el ranking cada ciclo, y >= 30 % de las visitas programadas (no necesariamente ejecutadas) corresponden a esas zonas, aunque el ingreso se posponga por orden público. | Equidad | Condiciones de orden público que en ocasiones hacen imposible el ingreso a zonas de difícil acceso, tratamiento de datos personales bajo la Ley 1581 de 2012 y registro de la distribución geográfica de las intervenciones. |
 
 En la práctica, el equipo genera periódicamente un ranking geográfico de riesgo, Distribución y Comercial programan las cuadrillas según ese ranking y dentro de la capacidad disponible, y se mide el resultado en energía recuperada e índice de pérdidas. Cuando el orden público bloquea el ingreso, la visita queda pendiente o se reprograma, sin sacar esa zona del análisis de priorización.
 
@@ -188,7 +188,27 @@ El proyecto combina fuentes administrativas internas de CENS con información p�
 | **Temas éticos** | Uso conforme a las condiciones de publicación y no distorsión de cifras oficiales. | Interpretación correcta de la norma, sin uso indebido frente a usuarios. | Manejo responsable de información de vigilancia y de quejas. |
 | **Otra información útil** | Contextualiza el balance energético y el entorno de mercado. | Enmarca metas y reglas de pérdidas, sin ser por sí misma una restricción operativa del modelo. | Permite contrastar el desempeño de CENS con la vigilancia del servicio. |
 
-#### 6.3 En un escenario ideal, ¿qué datos adicionales serían relevantes?
+#### 6.3 Caracterización de las variables de datos
+
+Además de las fuentes, las variables clave se caracterizan por tipo, rango o dominio esperado, ausencias y tratamiento de atípicos. Los valores de rango son de planeación (órdenes de magnitud operativos) y se precisan al inventariar cada fuente.
+
+| Variable / dato | Fuente | Tipo de dato | Rango / dominio esperado | Ausencia de datos | Datos atípicos |
+|---|---|---|---|---|---|
+| Consumo facturado (kWh) | SAC | Numérico continuo | >= 0 kWh por ciclo, típicamente 0–varios miles kWh/mes según tipo de usuario | Ciclos sin lectura, cuentas nuevas o medidores sin historial. Se marca faltante, no se imputa como cero sin revisión. | Caídas abruptas a casi 0, picos fuera de la distribución histórica del cliente o del transformador, series planas prolongadas con vecinos activos. |
+| Tipo de usuario / tarifa | SAC | Categórico | Residencial, comercial, industrial, oficial u otros códigos comerciales vigentes | Códigos nulos o no vigentes. Se corrige con maestro comercial o se excluye del score hasta normalizar. | Categorías inconsistentes con el consumo o con la zona. |
+| Estado de la cuenta | SAC | Categórico | Activa, suspendida, retirada u otros estados del SAC | Estado vacío. Se trata como no elegible para visita hasta completar. | Estados contradictorios con novedades recientes de medición. |
+| NIU / cuenta / medidor | SAC | Identificador (texto/numérico) | Identificadores únicos del maestro comercial | Duplicados o nulos. Se depura antes del cruce. | Múltiples medidores activos para la misma cuenta sin justificación. |
+| Código de circuito / transformador | GTECH (GIS) | Identificador + geoespacial | Códigos de inventario vigentes, coordenadas en el área de influencia de CENS | Activos sin coordenada o sin enlace a SAC. Quedan fuera del mapa de riesgo hasta completar inventario. | Coordenadas fuera del área de servicio, topología rota o transformadores sin clientes asociados. |
+| Topología / tramos de red | GTECH (GIS) | Geoespacial / relacional | Conectividad circuito–transformador–cliente coherente con el inventario | Tramos faltantes o desactualizados tras obras. Se documenta cobertura GIS por zona. | Geometrías inválidas, solapes o desconexiones que impiden el balance por circuito. |
+| Carga / medida de energía de red | SCADA | Numérico continuo (serie temporal) | Valores físicos plausibles según sensor y nivel de tensión, con sello de tiempo | Huecos por telemetría o retenciones cortas. Se interpola solo en ventanas cortas o se agrega el intervalo disponible. | Spikes por falla de sensor, valores negativos no esperados, congelamiento de señal. |
+| Alarmas / eventos de operación | SCADA | Categórico / evento con marca de tiempo | Códigos de alarma y severidad del Centro de Control | Eventos sin cierre o sin activo asociado. Se filtran para no contaminar el score. | Ráfagas de alarmas por fallo de comunicaciones (no atribuibles a fraude). |
+| Resultado de inspección / kWh recuperados | Campo / Comercial | Numérico y categórico | Irregularidad sí/no, kWh recuperados >= 0 | Visitas sin acta o sin resultado. No se usan como etiqueta positiva/negativa. | Recuperaciones extremas frente al consumo histórico, revisadas caso a caso. |
+| Precipitación / temperatura | Externos meteorológicos | Numérico continuo | Rangos climáticos locales (p. ej. temperatura típica de la región, precipitación >= 0 mm) | Días sin reporte. Se usa la estación más cercana o se omite el feature ese día. | Valores imposibles (p. ej. precipitación negativa) o saltos de sensor. |
+| Polígonos orden público / rural / DANE | Externos | Geoespacial / numérico agregado | Polígonos del área de influencia, indicadores territoriales no negativos | Zonas sin polígono. Se asigna “sin marca” y no se interpreta como bajo riesgo. | Indicadores desactualizados o a granularidad incompatible con el circuito. |
+
+**Criterios transversales de calidad.** Antes del modelado se documenta, por variable, el porcentaje de faltantes, la cobertura geográfica y un perfil de atípicos (reglas de negocio + percentiles extremos). Los atípicos de consumo alimentan la detección de anomalías, mientras que los atípicos de sensor o de inventario se corrigen o se excluyen para no sesgar el ranking.
+
+#### 6.4 En un escenario ideal, ¿qué datos adicionales serían relevantes?
 
 Además de las fuentes internas y externas ya descritas, el proyecto incorpora o aspira a cruzar:
 
