@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CENS · Priorización de pérdidas no técnicas (MVP)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0f1c24;
+      --bg-2: #162a35;
+      --panel: #1b3442;
+      --panel-2: #214052;
+      --line: #2f5366;
+      --text: #e8f1f5;
+      --muted: #9bb3c0;
+      --brand: #1fa67a;
+      --brand-2: #148a64;
+      --warn: #e2a93b;
+      --danger: #e05a45;
+      --info: #3d9ad1;
+      --ok: #5cbc7a;
+      --shadow: 0 12px 40px rgba(0, 0, 0, 0.28);
+      --radius: 14px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; }
+    body {
+      font-family: "IBM Plex Sans", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(1200px 600px at 10% -10%, #1d4a5c 0%, transparent 55%),
+        radial-gradient(900px 500px at 100% 0%, #1a3d32 0%, transparent 50%),
+        var(--bg);
+    }
+
+    h1, h2, h3, .brand-title { font-family: Outfit, sans-serif; }
+
+    .app { max-width: 1280px; margin: 0 auto; padding: 20px 18px 40px; }
+
+    .topbar {
+      display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; align-items: flex-start;
+      margin-bottom: 18px;
+    }
+    .brand-title { margin: 0; font-size: 1.45rem; font-weight: 700; letter-spacing: 0.01em; }
+    .brand-sub { margin: 6px 0 0; color: var(--muted); font-size: 0.92rem; max-width: 52ch; line-height: 1.45; }
+    .badge-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .badge {
+      font-size: 0.75rem; font-weight: 600; padding: 5px 10px; border-radius: 999px;
+      background: rgba(31, 166, 122, 0.15); color: #8fe0c0; border: 1px solid rgba(31, 166, 122, 0.35);
+    }
+    .badge.warn { background: rgba(226, 169, 59, 0.12); color: #f0d08a; border-color: rgba(226, 169, 59, 0.35); }
+
+    .kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-bottom: 16px; }
+    .kpi {
+      background: linear-gradient(180deg, var(--panel) 0%, var(--bg-2) 100%);
+      border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; box-shadow: var(--shadow);
+    }
+    .kpi .label { color: var(--muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; }
+    .kpi .value { font-family: Outfit, sans-serif; font-size: 1.55rem; font-weight: 700; margin-top: 6px; }
+    .kpi .delta { font-size: 0.82rem; margin-top: 4px; color: var(--ok); }
+
+    .tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+    .tab {
+      border: 1px solid var(--line); background: var(--bg-2); color: var(--muted);
+      padding: 10px 14px; border-radius: 999px; cursor: pointer; font-weight: 600; font-size: 0.9rem;
+    }
+    .tab.active { background: var(--brand); border-color: var(--brand); color: #062218; }
+
+    .layout { display: grid; grid-template-columns: 1.35fr 0.9fr; gap: 14px; }
+    .panel {
+      background: rgba(27, 52, 66, 0.92); border: 1px solid var(--line);
+      border-radius: var(--radius); padding: 14px; box-shadow: var(--shadow); min-height: 420px;
+    }
+    .panel h2 { margin: 0 0 12px; font-size: 1.05rem; }
+
+    .toolbar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; align-items: center; }
+    input, select, button {
+      font: inherit; border-radius: 10px; border: 1px solid var(--line); background: var(--bg);
+      color: var(--text); padding: 9px 11px;
+    }
+    input { min-width: 180px; }
+    button { cursor: pointer; font-weight: 600; }
+    button.primary { background: var(--brand); border-color: var(--brand); color: #062218; }
+    button.ghost { background: transparent; }
+    button:disabled { opacity: 0.45; cursor: not-allowed; }
+
+    .map {
+      position: relative; height: 380px; border-radius: 12px; overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(15, 28, 36, 0.15), rgba(15, 28, 36, 0.55)),
+        repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(47, 83, 102, 0.25) 40px),
+        repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(47, 83, 102, 0.25) 40px),
+        #123040;
+      border: 1px solid var(--line);
+    }
+    .map-label {
+      position: absolute; left: 12px; top: 12px; background: rgba(15, 28, 36, 0.75);
+      border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; font-size: 0.8rem; color: var(--muted);
+    }
+    .pin {
+      position: absolute; width: 18px; height: 18px; border-radius: 50%; transform: translate(-50%, -50%);
+      border: 2px solid #fff; cursor: pointer; box-shadow: 0 0 0 6px rgba(255,255,255,0.08);
+    }
+    .pin.high { background: var(--danger); }
+    .pin.med { background: var(--warn); }
+    .pin.low { background: var(--info); }
+    .pin.blocked::after {
+      content: ""; position: absolute; inset: -6px; border: 2px dashed var(--warn); border-radius: 50%;
+    }
+    .pin.selected { box-shadow: 0 0 0 7px rgba(31, 166, 122, 0.35); }
+
+    .legend { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px; color: var(--muted); font-size: 0.8rem; }
+    .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
+
+    table { width: 100%; border-collapse: collapse; font-size: 0.86rem; }
+    th, td { padding: 10px 8px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    th { color: var(--muted); font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.03em; }
+    tr { cursor: pointer; }
+    tr:hover td { background: rgba(33, 64, 82, 0.55); }
+    tr.active td { background: rgba(31, 166, 122, 0.12); }
+    .score {
+      font-family: Outfit, sans-serif; font-weight: 700; padding: 3px 8px; border-radius: 8px; display: inline-block;
+    }
+    .score.high { background: rgba(224, 90, 69, 0.2); color: #ffb1a4; }
+    .score.med { background: rgba(226, 169, 59, 0.18); color: #f3d48a; }
+    .score.low { background: rgba(61, 154, 209, 0.18); color: #9fd0ef; }
+
+    .chip {
+      display: inline-block; padding: 3px 8px; border-radius: 999px; font-size: 0.75rem; font-weight: 600;
+      background: rgba(61, 154, 209, 0.15); color: #9fd0ef;
+    }
+    .chip.field { background: rgba(31, 166, 122, 0.15); color: #8fe0c0; }
+    .chip.commercial { background: rgba(226, 169, 59, 0.15); color: #f0d08a; }
+    .chip.blocked { background: rgba(224, 90, 69, 0.15); color: #ffb1a4; }
+
+    .detail-empty { color: var(--muted); padding: 28px 8px; line-height: 1.5; }
+    .detail-grid { display: grid; gap: 10px; }
+    .detail-card {
+      background: var(--bg-2); border: 1px solid var(--line); border-radius: 12px; padding: 12px;
+    }
+    .detail-card h3 { margin: 0 0 8px; font-size: 0.95rem; }
+    .meta { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 0.86rem; }
+    .meta div { background: rgba(15,28,36,0.45); border-radius: 8px; padding: 8px; }
+    .meta span { display: block; color: var(--muted); font-size: 0.72rem; margin-bottom: 3px; }
+    .signals { margin: 0; padding-left: 18px; color: var(--text); }
+    .signals li { margin: 6px 0; color: var(--muted); }
+    .signals li strong { color: var(--text); }
+    .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+    .spark {
+      display: flex; align-items: flex-end; gap: 4px; height: 56px; margin-top: 8px;
+    }
+    .spark i {
+      display: block; width: 12px; border-radius: 4px 4px 0 0;
+      background: linear-gradient(180deg, var(--brand), #0d5a45);
+    }
+
+    .capacity {
+      display: flex; justify-content: space-between; gap: 10px; align-items: center;
+      background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; margin-bottom: 12px;
+    }
+    .bar { flex: 1; height: 10px; background: #0c1820; border-radius: 999px; overflow: hidden; }
+    .bar > span { display: block; height: 100%; background: linear-gradient(90deg, var(--brand), var(--warn)); }
+
+    .footer {
+      margin-top: 16px; color: var(--muted); font-size: 0.78rem; line-height: 1.45;
+      border-top: 1px solid var(--line); padding-top: 12px;
+    }
+
+    .view { display: none; }
+    .view.active { display: block; }
+
+    @media (max-width: 960px) {
+      .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .layout { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      .kpis { grid-template-columns: 1fr; }
+      input { min-width: 100%; flex: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div>
+        <h1 class="brand-title">CENS · Prioriza Pérdidas</h1>
+        <p class="brand-sub">
+          MVP de detección y priorización de pérdidas no técnicas. Ranking geográfico y listas de intervención
+          para Distribución, Comercial y cuadrillas. Periodo: 10–16 nov 2026.
+        </p>
+        <div class="badge-row">
+          <span class="badge">Modelo de riesgo · mock IA</span>
+          <span class="badge">Fuentes: SAC · GTECH · SCADA</span>
+          <span class="badge warn">Apoyo a la decisión · no es sanción automática</span>
+        </div>
+      </div>
+    </header>
+
+    <section class="kpis" id="kpis"></section>
+
+    <nav class="tabs" id="tabs">
+      <button class="tab active" data-view="mapa">Mapa de riesgo</button>
+      <button class="tab" data-view="campo">Lista de campo</button>
+      <button class="tab" data-view="comercial">Lista comercial</button>
+      <button class="tab" data-view="seguimiento">Seguimiento</button>
+    </nav>
+
+    <div class="layout">
+      <main class="panel">
+        <div class="view active" id="view-mapa">
+          <h2>Ranking geográfico de riesgo</h2>
+          <div class="map" id="map"></div>
+          <div class="legend">
+            <span><i class="dot" style="background:var(--danger)"></i>Alto</span>
+            <span><i class="dot" style="background:var(--warn)"></i>Medio</span>
+            <span><i class="dot" style="background:var(--info)"></i>Bajo</span>
+            <span>Borde discontinuo = acceso restringido (orden público)</span>
+          </div>
+        </div>
+
+        <div class="view" id="view-campo">
+          <h2>Lista priorizada · inspección en campo</h2>
+          <div class="capacity" id="capacity"></div>
+          <div class="toolbar">
+            <input id="q" type="search" placeholder="Buscar NIU, circuito o zona..." />
+            <select id="filtro-riesgo">
+              <option value="all">Todo riesgo</option>
+              <option value="high">Alto</option>
+              <option value="med">Medio</option>
+              <option value="low">Bajo</option>
+            </select>
+            <select id="filtro-acceso">
+              <option value="all">Todo acceso</option>
+              <option value="ok">Visitable</option>
+              <option value="blocked">Pendiente por orden público</option>
+            </select>
+          </div>
+          <div style="overflow:auto">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Score</th>
+                  <th>Cliente / punto</th>
+                  <th>Ubicación</th>
+                  <th>Acción IA</th>
+                  <th>Acceso</th>
+                  <th>Estado</th>
+                </tr>
+              </thead>
+              <tbody id="tabla-campo"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="view" id="view-comercial">
+          <h2>Lista priorizada · normalización comercial</h2>
+          <div class="toolbar">
+            <input id="q-com" type="search" placeholder="Buscar cuenta o zona..." />
+          </div>
+          <div style="overflow:auto">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Score</th>
+                  <th>Cuenta</th>
+                  <th>Zona</th>
+                  <th>Acción comercial IA</th>
+                  <th>Estado</th>
+                </tr>
+              </thead>
+              <tbody id="tabla-comercial"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="view" id="view-seguimiento">
+          <h2>Seguimiento del piloto</h2>
+          <div class="detail-grid" id="seguimiento"></div>
+        </div>
+      </main>
+
+      <aside class="panel" id="detalle">
+        <h2>Detalle y acción sugerida</h2>
+        <div class="detail-empty">Selecciona un punto en el mapa o una fila de las listas para ver señales del modelo, ubicación y acciones.</div>
+      </aside>
+    </div>
+
+    <footer class="footer">
+      Producto mínimo viable académico · datos simulados para demostración.
+      El score no constituye prueba jurídica de fraude. Tratamiento de datos conforme a Ley 1581.
+      Continuidad de la línea SafeGRID · CENS – Grupo EPM.
+    </footer>
+  </div>
+
+  <script>
+    const CUPO = 12;
+    const DATA = [
+      { id: 1, niu: "NIU-104582", cliente: "Cuenta residencial", tipo: "Residencial", circuito: "C-CTB-12", transformador: "T-8841", zona: "Catatumbo · Tibú", x: 22, y: 28, score: 0.93, riesgo: "high", acceso: "blocked", consumo: [180, 175, 160, 40, 18, 12], desbalance: "38 %", senal: "Caída abrupta de consumo con vecinos activos", scada: "Desbalance circuito vs facturado", accionCampo: "Inspección técnica de medidor", accionComercial: "Verificación de consumo y normalización", estado: "pendiente", kwhEst: 920 },
+      { id: 2, niu: "NIU-221907", cliente: "Taller metalúrgico", tipo: "Comercial", circuito: "C-CUC-04", transformador: "T-2201", zona: "Cúcuta · La Libertad", x: 68, y: 42, score: 0.89, riesgo: "high", acceso: "ok", consumo: [410, 400, 395, 120, 95, 88], desbalance: "27 %", senal: "Consumo incompatible con tipo de usuario", scada: "Carga estable en transformador", accionCampo: "Revisión de acometida y medidor", accionComercial: "Gestión comercial de normalización", estado: "pendiente", kwhEst: 740 },
+      { id: 3, niu: "NIU-088341", cliente: "Vivienda rural", tipo: "Residencial", circuito: "C-CTB-07", transformador: "T-7710", zona: "Catatumbo · El Tarra", x: 18, y: 55, score: 0.86, riesgo: "high", acceso: "blocked", consumo: [95, 90, 88, 10, 8, 5], desbalance: "41 %", senal: "Serie casi nula con red energizada", scada: "Alarma de telemedida intermitente", accionCampo: "Inspección en transformador / tramo", accionComercial: "Pendiente hasta habilitar acceso", estado: "pendiente", kwhEst: 1100 },
+      { id: 4, niu: "NIU-556012", cliente: "Minimercado", tipo: "Comercial", circuito: "C-OCA-02", transformador: "T-3308", zona: "Ocaña centro", x: 48, y: 22, score: 0.81, riesgo: "high", acceso: "ok", consumo: [260, 255, 250, 240, 70, 65], desbalance: "22 %", senal: "Quiebre reciente vs historia 12 meses", scada: "Sin alarma crítica", accionCampo: "Inspección técnica de medidor", accionComercial: "Verificación de lectura y factura", estado: "pendiente", kwhEst: 510 },
+      { id: 5, niu: "NIU-773220", cliente: "Cuenta residencial", tipo: "Residencial", circuito: "C-CUC-11", transformador: "T-1190", zona: "Cúcuta · San Luis", x: 74, y: 58, score: 0.76, riesgo: "med", acceso: "ok", consumo: [140, 138, 135, 130, 60, 55], desbalance: "18 %", senal: "Desvío frente a vecinos del mismo transformador", scada: "Balance parcial", accionCampo: "Revisión de medidor", accionComercial: "Contacto comercial preventivo", estado: "pendiente", kwhEst: 320 },
+      { id: 6, niu: "NIU-901144", cliente: "Pequeña industria", tipo: "Industrial", circuito: "C-PAM-01", transformador: "T-5012", zona: "Pamplona", x: 58, y: 72, score: 0.74, riesgo: "med", acceso: "ok", consumo: [800, 790, 820, 300, 280, 275], desbalance: "24 %", senal: "Caída de consumo industrial sin novedad comercial", scada: "Carga de alimentador sin caída equivalente", accionCampo: "Inspección técnica y sellos", accionComercial: "Normalización y ajuste de medición", estado: "pendiente", kwhEst: 980 },
+      { id: 7, niu: "NIU-334870", cliente: "Cuenta residencial", tipo: "Residencial", circuito: "C-CTB-12", transformador: "T-8845", zona: "Catatumbo · Tibú", x: 28, y: 36, score: 0.71, riesgo: "med", acceso: "blocked", consumo: [110, 108, 100, 30, 22, 20], desbalance: "29 %", senal: "Patrón anómalo agrupado en el mismo circuito", scada: "Desbalance zonal", accionCampo: "Inspección cuando haya acceso", accionComercial: "Mantener en seguimiento", estado: "pendiente", kwhEst: 450 },
+      { id: 8, niu: "NIU-120998", cliente: "Local comercial", tipo: "Comercial", circuito: "C-CUC-04", transformador: "T-2210", zona: "Cúcuta · Centro", x: 80, y: 34, score: 0.68, riesgo: "med", acceso: "ok", consumo: [190, 185, 180, 175, 50, 48], desbalance: "16 %", senal: "Cambio de perfil post-ciclo", scada: "Sin evento", accionCampo: "Revisión de medidor", accionComercial: "Verificación de consumo", estado: "asignado", kwhEst: 280 },
+      { id: 9, niu: "NIU-445661", cliente: "Cuenta oficial", tipo: "Oficial", circuito: "C-OCA-02", transformador: "T-3311", zona: "Ocaña norte", x: 42, y: 30, score: 0.61, riesgo: "med", acceso: "ok", consumo: [220, 210, 215, 200, 195, 90], desbalance: "14 %", senal: "Atípico moderado vs historia", scada: "OK", accionCampo: "Inspección selectiva", accionComercial: "Validación de medición", estado: "pendiente", kwhEst: 210 },
+      { id: 10, niu: "NIU-667203", cliente: "Cuenta residencial", tipo: "Residencial", circuito: "C-CUC-11", transformador: "T-1198", zona: "Cúcuta · El Ejido", x: 70, y: 66, score: 0.54, riesgo: "low", acceso: "ok", consumo: [95, 92, 90, 88, 85, 70], desbalance: "9 %", senal: "Desvío leve", scada: "OK", accionCampo: "Monitoreo", accionComercial: "Sin gestión inmediata", estado: "pendiente", kwhEst: 90 },
+      { id: 11, niu: "NIU-812450", cliente: "Finca / rural", tipo: "Residencial", circuito: "C-CTB-07", transformador: "T-7722", zona: "Catatumbo · El Tarra", x: 14, y: 68, score: 0.84, riesgo: "high", acceso: "blocked", consumo: [70, 68, 20, 8, 5, 4], desbalance: "35 %", senal: "Posible anomalía de medición en zona rural", scada: "Huecos de telemedida", accionCampo: "Inspección de medidor / tramo", accionComercial: "Pendiente por acceso", estado: "pendiente", kwhEst: 640 },
+      { id: 12, niu: "NIU-250771", cliente: "Restaurante", tipo: "Comercial", circuito: "C-CUC-04", transformador: "T-2208", zona: "Cúcuta · Ceiba", x: 76, y: 48, score: 0.79, riesgo: "high", acceso: "ok", consumo: [300, 295, 290, 100, 95, 92], desbalance: "21 %", senal: "Caída no explicada por calendario comercial", scada: "Carga de vecinos estable", accionCampo: "Inspección técnica", accionComercial: "Normalización prioritaria", estado: "pendiente", kwhEst: 560 },
+      { id: 13, niu: "NIU-918002", cliente: "Cuenta residencial", tipo: "Residencial", circuito: "C-PAM-01", transformador: "T-5020", zona: "Pamplona sur", x: 62, y: 80, score: 0.49, riesgo: "low", acceso: "ok", consumo: [120, 118, 116, 115, 112, 110], desbalance: "6 %", senal: "Perfil estable", scada: "OK", accionCampo: "Fuera de cupo prioritario", accionComercial: "Sin gestión", estado: "pendiente", kwhEst: 40 },
+      { id: 14, niu: "NIU-303119", cliente: "Depósito", tipo: "Comercial", circuito: "C-OCA-02", transformador: "T-3301", zona: "Ocaña industrial", x: 50, y: 18, score: 0.72, riesgo: "med", acceso: "ok", consumo: [500, 490, 480, 200, 180, 175], desbalance: "19 %", senal: "Anomalía vs estacionalidad", scada: "Desbalance moderado", accionCampo: "Revisión de acometida", accionComercial: "Gestión de normalización", estado: "visitado", kwhEst: 430, kwhRec: 380 },
+      { id: 15, niu: "NIU-147880", cliente: "Cuenta residencial", tipo: "Residencial", circuito: "C-CUC-11", transformador: "T-1185", zona: "Cúcuta · Sevilla", x: 84, y: 62, score: 0.66, riesgo: "med", acceso: "ok", consumo: [130, 128, 125, 50, 45, 44], desbalance: "17 %", senal: "Vecinos sin caída equivalente", scada: "OK", accionCampo: "Inspección de medidor", accionComercial: "Verificación de consumo", estado: "pendiente", kwhEst: 260 }
+    ];
+
+    let selectedId = DATA[0].id;
+    let view = "mapa";
+
+    const $ = (sel) => document.querySelector(sel);
+
+    function riskClass(r) { return r; }
+    function scoreClass(s) { return s >= 0.8 ? "high" : s >= 0.6 ? "med" : "low"; }
+
+    function filtered() {
+      const q = ($("#q")?.value || "").toLowerCase();
+      const riesgo = $("#filtro-riesgo")?.value || "all";
+      const acceso = $("#filtro-acceso")?.value || "all";
+      return DATA
+        .slice()
+        .sort((a, b) => b.score - a.score)
+        .filter((d) => {
+          const text = `${d.niu} ${d.circuito} ${d.zona} ${d.cliente}`.toLowerCase();
+          const okQ = !q || text.includes(q);
+          const okR = riesgo === "all" || d.riesgo === riesgo;
+          const okA = acceso === "all" || d.acceso === acceso;
+          return okQ && okR && okA;
+        });
+    }
+
+    function assignedCount() {
+      return DATA.filter((d) => d.estado === "asignado" || d.estado === "visitado").length;
+    }
+
+    function renderKpis() {
+      const visitables = DATA.filter((d) => d.acceso === "ok" && d.score >= 0.7).length;
+      const bloqueadas = DATA.filter((d) => d.acceso === "blocked").length;
+      const recuperados = DATA.reduce((s, d) => s + (d.kwhRec || 0), 0);
+      $("#kpis").innerHTML = `
+        <div class="kpi"><div class="label">Índice pérdidas (mock)</div><div class="value">14,12 %</div><div class="delta">−0,18 p.p. vs 14,30 % (2025)</div></div>
+        <div class="kpi"><div class="label">kWh recuperados piloto</div><div class="value">${recuperados.toLocaleString("es-CO")}</div><div class="delta">Registro de visitas cerradas</div></div>
+        <div class="kpi"><div class="label">Prioritarios visitables</div><div class="value">${visitables}</div><div class="delta">Score >= 0,70 y acceso OK</div></div>
+        <div class="kpi"><div class="label">En ranking / acceso restringido</div><div class="value">${bloqueadas}</div><div class="delta">Permanecen en lista (equidad)</div></div>
+      `;
+    }
+
+    function renderCapacity() {
+      const used = assignedCount();
+      const pct = Math.min(100, Math.round((used / CUPO) * 100));
+      $("#capacity").innerHTML = `
+        <div style="min-width:140px"><strong>Cupo semanal</strong><div style="color:var(--muted);font-size:0.82rem">${used} / ${CUPO} visitas</div></div>
+        <div class="bar"><span style="width:${pct}%"></span></div>
+        <div style="color:var(--muted);font-size:0.82rem">${pct}%</div>
+      `;
+    }
+
+    function renderMap() {
+      const map = $("#map");
+      map.innerHTML = `<div class="map-label">Vista esquemática · Norte de Santander<br/>Clic en un pin para abrir ficha</div>`;
+      DATA.forEach((d) => {
+        const pin = document.createElement("button");
+        pin.className = `pin ${d.riesgo}${d.acceso === "blocked" ? " blocked" : ""}${d.id === selectedId ? " selected" : ""}`;
+        pin.style.left = d.x + "%";
+        pin.style.top = d.y + "%";
+        pin.title = `${d.zona} · score ${d.score}`;
+        pin.onclick = () => { selectedId = d.id; renderAll(); };
+        map.appendChild(pin);
+      });
+    }
+
+    function renderCampo() {
+      const rows = filtered();
+      $("#tabla-campo").innerHTML = rows.map((d, i) => `
+        <tr data-id="${d.id}" class="${d.id === selectedId ? "active" : ""}">
+          <td>${i + 1}</td>
+          <td><span class="score ${scoreClass(d.score)}">${d.score.toFixed(2)}</span></td>
+          <td><strong>${d.niu}</strong><br/><span style="color:var(--muted)">${d.cliente} · ${d.tipo}</span></td>
+          <td>${d.zona}<br/><span style="color:var(--muted)">${d.circuito} / ${d.transformador}</span></td>
+          <td><span class="chip field">${d.accionCampo}</span></td>
+          <td>${d.acceso === "ok" ? '<span class="chip">Visitable</span>' : '<span class="chip blocked">Orden público</span>'}</td>
+          <td>${labelEstado(d.estado)}</td>
+        </tr>
+      `).join("");
+      $("#tabla-campo").querySelectorAll("tr").forEach((tr) => {
+        tr.onclick = () => { selectedId = Number(tr.dataset.id); renderAll(); };
+      });
+    }
+
+    function renderComercial() {
+      const q = ($("#q-com")?.value || "").toLowerCase();
+      const rows = DATA.slice().sort((a, b) => b.score - a.score).filter((d) => {
+        const text = `${d.niu} ${d.zona} ${d.cliente}`.toLowerCase();
+        return !q || text.includes(q);
+      });
+      $("#tabla-comercial").innerHTML = rows.map((d, i) => `
+        <tr data-id="${d.id}" class="${d.id === selectedId ? "active" : ""}">
+          <td>${i + 1}</td>
+          <td><span class="score ${scoreClass(d.score)}">${d.score.toFixed(2)}</span></td>
+          <td><strong>${d.niu}</strong><br/><span style="color:var(--muted)">${d.tipo}</span></td>
+          <td>${d.zona}</td>
+          <td><span class="chip commercial">${d.accionComercial}</span></td>
+          <td>${labelEstado(d.estado)}</td>
+        </tr>
+      `).join("");
+      $("#tabla-comercial").querySelectorAll("tr").forEach((tr) => {
+        tr.onclick = () => { selectedId = Number(tr.dataset.id); renderAll(); };
+      });
+    }
+
+    function labelEstado(e) {
+      if (e === "asignado") return '<span class="chip">Asignado</span>';
+      if (e === "visitado") return '<span class="chip field">Visitado</span>';
+      return '<span class="chip">Pendiente</span>';
+    }
+
+    function renderSeguimiento() {
+      const visitados = DATA.filter((d) => d.estado === "visitado").length;
+      const asignados = DATA.filter((d) => d.estado === "asignado").length;
+      const criticas = DATA.filter((d) => d.zona.includes("Catatumbo")).length;
+      const enRankingCriticas = Math.round((criticas / DATA.length) * 100);
+      $("#seguimiento").innerHTML = `
+        <div class="detail-card"><h3>Lift vs selección aleatoria (mock)</h3><p style="margin:0;color:var(--muted)">El top 10 % del ranking recupera <strong style="color:var(--text)">2,4×</strong> más kWh por visita que una lista aleatoria del mismo tamaño.</p></div>
+        <div class="detail-card"><h3>Operación de la semana</h3><p style="margin:0;color:var(--muted)">Asignadas: <strong style="color:var(--text)">${asignados}</strong> · Cerradas: <strong style="color:var(--text)">${visitados}</strong> · Cupo: <strong style="color:var(--text)">${CUPO}</strong></p></div>
+        <div class="detail-card"><h3>Equidad territorial</h3><p style="margin:0;color:var(--muted)">${enRankingCriticas}% de los puntos del ranking actual están en zonas de alta incidencia (Catatumbo). Permanecen aunque el acceso esté restringido.</p></div>
+        <div class="detail-card"><h3>Falsos positivos (piloto)</h3><p style="margin:0;color:var(--muted)">Estimación mock: <strong style="color:var(--text)">18 %</strong> de visitas sin irregularidad. Se registra para calibrar el modelo y el protocolo de cuadrillas.</p></div>
+      `;
+    }
+
+    function renderDetalle() {
+      const d = DATA.find((x) => x.id === selectedId);
+      if (!d) return;
+      const max = Math.max(...d.consumo);
+      const spark = d.consumo.map((v) => `<i style="height:${Math.max(8, (v / max) * 56)}px" title="${v} kWh"></i>`).join("");
+      const canAssign = d.acceso === "ok" && d.estado === "pendiente" && assignedCount() < CUPO;
+      const canClose = d.estado === "asignado";
+      $("#detalle").innerHTML = `
+        <h2>Detalle · ${d.niu}</h2>
+        <div class="detail-grid">
+          <div class="detail-card">
+            <h3>${d.cliente}</h3>
+            <div class="meta">
+              <div><span>Score IA</span><strong>${d.score.toFixed(2)}</strong></div>
+              <div><span>Tipo</span><strong>${d.tipo}</strong></div>
+              <div><span>Circuito</span><strong>${d.circuito}</strong></div>
+              <div><span>Transformador</span><strong>${d.transformador}</strong></div>
+              <div><span>Zona</span><strong>${d.zona}</strong></div>
+              <div><span>kWh estimados a recuperar</span><strong>${d.kwhEst}</strong></div>
+            </div>
+          </div>
+          <div class="detail-card">
+            <h3>Por qué sale en la lista</h3>
+            <ul class="signals">
+              <li><strong>SAC:</strong> ${d.senal}</li>
+              <li><strong>Desbalance red vs facturado:</strong> ${d.desbalance}</li>
+              <li><strong>SCADA:</strong> ${d.scada}</li>
+              <li><strong>Acción campo:</strong> ${d.accionCampo}</li>
+              <li><strong>Acción comercial:</strong> ${d.accionComercial}</li>
+            </ul>
+            <div style="margin-top:10px;color:var(--muted);font-size:0.8rem">Consumo últimos 6 ciclos (kWh)</div>
+            <div class="spark">${spark}</div>
+          </div>
+          <div class="detail-card">
+            <h3>Decisión operativa</h3>
+            <p style="margin:0 0 8px;color:var(--muted);font-size:0.9rem">
+              Estado actual: <strong style="color:var(--text)">${d.estado}</strong>
+              ${d.acceso === "blocked" ? " · Visita diferida por orden público (permanece en ranking)." : ""}
+              ${d.kwhRec ? ` · Recuperados: <strong style="color:var(--text)">${d.kwhRec} kWh</strong>` : ""}
+            </p>
+            <div class="actions">
+              <button class="primary" id="btn-asignar" ${canAssign ? "" : "disabled"}>Asignar a cuadrilla</button>
+              <button id="btn-cerrar" ${canClose ? "" : "disabled"}>Registrar visita · recuperar kWh</button>
+              <button class="ghost" id="btn-mantener">Mantener en seguimiento</button>
+            </div>
+          </div>
+        </div>
+      `;
+      $("#btn-asignar")?.addEventListener("click", () => {
+        d.estado = "asignado";
+        renderAll();
+      });
+      $("#btn-cerrar")?.addEventListener("click", () => {
+        d.estado = "visitado";
+        d.kwhRec = d.kwhEst;
+        renderAll();
+      });
+      $("#btn-mantener")?.addEventListener("click", () => {
+        if (d.estado === "pendiente") alert("Permanece en el ranking para el próximo ciclo.");
+      });
+    }
+
+    function renderAll() {
+      document.querySelectorAll(".view").forEach((v) => v.classList.toggle("active", v.id === `view-${view}`));
+      document.querySelectorAll(".tab").forEach((t) => t.classList.toggle("active", t.dataset.view === view));
+      renderKpis();
+      renderCapacity();
+      renderMap();
+      renderCampo();
+      renderComercial();
+      renderSeguimiento();
+      renderDetalle();
+    }
+
+    document.querySelectorAll(".tab").forEach((tab) => {
+      tab.addEventListener("click", () => { view = tab.dataset.view; renderAll(); });
+    });
+    ["q", "filtro-riesgo", "filtro-acceso", "q-com"].forEach((id) => {
+      document.getElementById(id)?.addEventListener("input", renderAll);
+      document.getElementById(id)?.addEventListener("change", renderAll);
+    });
+
+    renderAll();
+  </script>
+</body>
+</html>
