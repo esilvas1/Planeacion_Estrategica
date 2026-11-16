@@ -108,4 +108,41 @@ El mensaje que cierra la sesión es este:
 
 **Quedamos alineados: el proyecto arranca con metas claras de negocio, alcance cerrado y dueños de datos y de operación definidos. En los próximos 30 días TI, EPM y el equipo analítico habilitan el acceso a SAC, GTECH y SCADA, y Distribución y Comercial confirman cómo usarán las listas en campo y en normalización. El éxito lo mediremos en energía recuperada por visita, en el índice de pérdidas y en la cobertura de zonas críticas, no en la complejidad del modelo. Nos vemos en el primer seguimiento quincenal con avances concretos y riesgos actualizados.**
 
+## 3. Grupos de interés del proyecto (stakeholders)
+
+Los grupos de interés del proyecto se organizan en clientes internos de CENS, actores del Grupo EPM y clientes / interesados externos. La caracterización parte de los interesados ya identificados en el scoping y los detalla según interés, influencia e implicación en la ejecución.
+
+### 3.1 Clientes internos
+
+| Grupo de interés | Interés en el proyecto | Influencia | Rol / implicación | Qué espera / qué necesita |
+|---|---|---|---|---|
+| Dirección de Distribución / gestión de pérdidas | Bajar pérdidas no técnicas y recuperar más energía con el mismo cupo de cuadrillas. | Alta | Patrocinador de negocio y dueño de las metas de eficiencia, efectividad y equidad. | Ranking confiable, resultados medibles (kWh/visita e índice) y que las zonas críticas no salgan del seguimiento. |
+| Área Comercial | Convertir la priorización en normalización, corrección de medición y energía facturable. | Alta | Cliente interno de las listas de usuarios y ejecutor de la Acción 3. | Listas claras, trazabilidad de casos y manejo cuidadoso de usuarios vulnerables. |
+| Cuadrillas y supervisores de campo | Recibir rutas priorizadas y factibles de ejecutar. | Media-alta | Usuarios finales de las listas de inspección (Acción 1). | Menos visitas improductivas, protocolo ante falsos positivos y respeto a restricciones de orden público. |
+| TI (datos e infraestructura) | Integrar SAC, GIS y SCADA en Azure sin poner en riesgo producción. | Alta | Custodio técnico de plataformas, accesos y entorno de despliegue. | Reglas de acceso, calidad mínima de datos y carga controlada sobre sistemas vivos. |
+| CENSNNOVA | Pasar SafeGRID de piloto a servicio operable. | Media | Innovación y continuidad tecnológica del caso de uso. | Producto con dueño, backlog y operación continua, no un prototipo aislado. |
+| Distribución / inventario GIS (GTECH) | Que el inventario de red alimente el ranking geográfico. | Media | Dueño del modelo espacial de circuitos, transformadores y topología. | Uso controlado de la información de infraestructura crítica. |
+| Protección de datos / riesgo y cumplimiento | Cumplir Ley 1581 y políticas de CENS / EPM. | Media | Valida tratamiento de datos personales y riesgos de uso indebido. | Minimización de campos, controles de acceso y auditoría. |
+| Equipo del proyecto (núcleo analítico) | Entregar el MVP y sostener el producto de priorización. | Alta (ejecución) | Diseña, construye, valida y despliega el ranking y las listas. | Acceso oportuno a datos, decisiones de negocio estables y criterios de éxito claros. |
+
+### 3.2 Grupo empresarial
+
+| Grupo de interés | Interés en el proyecto | Influencia | Rol / implicación | Qué espera / qué necesita |
+|---|---|---|---|---|
+| EPM (Centro de Control / SCADA, ERP-Saphiro, lineamientos de grupo) | Proteger la operación de red y alinear el caso de uso con estándares del grupo. | Alta sobre datos SCADA y lineamientos | Autoriza acceso a SCADA, condiciona integración futura con SAP Saphiro y fija políticas de grupo. | Acuerdos formales de acceso, ciberseguridad de ciberactivos y no interferencia con el Centro de Control. |
+
+### 3.3 Clientes e interesados externos
+
+| Grupo de interés | Interés en el proyecto | Influencia | Rol / implicación | Qué espera / qué necesita |
+|---|---|---|---|---|
+| Usuarios priorizados para intervención | Recibir un trato justo si son visitados o normalizados. | Baja-media (reclamos y reputación) | Destinatarios de inspecciones y gestión comercial. | Explicación clara del motivo de la gestión, canales de reclamación y que un score no equivalga a sanción automática. |
+| Usuarios del servicio en general | Que el control de pérdidas no técnicas no se traduzca en mayor carga injustificada en la tarifa. | Baja | Beneficiarios indirectos si mejora el índice de pérdidas. | Transparencia institucional y protección de datos personales. |
+| CREG | Cumplimiento de metas y reglas de pérdidas en distribución. | Alta (marco regulatorio) | Define el entorno normativo que hace prioritario el control de pérdidas. | Indicadores creíbles y gestión conforme a la regulación, sin que el modelo sustituya obligaciones del prestador. |
+| SSPD | Vigilancia de la calidad del servicio y atención a quejas. | Media | Supervisa desempeño y puede recibir PQR asociadas a intervenciones. | Manejo responsable de quejas y de la información de vigilancia. |
+| Contratistas de inspección (cuando aplique) | Ejecutar visitas asignadas con información suficiente. | Baja-media | Extienden capacidad de campo bajo instrucción de CENS. | Listas operativas, criterios de inspección y registro de resultados. |
+| Autoridades locales en zonas de acceso restringido | Seguridad y orden en el territorio. | Media en zonas críticas | Condicionan si una visita programada puede ejecutarse. | Coordinación cuando el ingreso dependa de condiciones de orden público. |
+
+### 3.4 Lectura de la caracterización
+
+Los **clientes internos prioritarios** son Distribución / pérdidas, Comercial y las cuadrillas: de ellos depende que el ranking se convierta en energía recuperada. TI y EPM son **habilitadores críticos**: sin su acceso a SAC, GTECH y SCADA el proyecto no arranca. CENSNNOVA y el equipo analítico sostienen la continuidad del producto. Entre los externos, CREG fija la presión regulatoria del caso, mientras que los usuarios priorizados concentran el riesgo reputacional y ético del proyecto. 
 
