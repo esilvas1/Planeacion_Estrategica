@@ -101,3 +101,11 @@ Duración: **90 minutos**.
 Tres días antes se envían el resumen del proyecto (problema, metas, acciones y datos), el fuera de alcance, el borrador de acuerdos de acceso y esta agenda.
 
 Al cerrar la sesión deben quedar: acta aprobada, metas confirmadas, lista de accesos a datos con dueños y fechas, responsables confirmados según el plan de recursos, fecha del primer seguimiento quincenal y registro de riesgos abiertos (calidad de datos, orden público y capacidad de cuadrillas).
+
+## 2. Mensaje de cierre de la reunión
+
+El mensaje que cierra la sesión es este:
+
+**Quedamos alineados: el proyecto arranca con metas claras de negocio, alcance cerrado y dueños de datos y de operación definidos. En los próximos 30 días TI, EPM y el equipo analítico habilitan el acceso a SAC, GTECH y SCADA, y Distribución y Comercial confirman cómo usarán las listas en campo y en normalización. El éxito lo mediremos en energía recuperada por visita, en el índice de pérdidas y en la cobertura de zonas críticas, no en la complejidad del modelo. Nos vemos en el primer seguimiento quincenal con avances concretos y riesgos actualizados.**
+
+
