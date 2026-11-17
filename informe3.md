@@ -20,7 +20,7 @@ Catherine Salazar Pupiales
 
 Edwin Silva Salas
 
-Edwin Heano Ochoa
+Edwin Henao Ochoa
 <br>
 
 **Profesora:**
@@ -51,13 +51,11 @@ Santiago de Cali, noviembre de 2026
 
 CENS convoca la reunión de inicio para poner en marcha el proyecto *Detección y priorización de pérdidas de energía no técnicas*. En ella se confirman las metas de negocio, el alcance, el acceso a SAC, GTECH y SCADA, y el plan de trabajo de los primeros meses, de modo que Distribución, Comercial, TI, campo y el equipo analítico partan con el mismo entendimiento del problema y de lo que sí y no hará el proyecto.
 
-### 1.1 Mensaje de la reunión
-
-El mensaje que se comunica a los asistentes es el siguiente:
+### 1.1 Mensaje general de la reunión
 
 **Hoy arranca en CENS un proyecto para decidir mejor a quién visitar y en qué orden, con el fin de recuperar más energía con la misma capacidad de cuadrillas. Vamos a medir el éxito en kWh recuperados por visita, en el aporte al índice de pérdidas y en la cobertura de zonas críticas en el ranking. El modelo es un medio. La decisión operativa y el valor para la empresa son el fin.**
 
-En la misma intervención se precisan los compromisos del proyecto:
+Compromisos que se confirman en la apertura:
 
 1. **Metas:** mejorar al menos 20 % los kWh recuperados por visita frente a la línea base operativa, aportar a una reducción de al menos 0,30 puntos porcentuales del índice de pérdidas (14,30 % en 2025) y mantener en el ranking al menos el 95 % de las zonas de alta incidencia.
 2. **Operación que se refuerza:** inspección en campo, actualización del ranking geográfico de riesgo y normalización comercial sobre usuarios priorizados.
@@ -67,21 +65,21 @@ En la misma intervención se precisan los compromisos del proyecto:
 
 El primer producto operable será un MVP con ranking y listas de intervención. Los experimentos, cambios de requisitos y decisiones se registran para no perder el hilo técnico ni el de negocio (Dubovikov, 2019).
 
-### 1.2 Quiénes están invitados
+### 1.2 Tipos de invitados y mensaje específico para cada uno
 
-| Ámbito | Invitado | Motivo de la invitación |
-|---|---|---|
-| Interno | Dirección de Distribución / gestión de pérdidas | Dueño del problema y de las metas de eficiencia, efectividad y equidad. |
-| Interno | Área Comercial | Ejecuta normalización y ve el impacto en facturación y usuarios. |
-| Interno | TI (datos e infraestructura) | Custodia de plataformas, Azure y acceso a datos. |
-| Interno | CENSNNOVA | Continuidad de SafeGRID hacia un servicio operable. |
-| Interno | Supervisores de cuadrillas / gestión de pérdidas | Usan el ranking y las listas de visita en campo. |
-| Interno | Distribución / inventario GIS (GTECH) | Dueño del modelo geográfico de la red. |
-| Interno | Protección de datos / riesgo y cumplimiento | Uso de datos personales del SAC bajo Ley 1581. |
-| Grupo EPM | Centro de Control / enlace EPM (SCADA) | Acceso a medidas y eventos de red. |
-| Equipo del proyecto | Equipo núcleo ya definido en el plan de recursos (seis personajes, apoyo GIS y enlaces de Distribución y Comercial) | Presentan alcance, plan técnico, riesgos y próximos pasos. |
+| Tipo de invitado | Quiénes | Motivo de la invitación | Mensaje específico de apertura |
+|---|---|---|---|
+| Patrocinio de negocio | Dirección de Distribución / gestión de pérdidas | Dueño del problema y de las metas de eficiencia, efectividad y equidad. | *Ustedes validan las metas de kWh/visita, aporte al índice y equidad territorial. Sin su decisión de adopción el ranking no se convierte en recuperación de energía.* |
+| Cliente operativo comercial | Área Comercial | Ejecuta normalización y ve el impacto en facturación y usuarios. | *El proyecto les entrega listas priorizadas para normalización. Su rol es definir cómo se usan, con trazabilidad y cuidado de usuarios vulnerables.* |
+| Usuario de campo | Supervisores de cuadrillas / gestión de pérdidas | Usan el ranking y las listas de visita en campo. | *Recibirán rutas ordenadas por riesgo y cupo semanal. Pedimos su criterio sobre factibilidad, falsos positivos y zonas de acceso restringido.* |
+| Habilitador técnico | TI (datos e infraestructura) | Custodia de plataformas, Azure y acceso a datos. | *Necesitamos acceso controlado a SAC, GTECH y entorno Azure sin afectar producción. Ustedes fijan las reglas de seguridad y calidad mínima de datos.* |
+| Continuidad innovadora | CENSNNOVA | Continuidad de SafeGRID hacia un servicio operable. | *Este proyecto cierra el paso de piloto a producto con dueño, backlog y operación. SafeGRID deja de ser un experimento aislado.* |
+| Dueño de datos espaciales | Distribución / inventario GIS (GTECH) | Dueño del modelo geográfico de la red. | *El ranking geográfico depende de su inventario. Acordamos uso controlado de circuitos, transformadores y topología.* |
+| Cumplimiento | Protección de datos / riesgo y cumplimiento | Uso de datos personales del SAC bajo Ley 1581. | *El tratamiento de datos personales del SAC queda bajo minimización, control de acceso y auditoría. El score no es sanción automática.* |
+| Habilitador de grupo | Centro de Control / enlace EPM (SCADA) | Acceso a medidas y eventos de red. | *Requerimos acuerdo formal de lectura de SCADA (SP7), sin interferir con el Centro de Control y con ciberseguridad de ciberactivos.* |
+| Equipo ejecutor | Equipo núcleo del proyecto (seis roles, apoyo GIS y enlaces Distribución/Comercial) | Presentan alcance, plan técnico, riesgos y próximos pasos. | *Ustedes sostienen el plan: alcance cerrado, MVP, registro de experimentos y seguimiento quincenal con riesgos actualizados.* |
 
-CREG, SSPD, usuarios priorizados, contratistas de inspección y autoridades locales no asisten a esta reunión: se gestionan por canales institucionales.
+CREG, SSPD, usuarios priorizados, contratistas de inspección y autoridades locales no asisten a esta reunión: se gestionan por canales institucionales (sección 3).
 
 ### 1.3 Agenda de la reunión
 
@@ -99,11 +97,25 @@ Duración: **90 minutos**.
 
 Tres días antes se envían el resumen del proyecto (problema, metas, acciones y datos), el fuera de alcance, el borrador de acuerdos de acceso y esta agenda.
 
-## 2. Mensaje de cierre de la reunión
+## 2. Mensaje de cierre de la reunión de inicio
 
-El mensaje que cierra la sesión es este:
+### 2.1 Mensaje general de cierre
 
 **Quedamos alineados: el proyecto arranca con metas claras de negocio, alcance cerrado y dueños de datos y de operación definidos. En los próximos 30 días TI, EPM y el equipo analítico habilitan el acceso a SAC, GTECH y SCADA, y Distribución y Comercial confirman cómo usarán las listas en campo y en normalización. El éxito lo mediremos en energía recuperada por visita, en el índice de pérdidas y en la cobertura de zonas críticas, no en la complejidad del modelo. Nos vemos en el primer seguimiento quincenal con avances concretos y riesgos actualizados.**
+
+### 2.2 Mensaje de cierre por tipo de invitado
+
+| Tipo de invitado | Mensaje de cierre |
+|---|---|
+| Patrocinio de negocio (Distribución / pérdidas) | *Confirmamos las metas. En 30 días revisamos el primer avance del ranking y la línea base de kWh/visita. Su decisión de adopción queda como hito del piloto.* |
+| Cliente operativo comercial | *Queda pendiente formalizar el protocolo de normalización con las listas priorizadas y el manejo de usuarios vulnerables. Traen ese acuerdo al primer seguimiento.* |
+| Usuario de campo (cuadrillas) | *Recibirán el borrador de lista de visita y el protocolo ante falsos positivos. Su feedback de factibilidad cierra el diseño del cupo semanal.* |
+| Habilitador técnico (TI) | *Compromiso: habilitar accesos a SAC/GTECH y el entorno Azure en el plazo acordado, con reglas de seguridad documentadas.* |
+| Continuidad innovadora (CENSNNOVA) | *SafeGRID queda en la ruta a servicio operable: backlog compartido con el equipo del proyecto y dueño de producto identificado.* |
+| Dueño de datos espaciales (GIS / GTECH) | *Entregan el subset de inventario autorizado para el cruce geográfico y validan el uso en el ranking.* |
+| Cumplimiento (protección de datos) | *Revisan la ficha de minimización de campos del SAC y los controles de acceso antes del primer extracto de datos.* |
+| Habilitador de grupo (EPM / SCADA) | *Avanzamos el acuerdo formal de lectura SCADA; sin ese visto bueno no se integra la señal de red al scoring.* |
+| Equipo ejecutor | *Activan el plan de 30 días, el registro de experimentos y la convocatoria del seguimiento quincenal.* |
 
 ## 3. Grupos de interés del proyecto (stakeholders)
 
@@ -111,37 +123,44 @@ Los grupos de interés del proyecto se organizan en clientes internos de CENS, a
 
 ### 3.1 Clientes internos
 
-| Grupo de interés | Interés en el proyecto | Influencia | Rol / implicación | Qué espera / qué necesita |
+| Grupo de interés | Interés en el proyecto | Influencia / poder | Rol / implicación | Qué espera / qué necesita |
 |---|---|---|---|---|
-| Dirección de Distribución / gestión de pérdidas | Bajar pérdidas no técnicas y recuperar más energía con el mismo cupo de cuadrillas. | Alta | Patrocinador de negocio y dueño de las metas de eficiencia, efectividad y equidad. | Ranking confiable, resultados medibles (kWh/visita e índice) y que las zonas críticas no salgan del seguimiento. |
-| Área Comercial | Convertir la priorización en normalización, corrección de medición y energía facturable. | Alta | Cliente interno de las listas de usuarios y ejecutor de la Acción 3. | Listas claras, trazabilidad de casos y manejo cuidadoso de usuarios vulnerables. |
-| Cuadrillas y supervisores de campo | Recibir rutas priorizadas y factibles de ejecutar. | Media-alta | Usuarios finales de las listas de inspección (Acción 1). | Menos visitas improductivas, protocolo ante falsos positivos y respeto a restricciones de orden público. |
-| TI (datos e infraestructura) | Integrar SAC, GIS y SCADA en Azure sin poner en riesgo producción. | Alta | Custodio técnico de plataformas, accesos y entorno de despliegue. | Reglas de acceso, calidad mínima de datos y carga controlada sobre sistemas vivos. |
-| CENSNNOVA | Pasar SafeGRID de piloto a servicio operable. | Media | Innovación y continuidad tecnológica del caso de uso. | Producto con dueño, backlog y operación continua, no un prototipo aislado. |
-| Distribución / inventario GIS (GTECH) | Que el inventario de red alimente el ranking geográfico. | Media | Dueño del modelo espacial de circuitos, transformadores y topología. | Uso controlado de la información de infraestructura crítica. |
-| Protección de datos / riesgo y cumplimiento | Cumplir Ley 1581 y políticas de CENS / EPM. | Media | Valida tratamiento de datos personales y riesgos de uso indebido. | Minimización de campos, controles de acceso y auditoría. |
-| Equipo del proyecto (núcleo analítico) | Entregar el MVP y sostener el producto de priorización. | Alta (ejecución) | Diseña, construye, valida y despliega el ranking y las listas. | Acceso oportuno a datos, decisiones de negocio estables y criterios de éxito claros. |
+| Dirección de Distribución / gestión de pérdidas | Alto | Alto | Patrocinador de negocio y dueño de las metas de eficiencia, efectividad y equidad. | Ranking confiable, resultados medibles (kWh/visita e índice) y que las zonas críticas no salgan del seguimiento. |
+| Área Comercial | Alto | Alto | Cliente interno de las listas de usuarios y ejecutor de la Acción 3. | Listas claras, trazabilidad de casos y manejo cuidadoso de usuarios vulnerables. |
+| Cuadrillas y supervisores de campo | Alto | Medio | Usuarios finales de las listas de inspección (Acción 1). | Menos visitas improductivas, protocolo ante falsos positivos y respeto a restricciones de orden público. |
+| TI (datos e infraestructura) | Medio | Alto | Custodio técnico de plataformas, accesos y entorno de despliegue. | Reglas de acceso, calidad mínima de datos y carga controlada sobre sistemas vivos. |
+| CENSNNOVA | Alto | Medio | Innovación y continuidad tecnológica del caso de uso. | Producto con dueño, backlog y operación continua, no un prototipo aislado. |
+| Distribución / inventario GIS (GTECH) | Medio | Medio | Dueño del modelo espacial de circuitos, transformadores y topología. | Uso controlado de la información de infraestructura crítica. |
+| Protección de datos / riesgo y cumplimiento | Medio | Medio | Valida tratamiento de datos personales y riesgos de uso indebido. | Minimización de campos, controles de acceso y auditoría. |
+| Equipo del proyecto (núcleo analítico) | Alto | Medio (ejecución) | Diseña, construye, valida y despliega el ranking y las listas. | Acceso oportuno a datos, decisiones de negocio estables y criterios de éxito claros. |
 
 ### 3.2 Grupo empresarial
 
-| Grupo de interés | Interés en el proyecto | Influencia | Rol / implicación | Qué espera / qué necesita |
+| Grupo de interés | Interés en el proyecto | Influencia / poder | Rol / implicación | Qué espera / qué necesita |
 |---|---|---|---|---|
-| EPM (Centro de Control / SCADA, ERP-Saphiro, lineamientos de grupo) | Proteger la operación de red y alinear el caso de uso con estándares del grupo. | Alta sobre datos SCADA y lineamientos | Autoriza acceso a SCADA, condiciona integración futura con SAP Saphiro y fija políticas de grupo. | Acuerdos formales de acceso, ciberseguridad de ciberactivos y no interferencia con el Centro de Control. |
+| EPM (Centro de Control / SCADA, ERP-Saphiro, lineamientos de grupo) | Medio | Alto | Autoriza acceso a SCADA, condiciona integración futura con SAP Saphiro y fija políticas de grupo. | Acuerdos formales de acceso, ciberseguridad de ciberactivos y no interferencia con el Centro de Control. |
 
 ### 3.3 Clientes e interesados externos
 
-| Grupo de interés | Interés en el proyecto | Influencia | Rol / implicación | Qué espera / qué necesita |
+| Grupo de interés | Interés en el proyecto | Influencia / poder | Rol / implicación | Qué espera / qué necesita |
 |---|---|---|---|---|
-| Usuarios priorizados para intervención | Recibir un trato justo si son visitados o normalizados. | Baja-media (reclamos y reputación) | Destinatarios de inspecciones y gestión comercial. | Explicación clara del motivo de la gestión, canales de reclamación y que un score no equivalga a sanción automática. |
-| Usuarios del servicio en general | Que el control de pérdidas no técnicas no se traduzca en mayor carga injustificada en la tarifa. | Baja | Beneficiarios indirectos si mejora el índice de pérdidas. | Transparencia institucional y protección de datos personales. |
-| CREG | Cumplimiento de metas y reglas de pérdidas en distribución. | Alta (marco regulatorio) | Define el entorno normativo que hace prioritario el control de pérdidas. | Indicadores creíbles y gestión conforme a la regulación, sin que el modelo sustituya obligaciones del prestador. |
-| SSPD | Vigilancia de la calidad del servicio y atención a quejas. | Media | Supervisa desempeño y puede recibir PQR asociadas a intervenciones. | Manejo responsable de quejas y de la información de vigilancia. |
-| Contratistas de inspección (cuando aplique) | Ejecutar visitas asignadas con información suficiente. | Baja-media | Extienden capacidad de campo bajo instrucción de CENS. | Listas operativas, criterios de inspección y registro de resultados. |
-| Autoridades locales en zonas de acceso restringido | Seguridad y orden en el territorio. | Media en zonas críticas | Condicionan si una visita programada puede ejecutarse. | Coordinación cuando el ingreso dependa de condiciones de orden público. |
+| Usuarios priorizados para intervención | Alto | Bajo | Destinatarios de inspecciones y gestión comercial. | Explicación clara del motivo de la gestión, canales de reclamación y que un score no equivalga a sanción automática. |
+| Usuarios del servicio en general | Bajo | Bajo | Beneficiarios indirectos si mejora el índice de pérdidas. | Transparencia institucional y protección de datos personales. |
+| CREG | Medio | Alto | Define el entorno normativo que hace prioritario el control de pérdidas. | Indicadores creíbles y gestión conforme a la regulación, sin que el modelo sustituya obligaciones del prestador. |
+| SSPD | Medio | Medio | Supervisa desempeño y puede recibir PQR asociadas a intervenciones. | Manejo responsable de quejas y de la información de vigilancia. |
+| Contratistas de inspección (cuando aplique) | Medio | Bajo | Extienden capacidad de campo bajo instrucción de CENS. | Listas operativas, criterios de inspección y registro de resultados. |
+| Autoridades locales en zonas de acceso restringido | Medio | Medio | Condicionan si una visita programada puede ejecutarse. | Coordinación cuando el ingreso dependa de condiciones de orden público. |
 
-### 3.4 Lectura de la caracterización
+### 3.4 Matriz de interés-poder
 
-Los **clientes internos prioritarios** son Distribución / pérdidas, Comercial y las cuadrillas: de ellos depende que el ranking se convierta en energía recuperada. TI y EPM son **habilitadores críticos**: sin su acceso a SAC, GTECH y SCADA el proyecto no arranca. CENSNNOVA y el equipo analítico sostienen la continuidad del producto. Entre los externos, CREG fija la presión regulatoria del caso, mientras que los usuarios priorizados concentran el riesgo reputacional y ético del proyecto.
+La posición de cada grupo se resume en la matriz interés–poder. El interés mide cuánto les afecta el resultado del proyecto; el poder, su capacidad de habilitar, bloquear o condicionar la ejecución.
+
+|  | **Interés bajo** | **Interés alto** |
+|---|---|---|
+| **Poder alto** | **Mantener satisfechos:** EPM (SCADA / lineamientos), CREG, TI. Autorizan o condicionan datos y marco normativo; no viven el día a día del ranking, pero sin ellos el proyecto se detiene. | **Gestionar de cerca:** Dirección de Distribución / pérdidas, Área Comercial. Patrocinan metas, adoptan listas y definen el valor de negocio. Comunicación frecuente y decisión conjunta. |
+| **Poder medio / bajo** | **Monitorear:** usuarios del servicio en general, SSPD (seguimiento institucional), GIS y protección de datos (controles puntuales). Información periódica y cumplimiento sin sobrecargar la agenda del piloto. | **Informar y mantener comprometidos:** cuadrillas / supervisores, CENSNNOVA, equipo del proyecto, usuarios priorizados, contratistas, autoridades locales. Usan o reciben el producto; se escucha su feedback y se gestiona el riesgo reputacional o de acceso. |
+
+**Lectura operativa.** Distribución y Comercial se gestionan de cerca porque convierten el score en kWh recuperados. TI, EPM y CREG se mantienen satisfechos con acuerdos formales y reportes creíbles. Cuadrillas, CENSNNOVA y el equipo ejecutor se informan y comprometen para que el MPV se use. Los usuarios priorizados concentran el riesgo ético: se informan con claridad y el score no se usa como sanción automática.
 
 ## 4. Mínimo producto viable (MPV)
 
@@ -149,17 +168,42 @@ El MPV del proyecto es la interfaz **CENS · Prioriza Pérdidas**, publicada en 
 
 **Qué entrega el MPV.** Mapa de riesgo con puntos en municipios del área de servicio, lista priorizada de inspección en campo, lista de normalización comercial, ficha de detalle con señales SAC / GTECH / SCADA, asignación a cuadrilla dentro de un cupo semanal y panel de seguimiento (lift, equidad territorial y falsos positivos).
 
+### 4.1 El MPV según las fases de CRISP-DM
+
+| Fase CRISP-DM | Cómo se refleja en el MPV |
+|---|---|
+| **Entendimiento del negocio** | El producto responde a la decisión operativa de CENS: a quién visitar y en qué orden. Los KPI visibles (índice de pérdidas, energía recuperada, puntos prioritarios, cobertura de zonas restringidas) alinean la interfaz con las metas de eficiencia, efectividad y equidad, no con la complejidad del modelo. |
+| **Entendimiento de los datos** | Cada punto priorizado expone señales de las tres fuentes del caso: SAC (consumo / facturación), GTECH (ubicación y red) y SCADA (eventos / medidas). El MPV deja explícito qué tipo de dato alimenta el score, aunque en esta versión sea simulado. |
+| **Preparación de los datos** | Los registros mock ya aparecen cruzados por municipio / zona, con score, cupo semanal y estado de visita. Eso representa el resultado de limpieza, georreferenciación y cruce SAC–GIS–SCADA que en producción ocurriría en Azure. |
+| **Modelado** | Un scoring de riesgo ordena los puntos (alto / medio / bajo) y genera las listas de campo y comercial. La precisión del algoritmo no es el foco del MPV: lo es la priorización accionable (Dubovikov, 2019). |
+| **Evaluación** | El panel de seguimiento muestra lift frente a visita no priorizada, equidad territorial (zonas críticas retenidas en el ranking) y tasa estimada de falsos positivos, para juzgar si el producto aporta valor de negocio. |
+| **Despliegue / distribución** | El MPV está publicado como aplicación web en GitHub Pages, usable por Distribución, Comercial y supervisores en demo. Incluye asignación a cuadrilla y registro de resultado de visita, es decir, el ciclo mínimo de uso operativo. |
+
+En síntesis, el MPV no es solo un mapa: recorre el ciclo CRISP-DM hasta un entregable distribuible que convierte datos de pérdidas no técnicas en una lista de intervención medible para CENS.
+
 ## 5. Reunión de cierre del proyecto
 
 Se asume que el MPV constituye la entrega final del proyecto. La reunión de cierre presenta resultados, valor generado, lecciones aprendidas y acuerdos de continuidad operativa del ranking y de las listas.
 
-### 5.1 Mensaje de la reunión de cierre
+### 5.1 Mensaje general de la reunión de cierre
 
 **Cerramos el proyecto con un producto usable: CENS ya puede priorizar visitas y gestiones comerciales con un ranking geográfico de riesgo. El valor no está en el algoritmo por sí solo, sino en recuperar más energía con el mismo cupo de cuadrillas, aportar al índice de pérdidas y mantener las zonas críticas en el seguimiento. El MPV queda en manos de Distribución, Comercial y TI para piloto operativo, con el score como apoyo a la decisión y no como sanción automática.**
 
-### 5.2 Quiénes están invitados
+### 5.2 Tipos de invitados y mensaje específico para cada uno
 
-Asisten los mismos interesados de la reunión de inicio (sección 1.2): Distribución / pérdidas, Comercial, cuadrillas, TI, CENSNNOVA, GIS, protección de datos, enlace EPM/SCADA y el equipo del proyecto. En el cierre el foco ya no es abrir el alcance ni negociar accesos, sino **validar resultados, ver la demo del MPV y acordar la continuidad operativa**.
+Asisten los mismos tipos de la reunión de inicio. El foco ya no es abrir el alcance ni negociar accesos, sino **validar resultados, ver la demo del MPV y acordar la continuidad operativa**.
+
+| Tipo de invitado | Quiénes | Mensaje específico en el cierre |
+|---|---|---|
+| Patrocinio de negocio | Dirección de Distribución / pérdidas | *El MPV queda bajo su adopción: ustedes confirman si el ranking entra a piloto operativo y con qué meta de kWh/visita se da por exitoso el traspaso.* |
+| Cliente operativo comercial | Área Comercial | *Reciben las listas de normalización y el protocolo de usuarios vulnerables. Su compromiso es operar el canal comercial con trazabilidad post-proyecto.* |
+| Usuario de campo | Supervisores / cuadrillas | *A partir de ahora usan la lista priorizada y registran el resultado de cada visita. Ese feedback calibra falsos positivos y el cupo semanal.* |
+| Habilitador técnico | TI | *El producto pasa a soporte de plataforma: acceso estable, respaldo del entorno y reglas de actualización del ranking.* |
+| Continuidad innovadora | CENSNNOVA | *SafeGRID queda con dueño y backlog. El cierre del proyecto no cierra el servicio: abre la operación continua.* |
+| Dueño de datos espaciales | GIS / GTECH | *Mantienen la actualización del inventario que alimenta el mapa de riesgo en el piloto.* |
+| Cumplimiento | Protección de datos | *Auditan el uso del score y el tratamiento de datos personales en la operación diaria; el acta de cierre registra los controles vigentes.* |
+| Habilitador de grupo | EPM / SCADA | *El acuerdo de lectura SCADA permanece activo para el piloto; cualquier ampliación se gestiona por el canal de grupo.* |
+| Equipo ejecutor | Equipo núcleo del proyecto | *Entregan acta, repositorio del MPV, lecciones aprendidas y responsables de continuidad a Distribución, Comercial y TI.* |
 
 ### 5.3 Agenda de la reunión de cierre
 
@@ -182,6 +226,10 @@ Duración: **60 minutos**.
 4. **La equidad territorial no se improvisa.** Mantener el Catatumbo y otras zonas de difícil acceso en el ranking, aunque la visita se posponga, evita sesgar la operación solo a zonas fáciles.
 5. **El score no reemplaza el criterio humano.** Falsos positivos, usuarios vulnerables y Ley 1581 exigen protocolo de campo y decisión asistida, no automatización de sanciones.
 6. **SafeGRID necesita dueño y continuidad.** El paso de piloto a servicio operable depende de backlog, operación y adopción por Distribución y Comercial, no solo de un entregable puntual.
+
+### 5.5 Presentación del producto (video <= 5 minutos)
+
+La presentación del MPV se realiza en un video de máximo 5 minutos, con énfasis en el **valor para CENS**: más energía recuperada por visita, aporte al índice de pérdidas y uso eficiente del cupo de cuadrillas. El guion cronometrado y la ficha de demo están en: [esilvas1.github.io/Planeacion_Estrategica/mvp/ficha_demo_5min.html](https://esilvas1.github.io/Planeacion_Estrategica/mvp/ficha_demo_5min.html). El video se entrega junto con este taller en la actividad del curso (grabación del equipo).
 
 ## 6. Conclusiones
 
@@ -207,9 +255,13 @@ En síntesis, frente al robo y la recuperación de energía en el área de influ
 
 [6] Dubovikov, K. (2019). *Managing Data Science: Effective Strategies to Manage Data Science Projects and Build a Sustainable Team*. Cap. 9, *Common Pitfalls of Data Science Projects*. Packt Publishing.
 
-[7] República de Colombia. (2012). *Ley 1581 de 2012* (protección de datos personales). Disponible en: [https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=49981](https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=49981)
+[7] Chapman, P., Clinton, J., Kerber, R., Khabaza, T., Reinartz, T., Shearer, C. y Wirth, R. (2000). *CRISP-DM 1.0: Step-by-step data mining guide*. SPSS Inc.
 
-[8] Centrales Eléctricas del Norte de Santander S.A. E.S.P. (CENS). Sitio institucional. Disponible en: [https://www.cens.com.co/](https://www.cens.com.co/)
+[8] República de Colombia. (2012). *Ley 1581 de 2012* (protección de datos personales). Disponible en: [https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=49981](https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=49981)
 
-[9] Equipo del taller. *CENS · Prioriza Pérdidas* (MPV). GitHub Pages. Disponible en: [https://esilvas1.github.io/Planeacion_Estrategica/mvp/](https://esilvas1.github.io/Planeacion_Estrategica/mvp/)
+[9] Centrales Eléctricas del Norte de Santander S.A. E.S.P. (CENS). Sitio institucional. Disponible en: [https://www.cens.com.co/](https://www.cens.com.co/)
+
+[10] Equipo del taller. *CENS · Prioriza Pérdidas* (MPV). GitHub Pages. Disponible en: [https://esilvas1.github.io/Planeacion_Estrategica/mvp/](https://esilvas1.github.io/Planeacion_Estrategica/mvp/)
+
+[11] Equipo del taller. *Ficha de demo del MPV (<= 5 min)*. GitHub Pages. Disponible en: [https://esilvas1.github.io/Planeacion_Estrategica/mvp/ficha_demo_5min.html](https://esilvas1.github.io/Planeacion_Estrategica/mvp/ficha_demo_5min.html)
 
