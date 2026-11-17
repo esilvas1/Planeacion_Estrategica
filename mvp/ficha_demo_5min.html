@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ficha técnica · Demo MPV Prioriza Pérdidas (5 min)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f4faf6;
+      --panel: #ffffff;
+      --line: #c5e0d0;
+      --text: #143528;
+      --muted: #4f6f5d;
+      --brand: #1b8f5a;
+      --brand-dark: #0f6b3f;
+      --soft: #d8f0e3;
+      --shadow: 0 10px 28px rgba(20, 53, 40, 0.08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "IBM Plex Sans", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(900px 420px at 0% 0%, #d7f0e2 0%, transparent 55%),
+        var(--bg);
+      line-height: 1.5;
+    }
+    h1, h2, h3 { font-family: Outfit, sans-serif; color: var(--brand-dark); }
+    .wrap { max-width: 920px; margin: 0 auto; padding: 28px 18px 48px; }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+      margin-bottom: 16px;
+    }
+    .meta { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .meta div {
+      background: var(--soft);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 0.92rem;
+    }
+    .meta span { display: block; color: var(--muted); font-size: 0.75rem; margin-bottom: 2px; }
+    a { color: var(--brand); font-weight: 600; }
+    ol, ul { margin: 8px 0 0; padding-left: 1.2rem; }
+    li { margin: 6px 0; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 12px 8px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      color: var(--muted);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    .time {
+      font-family: Outfit, sans-serif;
+      font-weight: 700;
+      color: var(--brand);
+      white-space: nowrap;
+    }
+    .quote {
+      background: #f2faf5;
+      border-left: 4px solid var(--brand);
+      padding: 10px 12px;
+      border-radius: 0 10px 10px 0;
+      color: var(--text);
+    }
+    .tag {
+      display: inline-block;
+      background: var(--soft);
+      color: var(--brand-dark);
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      margin-right: 6px;
+    }
+    .footer { color: var(--muted); font-size: 0.82rem; margin-top: 8px; }
+    @media (max-width: 700px) {
+      .meta { grid-template-columns: 1fr; }
+      table, thead, tbody, th, td, tr { display: block; }
+      th { display: none; }
+      td { border: none; padding: 6px 0; }
+      tr {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 12px;
+        margin-bottom: 12px;
+        background: #fff;
+      }
+      td:nth-child(1)::before { content: "Tiempo: "; font-weight: 700; color: var(--muted); }
+      td:nth-child(2)::before { content: "Pantalla: "; font-weight: 700; color: var(--muted); display: block; }
+      td:nth-child(3)::before { content: "Hablar: "; font-weight: 700; color: var(--muted); display: block; margin-top: 6px; }
+    }
+    @media print {
+      body { background: #fff; }
+      .card { box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="card">
+      <span class="tag">Ficha técnica</span>
+      <span class="tag">Máx. 5 minutos</span>
+      <h1>Demo hablada · CENS Prioriza Pérdidas</h1>
+      <p style="color:var(--muted); margin: 0 0 14px;">
+        Guion para explicar el uso del MPV en un video o presentación oral.
+        Enfoque: decisión operativa y valor para CENS (detección y recuperación de energía).
+      </p>
+      <div class="meta">
+        <div><span>Producto</span><strong>CENS · Prioriza Pérdidas</strong></div>
+        <div><span>URL del MPV</span><a href="https://esilvas1.github.io/Planeacion_Estrategica/mvp/" target="_blank" rel="noopener">esilvas1.github.io/.../mvp/</a></div>
+        <div><span>Audiencia</span><strong>Distribución, Comercial, TI, sponsors</strong></div>
+        <div><span>Objetivo</span><strong>Mostrar uso de la herramienta y valor de negocio</strong></div>
+      </div>
+    </header>
+
+    <section class="card">
+      <h2>Antes de grabar</h2>
+      <ol>
+        <li>Abrir la URL del MPV en pantalla completa.</li>
+        <li>Dejar visible la pestaña <strong>Mapa de riesgo</strong>.</li>
+        <li>Hablar a ritmo conversacional (aprox. 130–140 palabras/minuto).</li>
+        <li>No explicar el código ni la precisión del modelo: explicar la <strong>decisión operativa</strong>.</li>
+      </ol>
+    </section>
+
+    <section class="card">
+      <h2>Guion cronometrado</h2>
+      <div style="overflow:auto">
+        <table>
+          <thead>
+            <tr>
+              <th>Tiempo</th>
+              <th>Pantalla / acción</th>
+              <th>Texto sugerido (hablar)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="time">0:00–0:40</td>
+              <td>Portada / KPIs superiores</td>
+              <td class="quote">“En CENS las pérdidas no técnicas elevan el índice de energía no facturada y tensionan la operación. Este producto, Prioriza Pérdidas, ayuda a decidir a quién visitar y en qué orden, para recuperar más energía con el mismo cupo de cuadrillas. Arriba vemos indicadores de negocio: índice de pérdidas, energía recuperada en el piloto, puntos prioritarios visitables y cuántos siguen en ranking aunque el acceso esté restringido.”</td>
+            </tr>
+            <tr>
+              <td class="time">0:40–1:40</td>
+              <td>Mapa: zoom, clic en punto alto riesgo y otro con borde (orden público)</td>
+              <td class="quote">“En el mapa de riesgo vemos el área de influencia de CENS: Cúcuta, Catatumbo, Ocaña, Pamplona y municipios cercanos. Cada círculo es un cliente o punto priorizado por el modelo. Verde más oscuro es mayor riesgo. Si el punto tiene borde discontinuo, el acceso está restringido por orden público: no se borra del ranking, la visita queda pendiente. Al hacer clic, a la derecha aparece la ficha.”</td>
+            </tr>
+            <tr>
+              <td class="time">1:40–2:40</td>
+              <td>Panel derecho: detalle del punto</td>
+              <td class="quote">“La ficha muestra el score, el circuito, el transformador y la zona. Abajo explica por qué sale en la lista: señales del sistema comercial SAC, desbalance entre energía de red y facturada, y señales SCADA. También sugiere la acción de campo y la acción comercial. Importante: esto es apoyo a la decisión, no una sanción automática.”</td>
+            </tr>
+            <tr>
+              <td class="time">2:40–3:40</td>
+              <td>Lista de campo: filtrar alto riesgo, asignar visita</td>
+              <td class="quote">“Pasamos a la lista de campo. Aquí el supervisor ordena las inspecciones por score, filtra por riesgo o por acceso, y ve la acción recomendada. Hay un cupo semanal de visitas: no se puede asignar más de la capacidad real. Selecciono un punto visitable y pulso Asignar a cuadrilla. Cuando regresa la cuadrilla, registro la visita y los kWh recuperados. Así se cierra el ciclo operativo.”</td>
+            </tr>
+            <tr>
+              <td class="time">3:40–4:20</td>
+              <td>Lista comercial</td>
+              <td class="quote">“La lista comercial usa la misma priorización, pero orientada a normalización: verificación de consumo, corrección de medición y gestión de cuenta. Distribución y Comercial trabajan sobre la misma evidencia, con acciones distintas.”</td>
+            </tr>
+            <tr>
+              <td class="time">4:20–5:00</td>
+              <td>Seguimiento + cierre</td>
+              <td class="quote">“En seguimiento vemos el valor para la empresa: el ranking recupera más energía por visita que una selección aleatoria, se controla el cupo y se mantiene cobertura de zonas críticas como el Catatumbo. En resumen: menos visitas improductivas, más energía recuperada y mejor control de pérdidas, sin abandonar las zonas difíciles. Ese es el valor de Prioriza Pérdidas para CENS.”</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Mensaje de cierre (una frase)</h2>
+      <p class="quote" style="margin:0">
+        “Prioriza Pérdidas convierte datos de SAC, red y SCADA en una lista accionable para recuperar energía donde más conviene intervenir.”
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Qué no decir (para no pasarse de 5 minutos)</h2>
+      <ul>
+        <li>Detalle de algoritmos (XGBoost, Isolation Forest, etc.).</li>
+        <li>Arquitectura Azure o migración SAP.</li>
+        <li>Toda la lista de puntos uno por uno.</li>
+        <li>Discusión larga de ética (basta la frase de “apoyo a la decisión”).</li>
+      </ul>
+      <p class="footer">
+        Herramienta: <a href="./index.html">abrir MPV local</a> ·
+        Pages: <a href="https://esilvas1.github.io/Planeacion_Estrategica/mvp/" target="_blank" rel="noopener">versión publicada</a>
+      </p>
+    </section>
+  </div>
+</body>
+</html>

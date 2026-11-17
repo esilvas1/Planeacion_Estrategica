@@ -16,12 +16,11 @@
 
 **Integrantes:**
 
-Edwin Heano Ochoa
-
 Catherine Salazar Pupiales
 
 Edwin Silva Salas
 
+Edwin Heano Ochoa
 <br>
 
 **Profesora:**
@@ -150,8 +149,6 @@ El MPV del proyecto es la interfaz **CENS · Prioriza Pérdidas**, publicada en 
 
 **Qué entrega el MPV.** Mapa de riesgo con puntos en municipios del área de servicio, lista priorizada de inspección en campo, lista de normalización comercial, ficha de detalle con señales SAC / GTECH / SCADA, asignación a cuadrilla dentro de un cupo semanal y panel de seguimiento (lift, equidad territorial y falsos positivos).
 
-**Qué no incluye.** Entrenamiento real del modelo, integración productiva con Azure, SAC, SCADA o SAP, ni precisión estadística definitiva. La guía del taller indica que, en este punto, la precisión del modelo no es el foco: el valor está en demostrar la decisión operativa (a quién visitar y en qué orden) y el vínculo con las metas de negocio.
-
 ## 5. Reunión de cierre del proyecto
 
 Se asume que el MPV constituye la entrega final del proyecto. La reunión de cierre presenta resultados, valor generado, lecciones aprendidas y acuerdos de continuidad operativa del ranking y de las listas.
@@ -162,16 +159,7 @@ Se asume que el MPV constituye la entrega final del proyecto. La reunión de cie
 
 ### 5.2 Quiénes están invitados
 
-| Ámbito | Invitado | Motivo |
-|---|---|---|
-| Interno | Dirección de Distribución / gestión de pérdidas | Patrocinador: valida resultados frente a metas de eficiencia, efectividad y equidad. |
-| Interno | Área Comercial | Confirma utilidad de las listas de normalización. |
-| Interno | Supervisores de cuadrillas / gestión de pérdidas | Usuarios de campo: validan usabilidad de las listas y el registro de visitas. |
-| Interno | TI (datos e infraestructura) | Recibe el producto para soporte, accesos y eventual despliegue. |
-| Interno | CENSNNOVA | Continuidad de SafeGRID hacia operación permanente. |
-| Interno | Protección de datos / riesgo | Cierre sobre tratamiento de datos personales (Ley 1581). |
-| Grupo EPM | Enlace Centro de Control / SCADA (si participó en accesos) | Cierre de acuerdos de datos de red. |
-| Equipo del proyecto | Equipo núcleo definido en el plan de recursos | Presenta resultados, demo del MPV y lecciones aprendidas. |
+Asisten los mismos interesados de la reunión de inicio (sección 1.2): Distribución / pérdidas, Comercial, cuadrillas, TI, CENSNNOVA, GIS, protección de datos, enlace EPM/SCADA y el equipo del proyecto. En el cierre el foco ya no es abrir el alcance ni negociar accesos, sino **validar resultados, ver la demo del MPV y acordar la continuidad operativa**.
 
 ### 5.3 Agenda de la reunión de cierre
 
@@ -195,13 +183,33 @@ Duración: **60 minutos**.
 5. **El score no reemplaza el criterio humano.** Falsos positivos, usuarios vulnerables y Ley 1581 exigen protocolo de campo y decisión asistida, no automatización de sanciones.
 6. **SafeGRID necesita dueño y continuidad.** El paso de piloto a servicio operable depende de backlog, operación y adopción por Distribución y Comercial, no solo de un entregable puntual.
 
-### 5.5 Video de presentación del producto
+## 6. Conclusiones
 
-El equipo elabora y entrega un **video de máximo 5 minutos** (archivo aparte, no incluido en este documento) que presenta el MPV y enfatiza el valor para CENS. El video se graba sobre la interfaz publicada en [GitHub Pages](https://esilvas1.github.io/Planeacion_Estrategica/mvp/) y cubre, como mínimo:
+CENS enfrenta pérdidas de energía no técnicas asociadas a hurto, fraude y anomalías de medición, con un índice de 14,30 % en 2025 y hasta 47,84 % en el Catatumbo. El proyecto de detección y priorización ataca ese problema en el punto donde más duele la operación: decidir a quién visitar y en qué orden, para recuperar más energía con la misma capacidad de cuadrillas.
 
-1. Problema de pérdidas no técnicas y por qué priorizar visitas importa para la empresa.  
-2. Recorrido del MPV: mapa de riesgo, lista de campo, lista comercial y ficha de detalle.  
-3. Cómo el producto genera valor: más energía recuperada con el mismo cupo, aporte al índice de pérdidas y seguimiento equitativo de zonas críticas.  
-4. Cierre: el modelo apoya la decisión operativa de Distribución y Comercial, en la línea de SafeGRID.
+La solución propuesta no sustituye las revisiones de campo ni la gestión comercial: las orienta. Al cruzar SAC, GTECH y SCADA (Spectrum Power 7), el ranking geográfico de riesgo concentra inspecciones y normalizaciones donde el retorno esperado en kWh es mayor, reduce visitas improductivas y mantiene en seguimiento las zonas de alta incidencia aunque el acceso esté restringido por orden público. En ese sentido, la detección de robo y fraude deja de depender solo de la experiencia local o de listados poco priorizados, y pasa a apoyarse en señales de consumo, red y ubicación.
 
+El valor para la empresa se mide en energía recuperada por intervención, aporte a la baja del índice de pérdidas y uso más eficiente del cupo operativo, en la línea abierta por SafeGRID. Ese valor solo se materializa si Distribución, Comercial y campo adoptan las listas, si TI y EPM sostienen el acceso a los datos y si el score se usa como apoyo a la decisión, no como sanción automática, bajo Ley 1581.
+
+En síntesis, frente al robo y la recuperación de energía en el área de influencia de CENS, el proyecto concluye que la prioridad no es un modelo más complejo, sino un producto operable de priorización que convierta datos ya existentes en intervenciones más efectivas, medibles y territorialmente responsables.
+
+## Referencias
+
+[1] Hexagon. (2022). *Hexagon announces HxGN NetWorks, rebrands utilities and communications offerings* (incluye el renombrado de Intergraph G/Technology, conocido en operación como GTECH). Disponible en: [https://hexagon.com/company/newsroom/press-releases/2022/hexagon-announces-hxgn-networks-rebrands-utilities-and-communications-offerings](https://hexagon.com/company/newsroom/press-releases/2022/hexagon-announces-hxgn-networks-rebrands-utilities-and-communications-offerings)
+
+[2] ACTSIS / Universidad Industrial de Santander. *Sistema de Administración Comercial (SAC)*: sistema de administración y gestión de procesos de comercialización de servicios públicos (energía y afines). Disponible en: [https://noesis.uis.edu.co/handle/20.500.14071/27087](https://noesis.uis.edu.co/handle/20.500.14071/27087)
+
+[3] Centrales Eléctricas del Norte de Santander S.A. E.S.P. (CENS). (2021). *Informe del revisor fiscal*: identifica el aplicativo SAC sobre base de datos Oracle como sistema de información comercial. Disponible en: [https://www.cens.com.co/Portals/cens/menu-transparencia/mecanismos-de-control/revisoria-fiscal/RF2021.pdf](https://www.cens.com.co/Portals/cens/menu-transparencia/mecanismos-de-control/revisoria-fiscal/RF2021.pdf)
+
+[4] Siemens. *Spectrum Power Advanced Distribution Management (ADMS)*: plataforma que integra funcionalidad SCADA (familia Spectrum Power, incl. Spectrum Power 7 / SP7) para monitoreo, alarma, medición y control de redes de distribución. Disponible en: [https://www.siemens.com/global/en/products/energy/grid-software/operation/grid-control/advanced-distribution-management.html](https://www.siemens.com/global/en/products/energy/grid-software/operation/grid-control/advanced-distribution-management.html)
+
+[5] Siemens. *Spectrum Power ADMS – módulos* (documento técnico): describe el módulo SCADA y su integración con GIS, CIS y aplicaciones de operación (DMS/OMS). Disponible en: [https://assets.new.siemens.com/siemens/assets/api/uuid:6be45822-9bad-4f93-ac98-d4fbee5d622f/interactive-pdf-for-ADMS-modules.pdf](https://assets.new.siemens.com/siemens/assets/api/uuid:6be45822-9bad-4f93-ac98-d4fbee5d622f/interactive-pdf-for-ADMS-modules.pdf)
+
+[6] Dubovikov, K. (2019). *Managing Data Science: Effective Strategies to Manage Data Science Projects and Build a Sustainable Team*. Cap. 9, *Common Pitfalls of Data Science Projects*. Packt Publishing.
+
+[7] República de Colombia. (2012). *Ley 1581 de 2012* (protección de datos personales). Disponible en: [https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=49981](https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=49981)
+
+[8] Centrales Eléctricas del Norte de Santander S.A. E.S.P. (CENS). Sitio institucional. Disponible en: [https://www.cens.com.co/](https://www.cens.com.co/)
+
+[9] Equipo del taller. *CENS · Prioriza Pérdidas* (MPV). GitHub Pages. Disponible en: [https://esilvas1.github.io/Planeacion_Estrategica/mvp/](https://esilvas1.github.io/Planeacion_Estrategica/mvp/)
 
