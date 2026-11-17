@@ -142,5 +142,66 @@ Los grupos de interés del proyecto se organizan en clientes internos de CENS, a
 
 ### 3.4 Lectura de la caracterización
 
-Los **clientes internos prioritarios** son Distribución / pérdidas, Comercial y las cuadrillas: de ellos depende que el ranking se convierta en energía recuperada. TI y EPM son **habilitadores críticos**: sin su acceso a SAC, GTECH y SCADA el proyecto no arranca. CENSNNOVA y el equipo analítico sostienen la continuidad del producto. Entre los externos, CREG fija la presión regulatoria del caso, mientras que los usuarios priorizados concentran el riesgo reputacional y ético del proyecto. 
+Los **clientes internos prioritarios** son Distribución / pérdidas, Comercial y las cuadrillas: de ellos depende que el ranking se convierta en energía recuperada. TI y EPM son **habilitadores críticos**: sin su acceso a SAC, GTECH y SCADA el proyecto no arranca. CENSNNOVA y el equipo analítico sostienen la continuidad del producto. Entre los externos, CREG fija la presión regulatoria del caso, mientras que los usuarios priorizados concentran el riesgo reputacional y ético del proyecto.
+
+## 4. Mínimo producto viable (MPV)
+
+El MPV del proyecto es la interfaz **CENS · Prioriza Pérdidas**, publicada en GitHub Pages: [esilvas1.github.io/Planeacion_Estrategica/mvp/](https://esilvas1.github.io/Planeacion_Estrategica/mvp/). Simula un producto operable de priorización de pérdidas no técnicas con datos mock y un ranking geográfico sobre el área de influencia de CENS.
+
+**Qué entrega el MPV.** Mapa de riesgo con puntos en municipios del área de servicio, lista priorizada de inspección en campo, lista de normalización comercial, ficha de detalle con señales SAC / GTECH / SCADA, asignación a cuadrilla dentro de un cupo semanal y panel de seguimiento (lift, equidad territorial y falsos positivos).
+
+**Qué no incluye.** Entrenamiento real del modelo, integración productiva con Azure, SAC, SCADA o SAP, ni precisión estadística definitiva. La guía del taller indica que, en este punto, la precisión del modelo no es el foco: el valor está en demostrar la decisión operativa (a quién visitar y en qué orden) y el vínculo con las metas de negocio.
+
+## 5. Reunión de cierre del proyecto
+
+Se asume que el MPV constituye la entrega final del proyecto. La reunión de cierre presenta resultados, valor generado, lecciones aprendidas y acuerdos de continuidad operativa del ranking y de las listas.
+
+### 5.1 Mensaje de la reunión de cierre
+
+**Cerramos el proyecto con un producto usable: CENS ya puede priorizar visitas y gestiones comerciales con un ranking geográfico de riesgo. El valor no está en el algoritmo por sí solo, sino en recuperar más energía con el mismo cupo de cuadrillas, aportar al índice de pérdidas y mantener las zonas críticas en el seguimiento. El MPV queda en manos de Distribución, Comercial y TI para piloto operativo, con el score como apoyo a la decisión y no como sanción automática.**
+
+### 5.2 Quiénes están invitados
+
+| Ámbito | Invitado | Motivo |
+|---|---|---|
+| Interno | Dirección de Distribución / gestión de pérdidas | Patrocinador: valida resultados frente a metas de eficiencia, efectividad y equidad. |
+| Interno | Área Comercial | Confirma utilidad de las listas de normalización. |
+| Interno | Supervisores de cuadrillas / gestión de pérdidas | Usuarios de campo: validan usabilidad de las listas y el registro de visitas. |
+| Interno | TI (datos e infraestructura) | Recibe el producto para soporte, accesos y eventual despliegue. |
+| Interno | CENSNNOVA | Continuidad de SafeGRID hacia operación permanente. |
+| Interno | Protección de datos / riesgo | Cierre sobre tratamiento de datos personales (Ley 1581). |
+| Grupo EPM | Enlace Centro de Control / SCADA (si participó en accesos) | Cierre de acuerdos de datos de red. |
+| Equipo del proyecto | Equipo núcleo definido en el plan de recursos | Presenta resultados, demo del MPV y lecciones aprendidas. |
+
+### 5.3 Agenda de la reunión de cierre
+
+Duración: **60 minutos**.
+
+| Tiempo | Tema | Responsable | Resultado esperado |
+|---|---|---|---|
+| 0–5 min | Apertura y objetivo de la reunión de cierre | Gestor de productos | Asistentes alineados sobre el cierre. |
+| 5–15 min | Resultados frente a las metas (kWh/visita, índice, equidad territorial) | Asesor analítico + Distribución | Lectura compartida del valor de negocio logrado / simulado en el piloto. |
+| 15–30 min | Demostración del MPV (mapa, listas de campo y comercial, ficha y asignación) | Científico de datos + Analista de negocio | Sponsors y usuarios ven el producto en uso. |
+| 30–40 min | Adopción operativa: quién opera el ranking, frecuencia de recálculo y protocolo ante falsos positivos | Enlaces de Distribución y Comercial + supervisores | Acuerdos de uso post-proyecto. |
+| 40–50 min | Lecciones aprendidas, riesgos remanentes (datos, orden público, acceso SCADA) y ética | Gestor de productos + Protección de datos | Lecciones documentadas y riesgos transferidos a operación. |
+| 50–60 min | Acta de cierre, entregables, responsables de continuidad y próximos pasos | Gestor de productos | Proyecto cerrado formalmente con dueños claros. |
+
+### 5.4 Lecciones aprendidas
+
+1. **La meta de negocio debe preceder al modelo.** Medir kWh por visita, aporte al índice y cobertura de zonas críticas evitó convertir el proyecto en un ejercicio solo técnico.
+2. **Sin acceso a SAC, GTECH y SCADA no hay producto.** Los acuerdos tempranos con TI y EPM condicionan el cronograma más que la elección del algoritmo.
+3. **El MPV gana cuando se centra en la decisión operativa.** Ranking, listas y registro de visita aportan más valor inmediato que un modelo complejo sin interfaz usable.
+4. **La equidad territorial no se improvisa.** Mantener el Catatumbo y otras zonas de difícil acceso en el ranking, aunque la visita se posponga, evita sesgar la operación solo a zonas fáciles.
+5. **El score no reemplaza el criterio humano.** Falsos positivos, usuarios vulnerables y Ley 1581 exigen protocolo de campo y decisión asistida, no automatización de sanciones.
+6. **SafeGRID necesita dueño y continuidad.** El paso de piloto a servicio operable depende de backlog, operación y adopción por Distribución y Comercial, no solo de un entregable puntual.
+
+### 5.5 Video de presentación del producto
+
+El equipo elabora y entrega un **video de máximo 5 minutos** (archivo aparte, no incluido en este documento) que presenta el MPV y enfatiza el valor para CENS. El video se graba sobre la interfaz publicada en [GitHub Pages](https://esilvas1.github.io/Planeacion_Estrategica/mvp/) y cubre, como mínimo:
+
+1. Problema de pérdidas no técnicas y por qué priorizar visitas importa para la empresa.  
+2. Recorrido del MPV: mapa de riesgo, lista de campo, lista comercial y ficha de detalle.  
+3. Cómo el producto genera valor: más energía recuperada con el mismo cupo, aporte al índice de pérdidas y seguimiento equitativo de zonas críticas.  
+4. Cierre: el modelo apoya la decisión operativa de Distribución y Comercial, en la línea de SafeGRID.
+
 
