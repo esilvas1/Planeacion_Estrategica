@@ -132,9 +132,34 @@
     </header>
 
     <section class="card">
-      <h2>Antes de grabar</h2>
+      <h2>1. Introducción: qué es este MPV</h2>
+      <div class="meta" style="margin-bottom:14px">
+        <div><span>Qué es</span><strong>Un Mínimo Producto Viable (MPV): la versión más pequeña de la solución que ya se puede usar y demostrar.</strong></div>
+        <div><span>De qué se trata</span><strong>Detección y priorización de pérdidas de energía no técnicas (hurto, fraude, anomalías de medición) en CENS – Grupo EPM.</strong></div>
+        <div><span>Para qué sirve</span><strong>Ayudar a decidir a quién visitar y en qué orden, para recuperar más energía con el mismo cupo de cuadrillas.</strong></div>
+        <div><span>Quién lo desarrolló</span><strong>Grupo de la Maestría en Ciencia de Datos (PUJ Cali): Catherine Salazar Pupiales, Edwin Silva Salas y Edwin Heano Ochoa. Profesora: Mónica Rodríguez.</strong></div>
+      </div>
+      <p style="margin:0 0 10px;color:var(--muted)">
+        No es el modelo final en producción ni un sistema integrado con Azure/SAC/SCADA reales.
+        Es una interfaz operable con datos simulados que muestra el flujo completo:
+        mapa de riesgo, listas de campo y comercial, ficha de detalle y seguimiento del valor.
+      </p>
+      <h3 style="margin:16px 0 8px;font-size:1rem">Texto introductorio sugerido (hablar al inicio, ~30–40 s)</h3>
+      <p class="quote" style="margin:0">
+        “Buenas. Somos Catherine Salazar, Edwin Silva y Edwin Heano, estudiantes de la Maestría en Ciencia de Datos de la Pontificia Universidad Javeriana Cali.
+        Les presentamos el mínimo producto viable de nuestro proyecto con CENS, del Grupo EPM:
+        Prioriza Pérdidas. Un MPV es la versión mínima de la solución que ya se puede usar.
+        Este producto sirve para detectar y priorizar pérdidas no técnicas —hurto, fraude o anomalías de medición—
+        y orientar a Distribución y Comercial sobre a quién visitar primero, para recuperar más energía con la misma capacidad de cuadrillas.
+        Ahora les muestro cómo se usa.”
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>2. Antes de grabar</h2>
       <ol>
         <li>Abrir la URL del MPV en pantalla completa.</li>
+        <li>Decir primero la <strong>introducción</strong> (qué es el MPV, de qué se trata, para qué es y quién lo desarrolló).</li>
         <li>Dejar visible la pestaña <strong>Mapa de riesgo</strong>.</li>
         <li>Hablar a ritmo conversacional (aprox. 130–140 palabras/minuto).</li>
         <li>No explicar el código ni la precisión del modelo: explicar la <strong>decisión operativa</strong>.</li>
@@ -142,7 +167,7 @@
     </section>
 
     <section class="card">
-      <h2>Guion cronometrado</h2>
+      <h2>3. Guion cronometrado (uso de la herramienta)</h2>
       <div style="overflow:auto">
         <table>
           <thead>
@@ -155,33 +180,38 @@
           <tbody>
             <tr>
               <td class="time">0:00–0:40</td>
+              <td>Introducción (sin entrar aún a funciones)</td>
+              <td class="quote">Usar el texto introductorio de la sección 1: qué es el MPV, de qué se trata, para qué es y qué grupo lo desarrolló.</td>
+            </tr>
+            <tr>
+              <td class="time">0:40–1:10</td>
               <td>Portada / KPIs superiores</td>
-              <td class="quote">“En CENS las pérdidas no técnicas elevan el índice de energía no facturada y tensionan la operación. Este producto, Prioriza Pérdidas, ayuda a decidir a quién visitar y en qué orden, para recuperar más energía con el mismo cupo de cuadrillas. Arriba vemos indicadores de negocio: índice de pérdidas, energía recuperada en el piloto, puntos prioritarios visitables y cuántos siguen en ranking aunque el acceso esté restringido.”</td>
+              <td class="quote">“En CENS las pérdidas no técnicas elevan el índice de energía no facturada. Arriba vemos indicadores de negocio: índice de pérdidas, energía recuperada en el piloto, puntos prioritarios visitables y cuántos siguen en ranking aunque el acceso esté restringido.”</td>
             </tr>
             <tr>
-              <td class="time">0:40–1:40</td>
+              <td class="time">1:10–2:00</td>
               <td>Mapa: zoom, clic en punto alto riesgo y otro con borde (orden público)</td>
-              <td class="quote">“En el mapa de riesgo vemos el área de influencia de CENS: Cúcuta, Catatumbo, Ocaña, Pamplona y municipios cercanos. Cada círculo es un cliente o punto priorizado por el modelo. Verde más oscuro es mayor riesgo. Si el punto tiene borde discontinuo, el acceso está restringido por orden público: no se borra del ranking, la visita queda pendiente. Al hacer clic, a la derecha aparece la ficha.”</td>
+              <td class="quote">“En el mapa vemos el área de CENS: Cúcuta, Catatumbo, Ocaña, Pamplona y municipios cercanos. Cada círculo es un punto priorizado. Verde más oscuro es mayor riesgo. Si tiene borde discontinuo, el acceso está restringido por orden público: no se borra del ranking. Al hacer clic, a la derecha aparece la ficha.”</td>
             </tr>
             <tr>
-              <td class="time">1:40–2:40</td>
+              <td class="time">2:00–2:45</td>
               <td>Panel derecho: detalle del punto</td>
-              <td class="quote">“La ficha muestra el score, el circuito, el transformador y la zona. Abajo explica por qué sale en la lista: señales del sistema comercial SAC, desbalance entre energía de red y facturada, y señales SCADA. También sugiere la acción de campo y la acción comercial. Importante: esto es apoyo a la decisión, no una sanción automática.”</td>
+              <td class="quote">“La ficha muestra el score, circuito, transformador y zona. Explica por qué sale en la lista con señales de SAC, desbalance red vs facturado y SCADA, y sugiere acción de campo y comercial. Esto es apoyo a la decisión, no una sanción automática.”</td>
             </tr>
             <tr>
-              <td class="time">2:40–3:40</td>
+              <td class="time">2:45–3:40</td>
               <td>Lista de campo: filtrar alto riesgo, asignar visita</td>
-              <td class="quote">“Pasamos a la lista de campo. Aquí el supervisor ordena las inspecciones por score, filtra por riesgo o por acceso, y ve la acción recomendada. Hay un cupo semanal de visitas: no se puede asignar más de la capacidad real. Selecciono un punto visitable y pulso Asignar a cuadrilla. Cuando regresa la cuadrilla, registro la visita y los kWh recuperados. Así se cierra el ciclo operativo.”</td>
+              <td class="quote">“En la lista de campo el supervisor ordena por score, filtra por riesgo o acceso y ve la acción recomendada. Hay cupo semanal: no se asigna más de la capacidad real. Selecciono un punto visitable, Asignar a cuadrilla, y luego registro la visita con los kWh recuperados.”</td>
             </tr>
             <tr>
-              <td class="time">3:40–4:20</td>
+              <td class="time">3:40–4:15</td>
               <td>Lista comercial</td>
-              <td class="quote">“La lista comercial usa la misma priorización, pero orientada a normalización: verificación de consumo, corrección de medición y gestión de cuenta. Distribución y Comercial trabajan sobre la misma evidencia, con acciones distintas.”</td>
+              <td class="quote">“La lista comercial usa la misma priorización para normalización: verificar consumo, corregir medición y gestionar la cuenta. Distribución y Comercial trabajan con la misma evidencia y acciones distintas.”</td>
             </tr>
             <tr>
-              <td class="time">4:20–5:00</td>
+              <td class="time">4:15–5:00</td>
               <td>Seguimiento + cierre</td>
-              <td class="quote">“En seguimiento vemos el valor para la empresa: el ranking recupera más energía por visita que una selección aleatoria, se controla el cupo y se mantiene cobertura de zonas críticas como el Catatumbo. En resumen: menos visitas improductivas, más energía recuperada y mejor control de pérdidas, sin abandonar las zonas difíciles. Ese es el valor de Prioriza Pérdidas para CENS.”</td>
+              <td class="quote">“En seguimiento vemos el valor: más energía por visita que una lista aleatoria, control del cupo y cobertura de zonas críticas como el Catatumbo. En resumen: menos visitas improductivas, más energía recuperada y mejor control de pérdidas. Ese es el valor de Prioriza Pérdidas para CENS.”</td>
             </tr>
           </tbody>
         </table>
@@ -189,14 +219,14 @@
     </section>
 
     <section class="card">
-      <h2>Mensaje de cierre (una frase)</h2>
+      <h2>4. Mensaje de cierre (una frase)</h2>
       <p class="quote" style="margin:0">
         “Prioriza Pérdidas convierte datos de SAC, red y SCADA en una lista accionable para recuperar energía donde más conviene intervenir.”
       </p>
     </section>
 
     <section class="card">
-      <h2>Qué no decir (para no pasarse de 5 minutos)</h2>
+      <h2>5. Qué no decir (para no pasarse de 5 minutos)</h2>
       <ul>
         <li>Detalle de algoritmos (XGBoost, Isolation Forest, etc.).</li>
         <li>Arquitectura Azure o migración SAP.</li>
