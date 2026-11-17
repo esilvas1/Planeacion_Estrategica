@@ -7,22 +7,24 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
   <style>
     :root {
-      --bg: #0f1c24;
-      --bg-2: #162a35;
-      --panel: #1b3442;
-      --panel-2: #214052;
-      --line: #2f5366;
-      --text: #e8f1f5;
-      --muted: #9bb3c0;
-      --brand: #1fa67a;
-      --brand-2: #148a64;
-      --warn: #e2a93b;
-      --danger: #e05a45;
-      --info: #3d9ad1;
-      --ok: #5cbc7a;
-      --shadow: 0 12px 40px rgba(0, 0, 0, 0.28);
+      --bg: #f4faf6;
+      --bg-2: #eaf5ee;
+      --panel: #ffffff;
+      --panel-2: #f0faf3;
+      --line: #c5e0d0;
+      --text: #143528;
+      --muted: #4f6f5d;
+      --brand: #1b8f5a;
+      --brand-2: #147a4b;
+      --green-high: #0f6b3f;
+      --green-med: #2f9e68;
+      --green-low: #7bc49a;
+      --green-soft: #d8f0e3;
+      --ok: #1b8f5a;
+      --shadow: 0 10px 28px rgba(20, 53, 40, 0.08);
       --radius: 14px;
     }
 
@@ -32,8 +34,8 @@
       font-family: "IBM Plex Sans", sans-serif;
       color: var(--text);
       background:
-        radial-gradient(1200px 600px at 10% -10%, #1d4a5c 0%, transparent 55%),
-        radial-gradient(900px 500px at 100% 0%, #1a3d32 0%, transparent 50%),
+        radial-gradient(1100px 520px at 8% -8%, #d7f0e2 0%, transparent 55%),
+        radial-gradient(900px 480px at 100% 0%, #e5f6ec 0%, transparent 50%),
         var(--bg);
     }
 
@@ -45,73 +47,71 @@
       display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; align-items: flex-start;
       margin-bottom: 18px;
     }
-    .brand-title { margin: 0; font-size: 1.45rem; font-weight: 700; letter-spacing: 0.01em; }
+    .brand-title { margin: 0; font-size: 1.45rem; font-weight: 700; letter-spacing: 0.01em; color: var(--green-high); }
     .brand-sub { margin: 6px 0 0; color: var(--muted); font-size: 0.92rem; max-width: 52ch; line-height: 1.45; }
     .badge-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
     .badge {
       font-size: 0.75rem; font-weight: 600; padding: 5px 10px; border-radius: 999px;
-      background: rgba(31, 166, 122, 0.15); color: #8fe0c0; border: 1px solid rgba(31, 166, 122, 0.35);
+      background: var(--green-soft); color: var(--green-high); border: 1px solid var(--line);
     }
-    .badge.warn { background: rgba(226, 169, 59, 0.12); color: #f0d08a; border-color: rgba(226, 169, 59, 0.35); }
+    .badge.warn { background: #e7f6ed; color: var(--brand-2); border-color: #b7dbc8; }
 
     .kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-bottom: 16px; }
     .kpi {
-      background: linear-gradient(180deg, var(--panel) 0%, var(--bg-2) 100%);
+      background: linear-gradient(180deg, var(--panel) 0%, var(--panel-2) 100%);
       border: 1px solid var(--line); border-radius: var(--radius); padding: 14px 16px; box-shadow: var(--shadow);
     }
     .kpi .label { color: var(--muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; }
-    .kpi .value { font-family: Outfit, sans-serif; font-size: 1.55rem; font-weight: 700; margin-top: 6px; }
-    .kpi .delta { font-size: 0.82rem; margin-top: 4px; color: var(--ok); }
+    .kpi .value { font-family: Outfit, sans-serif; font-size: 1.55rem; font-weight: 700; margin-top: 6px; color: var(--green-high); }
+    .kpi .delta { font-size: 0.82rem; margin-top: 4px; color: var(--brand); }
 
     .tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
     .tab {
-      border: 1px solid var(--line); background: var(--bg-2); color: var(--muted);
+      border: 1px solid var(--line); background: var(--panel); color: var(--muted);
       padding: 10px 14px; border-radius: 999px; cursor: pointer; font-weight: 600; font-size: 0.9rem;
     }
-    .tab.active { background: var(--brand); border-color: var(--brand); color: #062218; }
+    .tab.active { background: var(--brand); border-color: var(--brand); color: #fff; }
 
     .layout { display: grid; grid-template-columns: 1.35fr 0.9fr; gap: 14px; }
     .panel {
-      background: rgba(27, 52, 66, 0.92); border: 1px solid var(--line);
+      background: var(--panel); border: 1px solid var(--line);
       border-radius: var(--radius); padding: 14px; box-shadow: var(--shadow); min-height: 420px;
     }
-    .panel h2 { margin: 0 0 12px; font-size: 1.05rem; }
+    .panel h2 { margin: 0 0 12px; font-size: 1.05rem; color: var(--green-high); }
 
     .toolbar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; align-items: center; }
     input, select, button {
-      font: inherit; border-radius: 10px; border: 1px solid var(--line); background: var(--bg);
+      font: inherit; border-radius: 10px; border: 1px solid var(--line); background: #fff;
       color: var(--text); padding: 9px 11px;
     }
     input { min-width: 180px; }
     button { cursor: pointer; font-weight: 600; }
-    button.primary { background: var(--brand); border-color: var(--brand); color: #062218; }
-    button.ghost { background: transparent; }
+    button.primary { background: var(--brand); border-color: var(--brand); color: #fff; }
+    button.ghost { background: transparent; color: var(--brand-2); }
     button:disabled { opacity: 0.45; cursor: not-allowed; }
 
     .map {
-      position: relative; height: 380px; border-radius: 12px; overflow: hidden;
-      background:
-        linear-gradient(180deg, rgba(15, 28, 36, 0.15), rgba(15, 28, 36, 0.55)),
-        repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(47, 83, 102, 0.25) 40px),
-        repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(47, 83, 102, 0.25) 40px),
-        #123040;
-      border: 1px solid var(--line);
+      position: relative; height: 420px; border-radius: 12px; overflow: hidden;
+      border: 1px solid var(--line); z-index: 1;
     }
-    .map-label {
-      position: absolute; left: 12px; top: 12px; background: rgba(15, 28, 36, 0.75);
-      border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; font-size: 0.8rem; color: var(--muted);
+    .map-note {
+      margin-top: 8px; color: var(--muted); font-size: 0.8rem;
     }
-    .pin {
-      position: absolute; width: 18px; height: 18px; border-radius: 50%; transform: translate(-50%, -50%);
-      border: 2px solid #fff; cursor: pointer; box-shadow: 0 0 0 6px rgba(255,255,255,0.08);
+    .leaflet-container { font: inherit; background: #e8f6ee; }
+    .risk-marker {
+      width: 18px; height: 18px; border-radius: 50%; border: 2px solid #fff;
+      box-shadow: 0 1px 6px rgba(20, 53, 40, 0.35);
     }
-    .pin.high { background: var(--danger); }
-    .pin.med { background: var(--warn); }
-    .pin.low { background: var(--info); }
-    .pin.blocked::after {
-      content: ""; position: absolute; inset: -6px; border: 2px dashed var(--warn); border-radius: 50%;
+    .risk-marker.high { background: var(--green-high); }
+    .risk-marker.med { background: var(--green-med); }
+    .risk-marker.low { background: var(--green-low); }
+    .risk-marker.blocked {
+      box-shadow: 0 0 0 3px rgba(20, 122, 75, 0.35), 0 1px 6px rgba(20, 53, 40, 0.35);
+      outline: 2px dashed var(--brand-2); outline-offset: 3px;
     }
-    .pin.selected { box-shadow: 0 0 0 7px rgba(31, 166, 122, 0.35); }
+    .risk-marker.selected {
+      box-shadow: 0 0 0 5px rgba(27, 143, 90, 0.35), 0 1px 6px rgba(20, 53, 40, 0.35);
+    }
 
     .legend { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px; color: var(--muted); font-size: 0.8rem; }
     .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
@@ -120,31 +120,31 @@
     th, td { padding: 10px 8px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
     th { color: var(--muted); font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.03em; }
     tr { cursor: pointer; }
-    tr:hover td { background: rgba(33, 64, 82, 0.55); }
-    tr.active td { background: rgba(31, 166, 122, 0.12); }
+    tr:hover td { background: #f2faf5; }
+    tr.active td { background: var(--green-soft); }
     .score {
       font-family: Outfit, sans-serif; font-weight: 700; padding: 3px 8px; border-radius: 8px; display: inline-block;
     }
-    .score.high { background: rgba(224, 90, 69, 0.2); color: #ffb1a4; }
-    .score.med { background: rgba(226, 169, 59, 0.18); color: #f3d48a; }
-    .score.low { background: rgba(61, 154, 209, 0.18); color: #9fd0ef; }
+    .score.high { background: #ccead9; color: var(--green-high); }
+    .score.med { background: #dcf3e6; color: #1f7a52; }
+    .score.low { background: #eaf8f0; color: #3f9a6c; }
 
     .chip {
       display: inline-block; padding: 3px 8px; border-radius: 999px; font-size: 0.75rem; font-weight: 600;
-      background: rgba(61, 154, 209, 0.15); color: #9fd0ef;
+      background: #e7f6ed; color: var(--brand-2);
     }
-    .chip.field { background: rgba(31, 166, 122, 0.15); color: #8fe0c0; }
-    .chip.commercial { background: rgba(226, 169, 59, 0.15); color: #f0d08a; }
-    .chip.blocked { background: rgba(224, 90, 69, 0.15); color: #ffb1a4; }
+    .chip.field { background: #d8f0e3; color: var(--green-high); }
+    .chip.commercial { background: #e2f5ea; color: #1c7a4f; }
+    .chip.blocked { background: #d6ebe0; color: #0f5a36; }
 
     .detail-empty { color: var(--muted); padding: 28px 8px; line-height: 1.5; }
     .detail-grid { display: grid; gap: 10px; }
     .detail-card {
       background: var(--bg-2); border: 1px solid var(--line); border-radius: 12px; padding: 12px;
     }
-    .detail-card h3 { margin: 0 0 8px; font-size: 0.95rem; }
+    .detail-card h3 { margin: 0 0 8px; font-size: 0.95rem; color: var(--green-high); }
     .meta { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 0.86rem; }
-    .meta div { background: rgba(15,28,36,0.45); border-radius: 8px; padding: 8px; }
+    .meta div { background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 8px; }
     .meta span { display: block; color: var(--muted); font-size: 0.72rem; margin-bottom: 3px; }
     .signals { margin: 0; padding-left: 18px; color: var(--text); }
     .signals li { margin: 6px 0; color: var(--muted); }
@@ -155,15 +155,15 @@
     }
     .spark i {
       display: block; width: 12px; border-radius: 4px 4px 0 0;
-      background: linear-gradient(180deg, var(--brand), #0d5a45);
+      background: linear-gradient(180deg, var(--green-med), var(--green-high));
     }
 
     .capacity {
       display: flex; justify-content: space-between; gap: 10px; align-items: center;
-      background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; margin-bottom: 12px;
+      background: var(--bg-2); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; margin-bottom: 12px;
     }
-    .bar { flex: 1; height: 10px; background: #0c1820; border-radius: 999px; overflow: hidden; }
-    .bar > span { display: block; height: 100%; background: linear-gradient(90deg, var(--brand), var(--warn)); }
+    .bar { flex: 1; height: 10px; background: #d9eee3; border-radius: 999px; overflow: hidden; }
+    .bar > span { display: block; height: 100%; background: linear-gradient(90deg, var(--green-low), var(--green-high)); }
 
     .footer {
       margin-top: 16px; color: var(--muted); font-size: 0.78rem; line-height: 1.45;
@@ -214,10 +214,11 @@
         <div class="view active" id="view-mapa">
           <h2>Ranking geográfico de riesgo</h2>
           <div class="map" id="map"></div>
+          <p class="map-note">Mapa real · área de influencia CENS (Cúcuta y área metropolitana, Catatumbo, Ocaña, Pamplona y municipios aledaños). 35 puntos mock con coordenadas aproximadas.</p>
           <div class="legend">
-            <span><i class="dot" style="background:var(--danger)"></i>Alto</span>
-            <span><i class="dot" style="background:var(--warn)"></i>Medio</span>
-            <span><i class="dot" style="background:var(--info)"></i>Bajo</span>
+            <span><i class="dot" style="background:var(--green-high)"></i>Alto</span>
+            <span><i class="dot" style="background:var(--green-med)"></i>Medio</span>
+            <span><i class="dot" style="background:var(--green-low)"></i>Bajo</span>
             <span>Borde discontinuo = acceso restringido (orden público)</span>
           </div>
         </div>
@@ -298,28 +299,50 @@
     </footer>
   </div>
 
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script>
     const CUPO = 12;
     const DATA = [
-      { id: 1, niu: "NIU-104582", cliente: "Cuenta residencial", tipo: "Residencial", circuito: "C-CTB-12", transformador: "T-8841", zona: "Catatumbo · Tibú", x: 22, y: 28, score: 0.93, riesgo: "high", acceso: "blocked", consumo: [180, 175, 160, 40, 18, 12], desbalance: "38 %", senal: "Caída abrupta de consumo con vecinos activos", scada: "Desbalance circuito vs facturado", accionCampo: "Inspección técnica de medidor", accionComercial: "Verificación de consumo y normalización", estado: "pendiente", kwhEst: 920 },
-      { id: 2, niu: "NIU-221907", cliente: "Taller metalúrgico", tipo: "Comercial", circuito: "C-CUC-04", transformador: "T-2201", zona: "Cúcuta · La Libertad", x: 68, y: 42, score: 0.89, riesgo: "high", acceso: "ok", consumo: [410, 400, 395, 120, 95, 88], desbalance: "27 %", senal: "Consumo incompatible con tipo de usuario", scada: "Carga estable en transformador", accionCampo: "Revisión de acometida y medidor", accionComercial: "Gestión comercial de normalización", estado: "pendiente", kwhEst: 740 },
-      { id: 3, niu: "NIU-088341", cliente: "Vivienda rural", tipo: "Residencial", circuito: "C-CTB-07", transformador: "T-7710", zona: "Catatumbo · El Tarra", x: 18, y: 55, score: 0.86, riesgo: "high", acceso: "blocked", consumo: [95, 90, 88, 10, 8, 5], desbalance: "41 %", senal: "Serie casi nula con red energizada", scada: "Alarma de telemedida intermitente", accionCampo: "Inspección en transformador / tramo", accionComercial: "Pendiente hasta habilitar acceso", estado: "pendiente", kwhEst: 1100 },
-      { id: 4, niu: "NIU-556012", cliente: "Minimercado", tipo: "Comercial", circuito: "C-OCA-02", transformador: "T-3308", zona: "Ocaña centro", x: 48, y: 22, score: 0.81, riesgo: "high", acceso: "ok", consumo: [260, 255, 250, 240, 70, 65], desbalance: "22 %", senal: "Quiebre reciente vs historia 12 meses", scada: "Sin alarma crítica", accionCampo: "Inspección técnica de medidor", accionComercial: "Verificación de lectura y factura", estado: "pendiente", kwhEst: 510 },
-      { id: 5, niu: "NIU-773220", cliente: "Cuenta residencial", tipo: "Residencial", circuito: "C-CUC-11", transformador: "T-1190", zona: "Cúcuta · San Luis", x: 74, y: 58, score: 0.76, riesgo: "med", acceso: "ok", consumo: [140, 138, 135, 130, 60, 55], desbalance: "18 %", senal: "Desvío frente a vecinos del mismo transformador", scada: "Balance parcial", accionCampo: "Revisión de medidor", accionComercial: "Contacto comercial preventivo", estado: "pendiente", kwhEst: 320 },
-      { id: 6, niu: "NIU-901144", cliente: "Pequeña industria", tipo: "Industrial", circuito: "C-PAM-01", transformador: "T-5012", zona: "Pamplona", x: 58, y: 72, score: 0.74, riesgo: "med", acceso: "ok", consumo: [800, 790, 820, 300, 280, 275], desbalance: "24 %", senal: "Caída de consumo industrial sin novedad comercial", scada: "Carga de alimentador sin caída equivalente", accionCampo: "Inspección técnica y sellos", accionComercial: "Normalización y ajuste de medición", estado: "pendiente", kwhEst: 980 },
-      { id: 7, niu: "NIU-334870", cliente: "Cuenta residencial", tipo: "Residencial", circuito: "C-CTB-12", transformador: "T-8845", zona: "Catatumbo · Tibú", x: 28, y: 36, score: 0.71, riesgo: "med", acceso: "blocked", consumo: [110, 108, 100, 30, 22, 20], desbalance: "29 %", senal: "Patrón anómalo agrupado en el mismo circuito", scada: "Desbalance zonal", accionCampo: "Inspección cuando haya acceso", accionComercial: "Mantener en seguimiento", estado: "pendiente", kwhEst: 450 },
-      { id: 8, niu: "NIU-120998", cliente: "Local comercial", tipo: "Comercial", circuito: "C-CUC-04", transformador: "T-2210", zona: "Cúcuta · Centro", x: 80, y: 34, score: 0.68, riesgo: "med", acceso: "ok", consumo: [190, 185, 180, 175, 50, 48], desbalance: "16 %", senal: "Cambio de perfil post-ciclo", scada: "Sin evento", accionCampo: "Revisión de medidor", accionComercial: "Verificación de consumo", estado: "asignado", kwhEst: 280 },
-      { id: 9, niu: "NIU-445661", cliente: "Cuenta oficial", tipo: "Oficial", circuito: "C-OCA-02", transformador: "T-3311", zona: "Ocaña norte", x: 42, y: 30, score: 0.61, riesgo: "med", acceso: "ok", consumo: [220, 210, 215, 200, 195, 90], desbalance: "14 %", senal: "Atípico moderado vs historia", scada: "OK", accionCampo: "Inspección selectiva", accionComercial: "Validación de medición", estado: "pendiente", kwhEst: 210 },
-      { id: 10, niu: "NIU-667203", cliente: "Cuenta residencial", tipo: "Residencial", circuito: "C-CUC-11", transformador: "T-1198", zona: "Cúcuta · El Ejido", x: 70, y: 66, score: 0.54, riesgo: "low", acceso: "ok", consumo: [95, 92, 90, 88, 85, 70], desbalance: "9 %", senal: "Desvío leve", scada: "OK", accionCampo: "Monitoreo", accionComercial: "Sin gestión inmediata", estado: "pendiente", kwhEst: 90 },
-      { id: 11, niu: "NIU-812450", cliente: "Finca / rural", tipo: "Residencial", circuito: "C-CTB-07", transformador: "T-7722", zona: "Catatumbo · El Tarra", x: 14, y: 68, score: 0.84, riesgo: "high", acceso: "blocked", consumo: [70, 68, 20, 8, 5, 4], desbalance: "35 %", senal: "Posible anomalía de medición en zona rural", scada: "Huecos de telemedida", accionCampo: "Inspección de medidor / tramo", accionComercial: "Pendiente por acceso", estado: "pendiente", kwhEst: 640 },
-      { id: 12, niu: "NIU-250771", cliente: "Restaurante", tipo: "Comercial", circuito: "C-CUC-04", transformador: "T-2208", zona: "Cúcuta · Ceiba", x: 76, y: 48, score: 0.79, riesgo: "high", acceso: "ok", consumo: [300, 295, 290, 100, 95, 92], desbalance: "21 %", senal: "Caída no explicada por calendario comercial", scada: "Carga de vecinos estable", accionCampo: "Inspección técnica", accionComercial: "Normalización prioritaria", estado: "pendiente", kwhEst: 560 },
-      { id: 13, niu: "NIU-918002", cliente: "Cuenta residencial", tipo: "Residencial", circuito: "C-PAM-01", transformador: "T-5020", zona: "Pamplona sur", x: 62, y: 80, score: 0.49, riesgo: "low", acceso: "ok", consumo: [120, 118, 116, 115, 112, 110], desbalance: "6 %", senal: "Perfil estable", scada: "OK", accionCampo: "Fuera de cupo prioritario", accionComercial: "Sin gestión", estado: "pendiente", kwhEst: 40 },
-      { id: 14, niu: "NIU-303119", cliente: "Depósito", tipo: "Comercial", circuito: "C-OCA-02", transformador: "T-3301", zona: "Ocaña industrial", x: 50, y: 18, score: 0.72, riesgo: "med", acceso: "ok", consumo: [500, 490, 480, 200, 180, 175], desbalance: "19 %", senal: "Anomalía vs estacionalidad", scada: "Desbalance moderado", accionCampo: "Revisión de acometida", accionComercial: "Gestión de normalización", estado: "visitado", kwhEst: 430, kwhRec: 380 },
-      { id: 15, niu: "NIU-147880", cliente: "Cuenta residencial", tipo: "Residencial", circuito: "C-CUC-11", transformador: "T-1185", zona: "Cúcuta · Sevilla", x: 84, y: 62, score: 0.66, riesgo: "med", acceso: "ok", consumo: [130, 128, 125, 50, 45, 44], desbalance: "17 %", senal: "Vecinos sin caída equivalente", scada: "OK", accionCampo: "Inspección de medidor", accionComercial: "Verificación de consumo", estado: "pendiente", kwhEst: 260 }
+      { id: 1, niu: "NIU-104582", cliente: "Cuenta residencial", tipo: "Residencial", circuito: "C-CTB-12", transformador: "T-8841", zona: "Catatumbo · Tibú", lat: 8.639, lng: -72.736, score: 0.93, riesgo: "high", acceso: "blocked", consumo: [180, 175, 160, 40, 18, 12], desbalance: "38 %", senal: "Caída abrupta de consumo con vecinos activos", scada: "Desbalance circuito vs facturado", accionCampo: "Inspección técnica de medidor", accionComercial: "Verificación de consumo y normalización", estado: "pendiente", kwhEst: 920 },
+      { id: 2, niu: "NIU-221907", cliente: "Taller metalúrgico", tipo: "Comercial", circuito: "C-CUC-04", transformador: "T-2201", zona: "Cúcuta · La Libertad", lat: 7.903, lng: -72.521, score: 0.89, riesgo: "high", acceso: "ok", consumo: [410, 400, 395, 120, 95, 88], desbalance: "27 %", senal: "Consumo incompatible con tipo de usuario", scada: "Carga estable en transformador", accionCampo: "Revisión de acometida y medidor", accionComercial: "Gestión comercial de normalización", estado: "pendiente", kwhEst: 740 },
+      { id: 3, niu: "NIU-088341", cliente: "Vivienda rural", tipo: "Residencial", circuito: "C-CTB-07", transformador: "T-7710", zona: "Catatumbo · El Tarra", lat: 8.575, lng: -73.095, score: 0.86, riesgo: "high", acceso: "blocked", consumo: [95, 90, 88, 10, 8, 5], desbalance: "41 %", senal: "Serie casi nula con red energizada", scada: "Alarma de telemedida intermitente", accionCampo: "Inspección en transformador / tramo", accionComercial: "Pendiente hasta habilitar acceso", estado: "pendiente", kwhEst: 1100 },
+      { id: 4, niu: "NIU-556012", cliente: "Minimercado", tipo: "Comercial", circuito: "C-OCA-02", transformador: "T-3308", zona: "Ocaña centro", lat: 8.237, lng: -73.356, score: 0.81, riesgo: "high", acceso: "ok", consumo: [260, 255, 250, 240, 70, 65], desbalance: "22 %", senal: "Quiebre reciente vs historia 12 meses", scada: "Sin alarma crítica", accionCampo: "Inspección técnica de medidor", accionComercial: "Verificación de lectura y factura", estado: "pendiente", kwhEst: 510 },
+      { id: 5, niu: "NIU-773220", cliente: "Cuenta residencial", tipo: "Residencial", circuito: "C-CUC-11", transformador: "T-1190", zona: "Cúcuta · San Luis", lat: 7.881, lng: -72.492, score: 0.76, riesgo: "med", acceso: "ok", consumo: [140, 138, 135, 130, 60, 55], desbalance: "18 %", senal: "Desvío frente a vecinos del mismo transformador", scada: "Balance parcial", accionCampo: "Revisión de medidor", accionComercial: "Contacto comercial preventivo", estado: "pendiente", kwhEst: 320 },
+      { id: 6, niu: "NIU-901144", cliente: "Pequeña industria", tipo: "Industrial", circuito: "C-PAM-01", transformador: "T-5012", zona: "Pamplona", lat: 7.375, lng: -72.648, score: 0.74, riesgo: "med", acceso: "ok", consumo: [800, 790, 820, 300, 280, 275], desbalance: "24 %", senal: "Caída de consumo industrial sin novedad comercial", scada: "Carga de alimentador sin caída equivalente", accionCampo: "Inspección técnica y sellos", accionComercial: "Normalización y ajuste de medición", estado: "pendiente", kwhEst: 980 },
+      { id: 7, niu: "NIU-334870", cliente: "Cuenta residencial", tipo: "Residencial", circuito: "C-CTB-12", transformador: "T-8845", zona: "Catatumbo · Tibú", lat: 8.651, lng: -72.721, score: 0.71, riesgo: "med", acceso: "blocked", consumo: [110, 108, 100, 30, 22, 20], desbalance: "29 %", senal: "Patrón anómalo agrupado en el mismo circuito", scada: "Desbalance zonal", accionCampo: "Inspección cuando haya acceso", accionComercial: "Mantener en seguimiento", estado: "pendiente", kwhEst: 450 },
+      { id: 8, niu: "NIU-120998", cliente: "Local comercial", tipo: "Comercial", circuito: "C-CUC-04", transformador: "T-2210", zona: "Cúcuta · Centro", lat: 7.894, lng: -72.508, score: 0.68, riesgo: "med", acceso: "ok", consumo: [190, 185, 180, 175, 50, 48], desbalance: "16 %", senal: "Cambio de perfil post-ciclo", scada: "Sin evento", accionCampo: "Revisión de medidor", accionComercial: "Verificación de consumo", estado: "asignado", kwhEst: 280 },
+      { id: 9, niu: "NIU-445661", cliente: "Cuenta oficial", tipo: "Oficial", circuito: "C-OCA-02", transformador: "T-3311", zona: "Ocaña norte", lat: 8.252, lng: -73.348, score: 0.61, riesgo: "med", acceso: "ok", consumo: [220, 210, 215, 200, 195, 90], desbalance: "14 %", senal: "Atípico moderado vs historia", scada: "OK", accionCampo: "Inspección selectiva", accionComercial: "Validación de medición", estado: "pendiente", kwhEst: 210 },
+      { id: 10, niu: "NIU-667203", cliente: "Cuenta residencial", tipo: "Residencial", circuito: "C-CUC-11", transformador: "T-1198", zona: "Cúcuta · El Ejido", lat: 7.912, lng: -72.499, score: 0.54, riesgo: "low", acceso: "ok", consumo: [95, 92, 90, 88, 85, 70], desbalance: "9 %", senal: "Desvío leve", scada: "OK", accionCampo: "Monitoreo", accionComercial: "Sin gestión inmediata", estado: "pendiente", kwhEst: 90 },
+      { id: 11, niu: "NIU-812450", cliente: "Finca / rural", tipo: "Residencial", circuito: "C-CTB-07", transformador: "T-7722", zona: "Catatumbo · El Tarra", lat: 8.558, lng: -73.112, score: 0.84, riesgo: "high", acceso: "blocked", consumo: [70, 68, 20, 8, 5, 4], desbalance: "35 %", senal: "Posible anomalía de medición en zona rural", scada: "Huecos de telemedida", accionCampo: "Inspección de medidor / tramo", accionComercial: "Pendiente por acceso", estado: "pendiente", kwhEst: 640 },
+      { id: 12, niu: "NIU-250771", cliente: "Restaurante", tipo: "Comercial", circuito: "C-CUC-04", transformador: "T-2208", zona: "Cúcuta · Ceiba", lat: 7.906, lng: -72.516, score: 0.79, riesgo: "high", acceso: "ok", consumo: [300, 295, 290, 100, 95, 92], desbalance: "21 %", senal: "Caída no explicada por calendario comercial", scada: "Carga de vecinos estable", accionCampo: "Inspección técnica", accionComercial: "Normalización prioritaria", estado: "pendiente", kwhEst: 560 },
+      { id: 13, niu: "NIU-918002", cliente: "Cuenta residencial", tipo: "Residencial", circuito: "C-PAM-01", transformador: "T-5020", zona: "Pamplona sur", lat: 7.361, lng: -72.641, score: 0.49, riesgo: "low", acceso: "ok", consumo: [120, 118, 116, 115, 112, 110], desbalance: "6 %", senal: "Perfil estable", scada: "OK", accionCampo: "Fuera de cupo prioritario", accionComercial: "Sin gestión", estado: "pendiente", kwhEst: 40 },
+      { id: 14, niu: "NIU-303119", cliente: "Depósito", tipo: "Comercial", circuito: "C-OCA-02", transformador: "T-3301", zona: "Ocaña industrial", lat: 8.228, lng: -73.371, score: 0.72, riesgo: "med", acceso: "ok", consumo: [500, 490, 480, 200, 180, 175], desbalance: "19 %", senal: "Anomalía vs estacionalidad", scada: "Desbalance moderado", accionCampo: "Revisión de acometida", accionComercial: "Gestión de normalización", estado: "visitado", kwhEst: 430, kwhRec: 380 },
+      { id: 15, niu: "NIU-147880", cliente: "Cuenta residencial", tipo: "Residencial", circuito: "C-CUC-11", transformador: "T-1185", zona: "Cúcuta · Sevilla", lat: 7.872, lng: -72.481, score: 0.66, riesgo: "med", acceso: "ok", consumo: [130, 128, 125, 50, 45, 44], desbalance: "17 %", senal: "Vecinos sin caída equivalente", scada: "OK", accionCampo: "Inspección de medidor", accionComercial: "Verificación de consumo", estado: "pendiente", kwhEst: 260 },
+      { id: 16, niu: "NIU-501220", cliente: "Vivienda", tipo: "Residencial", circuito: "C-VDR-01", transformador: "T-6102", zona: "Villa del Rosario", lat: 7.834, lng: -72.474, score: 0.78, riesgo: "high", acceso: "ok", consumo: [150, 148, 140, 55, 40, 38], desbalance: "20 %", senal: "Caída de consumo en frontera metropolitana", scada: "Desbalance moderado", accionCampo: "Inspección técnica de medidor", accionComercial: "Verificación de consumo", estado: "pendiente", kwhEst: 390 },
+      { id: 17, niu: "NIU-502881", cliente: "Local comercial", tipo: "Comercial", circuito: "C-PAT-02", transformador: "T-6208", zona: "Los Patios", lat: 7.838, lng: -72.505, score: 0.73, riesgo: "med", acceso: "ok", consumo: [280, 270, 265, 110, 100, 98], desbalance: "18 %", senal: "Perfil comercial atípico", scada: "Carga de vecinos estable", accionCampo: "Revisión de acometida", accionComercial: "Normalización comercial", estado: "pendiente", kwhEst: 420 },
+      { id: 18, niu: "NIU-610334", cliente: "Cuenta residencial", tipo: "Residencial", circuito: "C-ZUL-03", transformador: "T-6301", zona: "El Zulia", lat: 7.933, lng: -72.601, score: 0.70, riesgo: "med", acceso: "ok", consumo: [100, 98, 95, 35, 30, 28], desbalance: "19 %", senal: "Desvío vs vecinos del transformador", scada: "OK", accionCampo: "Revisión de medidor", accionComercial: "Contacto comercial", estado: "pendiente", kwhEst: 250 },
+      { id: 19, niu: "NIU-611902", cliente: "Finca / rural", tipo: "Residencial", circuito: "C-SAR-01", transformador: "T-6405", zona: "Sardinata", lat: 8.083, lng: -72.801, score: 0.82, riesgo: "high", acceso: "ok", consumo: [85, 80, 25, 12, 8, 6], desbalance: "31 %", senal: "Consumo casi nulo con red activa", scada: "Desbalance de circuito", accionCampo: "Inspección en tramo rural", accionComercial: "Verificación de medición", estado: "pendiente", kwhEst: 580 },
+      { id: 20, niu: "NIU-720115", cliente: "Cuenta residencial", tipo: "Residencial", circuito: "C-CHI-01", transformador: "T-6502", zona: "Chinácota", lat: 7.607, lng: -72.601, score: 0.58, riesgo: "low", acceso: "ok", consumo: [110, 108, 105, 100, 70, 68], desbalance: "11 %", senal: "Desvío leve", scada: "OK", accionCampo: "Monitoreo", accionComercial: "Sin gestión inmediata", estado: "pendiente", kwhEst: 120 },
+      { id: 21, niu: "NIU-721440", cliente: "Minimercado", tipo: "Comercial", circuito: "C-SAL-02", transformador: "T-6601", zona: "Salazar de Las Palmas", lat: 7.774, lng: -72.812, score: 0.69, riesgo: "med", acceso: "ok", consumo: [200, 195, 190, 80, 75, 70], desbalance: "17 %", senal: "Quiebre reciente de consumo", scada: "Sin alarma crítica", accionCampo: "Inspección de medidor", accionComercial: "Verificación de lectura", estado: "pendiente", kwhEst: 300 },
+      { id: 22, niu: "NIU-830201", cliente: "Cuenta residencial", tipo: "Residencial", circuito: "C-ABR-01", transformador: "T-6703", zona: "Ábrego", lat: 8.081, lng: -73.221, score: 0.75, riesgo: "med", acceso: "ok", consumo: [125, 120, 118, 45, 40, 35], desbalance: "21 %", senal: "Anomalía vs historia local", scada: "Balance parcial", accionCampo: "Revisión de medidor", accionComercial: "Gestión comercial", estado: "pendiente", kwhEst: 340 },
+      { id: 23, niu: "NIU-831778", cliente: "Taller", tipo: "Comercial", circuito: "C-CNV-01", transformador: "T-6802", zona: "Catatumbo · Convención", lat: 8.469, lng: -73.206, score: 0.88, riesgo: "high", acceso: "blocked", consumo: [310, 300, 90, 40, 20, 15], desbalance: "36 %", senal: "Caída fuerte en zona de alta incidencia", scada: "Desbalance zonal", accionCampo: "Inspección cuando haya acceso", accionComercial: "Pendiente por orden público", estado: "pendiente", kwhEst: 870 },
+      { id: 24, niu: "NIU-832905", cliente: "Vivienda rural", tipo: "Residencial", circuito: "C-TEO-01", transformador: "T-6901", zona: "Catatumbo · Teorama", lat: 8.448, lng: -73.286, score: 0.85, riesgo: "high", acceso: "blocked", consumo: [60, 55, 15, 8, 5, 3], desbalance: "39 %", senal: "Serie casi nula", scada: "Huecos de telemedida", accionCampo: "Inspección de medidor / tramo", accionComercial: "Mantener en ranking", estado: "pendiente", kwhEst: 720 },
+      { id: 25, niu: "NIU-833410", cliente: "Cuenta residencial", tipo: "Residencial", circuito: "C-ECM-01", transformador: "T-7004", zona: "Catatumbo · El Carmen", lat: 8.511, lng: -73.448, score: 0.80, riesgo: "high", acceso: "blocked", consumo: [75, 70, 22, 10, 7, 5], desbalance: "33 %", senal: "Patrón anómalo rural", scada: "Desbalance de alimentador", accionCampo: "Inspección diferida", accionComercial: "Pendiente por acceso", estado: "pendiente", kwhEst: 610 },
+      { id: 26, niu: "NIU-840112", cliente: "Estación de servicio", tipo: "Comercial", circuito: "C-PSN-01", transformador: "T-7102", zona: "Puerto Santander", lat: 8.364, lng: -72.407, score: 0.77, riesgo: "high", acceso: "ok", consumo: [520, 510, 500, 180, 160, 155], desbalance: "23 %", senal: "Caída no explicada por operación", scada: "Carga de transformador estable", accionCampo: "Inspección técnica y sellos", accionComercial: "Normalización prioritaria", estado: "pendiente", kwhEst: 690 },
+      { id: 27, niu: "NIU-850221", cliente: "Cuenta residencial", tipo: "Residencial", circuito: "C-CAC-01", transformador: "T-7201", zona: "Cáchira", lat: 7.481, lng: -73.049, score: 0.57, riesgo: "low", acceso: "ok", consumo: [90, 88, 86, 84, 60, 58], desbalance: "10 %", senal: "Desvío leve", scada: "OK", accionCampo: "Monitoreo", accionComercial: "Sin gestión inmediata", estado: "pendiente", kwhEst: 95 },
+      { id: 28, niu: "NIU-860330", cliente: "Pequeño comercio", tipo: "Comercial", circuito: "C-LOU-01", transformador: "T-7305", zona: "Lourdes", lat: 7.974, lng: -72.832, score: 0.64, riesgo: "med", acceso: "ok", consumo: [160, 155, 150, 70, 65, 62], desbalance: "15 %", senal: "Cambio de perfil post-ciclo", scada: "Sin evento", accionCampo: "Revisión de medidor", accionComercial: "Verificación de consumo", estado: "pendiente", kwhEst: 220 },
+      { id: 29, niu: "NIU-870441", cliente: "Cuenta residencial", tipo: "Residencial", circuito: "C-GRM-01", transformador: "T-7402", zona: "Gramalote", lat: 7.888, lng: -72.797, score: 0.62, riesgo: "med", acceso: "ok", consumo: [105, 102, 100, 48, 42, 40], desbalance: "16 %", senal: "Desvío frente a vecinos", scada: "OK", accionCampo: "Inspección selectiva", accionComercial: "Contacto comercial", estado: "pendiente", kwhEst: 200 },
+      { id: 30, niu: "NIU-880552", cliente: "Vivienda", tipo: "Residencial", circuito: "C-BOC-01", transformador: "T-7501", zona: "Bochalema", lat: 7.646, lng: -72.597, score: 0.55, riesgo: "low", acceso: "ok", consumo: [115, 112, 110, 108, 80, 78], desbalance: "9 %", senal: "Perfil casi estable", scada: "OK", accionCampo: "Monitoreo", accionComercial: "Sin gestión", estado: "pendiente", kwhEst: 85 },
+      { id: 31, niu: "NIU-890663", cliente: "Cuenta residencial", tipo: "Residencial", circuito: "C-CUC-15", transformador: "T-1255", zona: "Cúcuta · Atalaya", lat: 7.859, lng: -72.503, score: 0.71, riesgo: "med", acceso: "ok", consumo: [135, 130, 128, 55, 50, 47], desbalance: "18 %", senal: "Anomalía urbana moderada", scada: "Balance parcial", accionCampo: "Revisión de medidor", accionComercial: "Verificación de consumo", estado: "pendiente", kwhEst: 270 },
+      { id: 32, niu: "NIU-900774", cliente: "Lavadero", tipo: "Comercial", circuito: "C-CUC-18", transformador: "T-1280", zona: "Cúcuta · Guaimaral", lat: 7.925, lng: -72.487, score: 0.83, riesgo: "high", acceso: "ok", consumo: [340, 330, 320, 110, 100, 95], desbalance: "25 %", senal: "Caída abrupta comercial", scada: "Carga de vecinos sin caída", accionCampo: "Inspección técnica", accionComercial: "Normalización prioritaria", estado: "pendiente", kwhEst: 640 },
+      { id: 33, niu: "NIU-910885", cliente: "Cuenta residencial", tipo: "Residencial", circuito: "C-CTB-15", transformador: "T-8901", zona: "Catatumbo · La Gabarra", lat: 8.924, lng: -73.123, score: 0.91, riesgo: "high", acceso: "blocked", consumo: [50, 45, 12, 5, 3, 2], desbalance: "44 %", senal: "Alta sospecha en zona crítica", scada: "Desbalance severo de circuito", accionCampo: "Inspección diferida por orden público", accionComercial: "Mantener en ranking de equidad", estado: "pendiente", kwhEst: 980 },
+      { id: 34, niu: "NIU-920996", cliente: "Depósito rural", tipo: "Comercial", circuito: "C-HAC-01", transformador: "T-7602", zona: "Hacarí", lat: 8.324, lng: -73.148, score: 0.67, riesgo: "med", acceso: "ok", consumo: [180, 175, 90, 70, 65, 60], desbalance: "17 %", senal: "Quiebre parcial de consumo", scada: "OK", accionCampo: "Revisión de acometida", accionComercial: "Gestión comercial", estado: "pendiente", kwhEst: 280 },
+      { id: 35, niu: "NIU-931107", cliente: "Cuenta residencial", tipo: "Residencial", circuito: "C-LAU-01", transformador: "T-7703", zona: "La Esperanza", lat: 8.190, lng: -72.460, score: 0.60, riesgo: "med", acceso: "ok", consumo: [98, 96, 94, 50, 45, 42], desbalance: "14 %", senal: "Desvío moderado", scada: "Sin evento", accionCampo: "Inspección selectiva", accionComercial: "Contacto comercial", estado: "pendiente", kwhEst: 180 }
     ];
 
     let selectedId = DATA[0].id;
     let view = "mapa";
+    let map, markersLayer;
 
     const $ = (sel) => document.querySelector(sel);
 
@@ -368,18 +391,47 @@
       `;
     }
 
-    function renderMap() {
-      const map = $("#map");
-      map.innerHTML = `<div class="map-label">Vista esquemática · Norte de Santander<br/>Clic en un pin para abrir ficha</div>`;
-      DATA.forEach((d) => {
-        const pin = document.createElement("button");
-        pin.className = `pin ${d.riesgo}${d.acceso === "blocked" ? " blocked" : ""}${d.id === selectedId ? " selected" : ""}`;
-        pin.style.left = d.x + "%";
-        pin.style.top = d.y + "%";
-        pin.title = `${d.zona} · score ${d.score}`;
-        pin.onclick = () => { selectedId = d.id; renderAll(); };
-        map.appendChild(pin);
+    function markerIcon(d) {
+      const selected = d.id === selectedId ? " selected" : "";
+      const blocked = d.acceso === "blocked" ? " blocked" : "";
+      return L.divIcon({
+        className: "",
+        html: `<div class="risk-marker ${d.riesgo}${blocked}${selected}"></div>`,
+        iconSize: [18, 18],
+        iconAnchor: [9, 9]
       });
+    }
+
+    function initMap() {
+      if (map) return;
+      map = L.map("map", { zoomControl: true, scrollWheelZoom: true });
+      // Esri World Street Map: no requiere API key para uso demostrativo
+      L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}", {
+        maxZoom: 19,
+        attribution: "Tiles &copy; Esri &mdash; Source: Esri, OpenStreetMap contributors"
+      }).addTo(map);
+      markersLayer = L.layerGroup().addTo(map);
+      // Encuadre inicial del área de influencia CENS (Norte de Santander / Catatumbo)
+      map.fitBounds([[7.25, -73.55], [9.00, -72.30]]);
+    }
+
+    function renderMap() {
+      initMap();
+      markersLayer.clearLayers();
+      DATA.forEach((d) => {
+        const marker = L.marker([d.lat, d.lng], { icon: markerIcon(d) });
+        marker.bindTooltip(`${d.zona}<br/>Score ${d.score.toFixed(2)} · ${d.niu}`, { direction: "top" });
+        marker.on("click", () => {
+          selectedId = d.id;
+          renderAll();
+        });
+        markersLayer.addLayer(marker);
+      });
+      const selected = DATA.find((x) => x.id === selectedId);
+      if (selected) {
+        map.panTo([selected.lat, selected.lng], { animate: true });
+      }
+      setTimeout(() => map.invalidateSize(), 80);
     }
 
     function renderCampo() {
@@ -458,6 +510,7 @@
               <div><span>Circuito</span><strong>${d.circuito}</strong></div>
               <div><span>Transformador</span><strong>${d.transformador}</strong></div>
               <div><span>Zona</span><strong>${d.zona}</strong></div>
+              <div><span>Coordenadas</span><strong>${d.lat.toFixed(3)}, ${d.lng.toFixed(3)}</strong></div>
               <div><span>kWh estimados a recuperar</span><strong>${d.kwhEst}</strong></div>
             </div>
           </div>
@@ -515,7 +568,11 @@
     }
 
     document.querySelectorAll(".tab").forEach((tab) => {
-      tab.addEventListener("click", () => { view = tab.dataset.view; renderAll(); });
+      tab.addEventListener("click", () => {
+        view = tab.dataset.view;
+        renderAll();
+        if (view === "mapa" && map) setTimeout(() => map.invalidateSize(), 120);
+      });
     });
     ["q", "filtro-riesgo", "filtro-acceso", "q-com"].forEach((id) => {
       document.getElementById(id)?.addEventListener("input", renderAll);
